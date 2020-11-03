@@ -37,7 +37,7 @@ public class Game {
 
         city.setExit("Work", workplace);
         city.setExit("Park", park);
-        city.setExit("MacDonalds", McDonalds);
+        city.setExit("McDonalds", McDonalds);
 
         forest.setExit("Road", road);
 

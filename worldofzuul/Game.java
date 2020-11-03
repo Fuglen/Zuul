@@ -37,7 +37,7 @@ public class Game {
 
         city.setExit("Work", workplace);
         city.setExit("Park", park);
-        city.setExit("MacDonalds", McDonalds);
+        city.setExit("McDonalds", McDonalds);
 
         forest.setExit("Road", road);
 
@@ -45,7 +45,9 @@ public class Game {
 
         beach.setExit("Road", road);
 
-        park.setExit("Road", road);
+        park.setExit("City", city);
+
+        McDonalds.setExit("City", city);
 
         // Set the starting room to home
         currentRoom = home;

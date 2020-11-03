@@ -10,30 +10,43 @@ public class Game {
         parser = new Parser();
     }
 
-
+    // Create rooms and define their exits
     private void createRooms() {
-        Room outside, theatre, pub, lab, office;
+        // Create all the rooms
+        Room home, beach, forest, city, workplace, macDonalds, park, road;
 
-        outside = new Room("outside the main entrance of the university");
-        theatre = new Room("in a lecture theatre");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        // Initialize all the rooms with a description
+        home = new Room("at home");
+        beach = new Room("at the beach");
+        forest = new Room("in the forest");
+        city = new Room("in the city");
+        workplace = new Room("at work");
+        macDonalds = new Room("at the MacDonalds");
+        park = new Room("at the park");
+        road = new Room("on the road again");
 
-        outside.setExit("east", theatre);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        // Define exits to all rooms
+        home.setExit("Road", road);
 
-        theatre.setExit("west", outside);
+        road.setExit("Home", home);
+        road.setExit("Forest", forest);
+        road.setExit("City", city);
+        road.setExit("Beach", beach);
 
-        pub.setExit("east", outside);
+        city.setExit("Work", workplace);
+        city.setExit("Park", park);
+        city.setExit("MacDonalds", macDonalds);
 
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
+        forest.setExit("Road", road);
 
-        office.setExit("west", lab);
+        workplace.setExit("Road", road);
 
-        currentRoom = outside;
+        beach.setExit("Road", road);
+
+        park.setExit("Road", road);
+
+        // Set the starting room to home
+        currentRoom = home;
     }
 
     public void play() {

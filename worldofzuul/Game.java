@@ -13,7 +13,7 @@ public class Game {
     // Create rooms and define their exits
     private void createRooms() {
         // Create all the rooms
-        Room home, beach, forest, city, workplace, macDonalds, park, road;
+        Room home, beach, forest, city, workplace, McDonalds, park, road;
 
         // Initialize all the rooms with a description
         home = new Room("at home");
@@ -21,7 +21,7 @@ public class Game {
         forest = new Room("in the forest");
         city = new Room("in the city");
         workplace = new Room("at work");
-        macDonalds = new Room("at the MacDonalds");
+        McDonalds = new Room("at the McDonalds");
         park = new Room("at the park");
         road = new Room("on the road again");
 
@@ -35,7 +35,7 @@ public class Game {
 
         city.setExit("Work", workplace);
         city.setExit("Park", park);
-        city.setExit("MacDonalds", macDonalds);
+        city.setExit("MacDonalds", McDonalds);
 
         forest.setExit("Road", road);
 

@@ -22,10 +22,10 @@ public class Inventory {
 
     public void printInventory () {
         System.out.println("Inventory:");
-        for (Item item: items) {
-            System.out.println(" - "+item);
+        if (items.size() == 0) {
+            System.out.println("Your inventory is empty");
+        } else{
+        System.out.println(" - " + items);
         }
     }
-
-
 }

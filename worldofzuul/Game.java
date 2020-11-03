@@ -3,6 +3,7 @@ package worldofzuul;
 public class Game {
     private Parser parser;
     private Room currentRoom;
+    private Inventory items = new Inventory();
 
 
     public Game() {
@@ -86,6 +87,8 @@ public class Game {
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
+        } else if (commandWord == CommandWord.INVENTORY){
+            items.printInventory();
         }
         return wantToQuit;
     }

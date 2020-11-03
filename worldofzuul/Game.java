@@ -45,7 +45,9 @@ public class Game {
 
         beach.setExit("Road", road);
 
-        park.setExit("Road", road);
+        park.setExit("City", city);
+
+        McDonalds.setExit("City", city);
 
         // Set the starting room to home
         currentRoom = home;

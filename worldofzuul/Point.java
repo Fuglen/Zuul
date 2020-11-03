@@ -1,27 +1,3 @@
-<<<<<<< Updated upstream
-package worldofzuul;
-
-public class Point {
-
-    private int point;
-
-    public Point(){
-
-    }
-
-    public int getPoint() {
-        return point;
-    }
-
-    public void addPoint(int points){
-        this.point += getPoint();
-    }
-
-    public void removePoint(int points){
-        this.point -= getPoint();
-    }
-}
-=======
 package worldofzuul;
 
 public class Point {
@@ -36,12 +12,11 @@ public class Point {
         return point;
     }
 
-    public void addPoint(int points){
-        this.point += getPoint();
+    public void addPoint(int point){
+        this.point = getPoint() + point;
     }
 
-    public void removePoint(int points){
-        this.point -= getPoint();
+    public void removePoint(int point){
+        this.point = getPoint() - point;
     }
 }
->>>>>>> Stashed changes

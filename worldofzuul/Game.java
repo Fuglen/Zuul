@@ -71,7 +71,8 @@ public class Game {
         System.out.println("Our game is a new, recycling adventure game.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-
+        System.out.println("Choose a first name for your character.");
+        System.out.println("Choose wisely, as it can't be changed.");
         player.createPlayer();
         System.out.println(currentRoom.getLongDescription());
     }

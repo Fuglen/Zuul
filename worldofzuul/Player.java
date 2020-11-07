@@ -13,6 +13,8 @@ public class Player {
     public void createPlayer() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
+
+        // Check if input contains a space, if not then uppercase the name. Meme is intended :)
         if (input.contains(" ")) {
             System.out.println("Only your first name, please. (No space)");
             createPlayer();

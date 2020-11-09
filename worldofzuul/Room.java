@@ -1,13 +1,13 @@
 package worldofzuul;
-
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
-import java.util.Iterator;
-
 
 public class Room {
     private String description;
     private HashMap<String, Room> exits;
+    private ArrayList<Item> roomItems = new ArrayList<>();
+    private Inventory roomInventory = new Inventory(roomItems);
 
     public Room(String description) {
         this.description = description;
@@ -32,11 +32,30 @@ public class Room {
         for (String exit : keys) {
             returnString += " " + exit;
         }
+        returnString += " | List of room items: " + printRoomItems();
         return returnString;
     }
 
     public Room getExit(String direction) {
         return exits.get(direction);
+    }
+    public Item getRoomItem(int i) {
+        return roomItems.get(i);
+    }
+    public int getRoomItems() {
+        return roomItems.size();
+    }
+    public void setRoomItem(Item item) {
+        roomItems.add(item);
+    }
+    public void removeRoomItem(int i) {
+        roomItems.remove(i);
+    }
+    public String printRoomItems() {
+        String roomItemsText = "";
+        for (int i = 0; i < roomItems.size(); i++) {
+            roomItemsText += roomItems.get(i).getName() + " ";
+        } return roomItemsText;
     }
 }
 

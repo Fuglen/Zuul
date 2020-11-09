@@ -11,10 +11,6 @@ public class Item {
     public Item(String name) {
         this.name = name;
     }
-    public Item(String name, Room room) {
-        this.name = name;
-        this.room = room;
-    }
 
     //Methods
     public String getName() {

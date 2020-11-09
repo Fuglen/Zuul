@@ -165,13 +165,11 @@ public class Game {
         if (!command.hasSecondWord()) {
             System.out.println("Collect what?");
         } else {
-            boolean itemPresence = false;
             for (int i = 0; i < currentRoom.getRoomItems(); i++) {
                 if (currentRoom.getRoomItem(i).getName().equals(command.getSecondWord())) {
                     inventory.addItem(currentRoom.getRoomItem(i));
                     System.out.println("You collected: " +currentRoom.getRoomItem(i).getName());
                     currentRoom.removeRoomItem(i);
-                    itemPresence = true;
                 }
             }
         }

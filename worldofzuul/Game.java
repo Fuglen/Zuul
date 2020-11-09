@@ -1,9 +1,12 @@
 package worldofzuul;
+import java.util.ArrayList;
 
 public class Game {
     private Parser parser;
     private Room currentRoom;
-    private Inventory items = new Inventory();
+    //Player inventory
+    private ArrayList<Item> inventoryItems = new ArrayList<>();
+    private Inventory inventory = new Inventory(inventoryItems);
     private Player player = new Player();
 
 
@@ -51,6 +54,19 @@ public class Game {
 
         // Set the starting room to home
         currentRoom = home;
+
+        //Room inventory
+        home.setRoomItem(new Item("tool"));
+
+        //Player inventory
+        Item plastic, glass, metal;
+        plastic = new Item("plastic");
+        glass = new Item("glass");
+        metal = new Item("metal");
+        Item[] items = new Item[] {plastic, glass, metal};
+        for (Item item: items) {
+            inventory.addItem(item);
+        }
     }
 
     public void play() {
@@ -94,7 +110,11 @@ public class Game {
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.INVENTORY){
-            items.printInventory();
+            inventory.printInventory();
+        } else if (commandWord == CommandWord.DROP) {
+            dropItem(command);
+        } else if (commandWord == CommandWord.COLLECT) {
+            collectItem(command);
         }
         return wantToQuit;
     }
@@ -119,6 +139,36 @@ public class Game {
         } else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
+        }
+    }
+
+    //Drops an item from the player inventory to the room inventory
+    private void dropItem(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Drop what?");
+        } else {
+            for (int i = 0; i < inventoryItems.size(); i++) {
+                if (inventoryItems.get(i).getName().equals(command.getSecondWord())) {
+                    currentRoom.setRoomItem(inventoryItems.get(i));
+                    inventory.removeItem(i);
+                    System.out.println("You dropped: "+command.getSecondWord());
+                }
+            }
+        }
+    }
+
+    //Collect an item from the room inventory and puts it into the player inventory
+    private void collectItem(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Collect what?");
+        } else {
+            for (int i = 0; i < currentRoom.getRoomItems(); i++) {
+                if (currentRoom.getRoomItem(i).getName().equals(command.getSecondWord())) {
+                    inventory.addItem(currentRoom.getRoomItem(i));
+                    System.out.println("You collected: " +currentRoom.getRoomItem(i).getName());
+                    currentRoom.removeRoomItem(i);
+                }
+            }
         }
     }
 

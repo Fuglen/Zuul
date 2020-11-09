@@ -1,8 +1,13 @@
 package worldofzuul;
+import java.util.ArrayList;
 
 public class Game {
     private Parser parser;
     private Room currentRoom;
+    //Player inventory
+    private ArrayList<Item> inventoryItems = new ArrayList<>();
+    private Inventory inventory = new Inventory(inventoryItems);
+    private Player player = new Player();
 
 
     public Game() {
@@ -10,30 +15,58 @@ public class Game {
         parser = new Parser();
     }
 
-
+    // Create rooms and define their exits
     private void createRooms() {
-        Room outside, theatre, pub, lab, office;
+        // Create all the rooms
+        Room home, beach, forest, city, workplace, McDonalds, park, road;
 
-        outside = new Room("outside the main entrance of the university");
-        theatre = new Room("in a lecture theatre");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        // Initialize all the rooms with a description
+        home = new Room("at home");
+        beach = new Room("at the beach");
+        forest = new Room("in the forest");
+        city = new Room("in the city");
+        workplace = new Room("at work");
+        McDonalds = new Room("at the McDonalds");
+        park = new Room("at the park");
+        road = new Room("on the road again");
 
-        outside.setExit("east", theatre);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        // Define exits to all rooms
+        home.setExit("Road", road);
 
-        theatre.setExit("west", outside);
+        road.setExit("Home", home);
+        road.setExit("Forest", forest);
+        road.setExit("City", city);
+        road.setExit("Beach", beach);
 
-        pub.setExit("east", outside);
+        city.setExit("Work", workplace);
+        city.setExit("Park", park);
+        city.setExit("McDonalds", McDonalds);
 
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
+        forest.setExit("Road", road);
 
-        office.setExit("west", lab);
+        workplace.setExit("Road", road);
 
-        currentRoom = outside;
+        beach.setExit("Road", road);
+
+        park.setExit("City", city);
+
+        McDonalds.setExit("City", city);
+
+        // Set the starting room to home
+        currentRoom = home;
+
+        //Room inventory
+        home.setRoomItem(new Item("tool"));
+
+        //Player inventory
+        Item plastic, glass, metal;
+        plastic = new Item("plastic");
+        glass = new Item("glass");
+        metal = new Item("metal");
+        Item[] items = new Item[] {plastic, glass, metal};
+        for (Item item: items) {
+            inventory.addItem(item);
+        }
     }
 
     public void play() {
@@ -50,10 +83,13 @@ public class Game {
 
     private void printWelcome() {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to our game!");
+        System.out.println("Our game is a new, recycling adventure game.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
+        System.out.println("Choose a first name for your character.");
+        System.out.println("Choose wisely, as it can't be changed.");
+        player.createPlayer();
         System.out.println(currentRoom.getLongDescription());
     }
 
@@ -73,6 +109,12 @@ public class Game {
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
+        } else if (commandWord == CommandWord.INVENTORY){
+            inventory.printInventory();
+        } else if (commandWord == CommandWord.DROP) {
+            dropItem(command);
+        } else if (commandWord == CommandWord.COLLECT) {
+            collectItem(command);
         }
         return wantToQuit;
     }
@@ -103,6 +145,36 @@ public class Game {
         }
     }
 
+    //Drops an item from the player inventory to the room inventory
+    private void dropItem(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Drop what?");
+        } else {
+            for (int i = 0; i < inventoryItems.size(); i++) {
+                if (inventoryItems.get(i).getName().equals(command.getSecondWord())) {
+                    currentRoom.setRoomItem(inventoryItems.get(i));
+                    inventory.removeItem(i);
+                    System.out.println("You dropped: "+command.getSecondWord());
+                }
+            }
+        }
+    }
+
+    //Collect an item from the room inventory and puts it into the player inventory
+    private void collectItem(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Collect what?");
+        } else {
+            for (int i = 0; i < currentRoom.getRoomItems(); i++) {
+                if (currentRoom.getRoomItem(i).getName().equals(command.getSecondWord())) {
+                    inventory.addItem(currentRoom.getRoomItem(i));
+                    System.out.println("You collected: " +currentRoom.getRoomItem(i).getName());
+                    currentRoom.removeRoomItem(i);
+                }
+            }
+        }
+    }
+
     private boolean quit(Command command) {
         if (command.hasSecondWord()) {
             System.out.println("Quit what?");
@@ -111,4 +183,5 @@ public class Game {
             return true;
         }
     }
+    
 }

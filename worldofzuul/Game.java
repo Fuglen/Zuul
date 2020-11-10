@@ -44,7 +44,7 @@ public class Game {
 
         forest.setExit("Road", road);
 
-        workplace.setExit("Road", road);
+        workplace.setExit("City", city);
 
         beach.setExit("Road", road);
 
@@ -119,10 +119,8 @@ public class Game {
         return wantToQuit;
     }
 
+    //Help command
     private void printHelp() {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
-        System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
     }

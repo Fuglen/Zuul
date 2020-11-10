@@ -44,7 +44,7 @@ public class Game {
 
         forest.setExit("Road", road);
 
-        workplace.setExit("Road", road);
+        workplace.setExit("City", city);
 
         beach.setExit("Road", road);
 

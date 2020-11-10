@@ -119,6 +119,7 @@ public class Game {
         return wantToQuit;
     }
 
+    //Help command
     private void printHelp() {
         System.out.println("Your command words are:");
         parser.showCommands();

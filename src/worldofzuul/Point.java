@@ -2,12 +2,15 @@ package worldofzuul;
 
 public class Point {
 
+    //Attributes
     private int point;
 
+    //Constructors
     public Point(){
         this.point = 0;
     }
 
+    //Methods
     public int getPoint() {
         return point;
     }
@@ -19,4 +22,5 @@ public class Point {
     public void removePoint(int point){
         this.point = getPoint() - point;
     }
+    
 }

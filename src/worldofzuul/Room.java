@@ -8,6 +8,7 @@ public class Room {
     private HashMap<String, Room> exits;
     private ArrayList<Item> roomItems = new ArrayList<>();
     private Inventory roomInventory = new Inventory(roomItems);
+    private Point point = new Point();
 
     public Room(String description) {
         this.description = description;
@@ -32,7 +33,7 @@ public class Room {
         for (String exit : keys) {
             returnString += " " + exit;
         }
-        returnString += " | List of room items: " + printRoomItems();
+        returnString += " | List of room items: " + printRoomItems() + "| Score:" + point.getPoint();
         return returnString;
     }
 

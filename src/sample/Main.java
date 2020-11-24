@@ -9,11 +9,6 @@ public class Main extends Application {
     public void start(Stage stage_dummy) throws Exception{
         Stage stage = FXMLLoader.load(getClass().getResource("window.fxml"));
         stage.show();
-
-/*        Parent root = FXMLLoader.load(getClass().getResource("window.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();*/
     }
     public static void main(String[] args) {
         launch(args);

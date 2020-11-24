@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class MainController {
@@ -14,7 +13,7 @@ public class MainController {
         Platform.exit();
     }
     @FXML
-    private void goMain(ActionEvent event) throws IOException {
+    private void goMain() throws IOException {
         Stage homeStage = FXMLLoader.load(getClass().getResource("home.fxml"));
         homeStage.show();
     }

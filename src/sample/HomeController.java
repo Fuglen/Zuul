@@ -3,7 +3,7 @@ package sample;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 
-public class MainController {
+public class HomeController {
     @FXML
     private void EndGame () {
         Platform.exit();

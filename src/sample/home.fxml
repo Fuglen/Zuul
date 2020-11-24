@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.stage.*?>
 
-<Stage xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainController">
+<Stage xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.HomeController">
 <scene>
 <Scene>
 <AnchorPane>
             <children>
                <VBox prefHeight="200.0" prefWidth="100.0">
                   <children>
-                     <Label alignment="CENTER" text="Window" />
+                     <Label alignment="CENTER" text="Home" />
                      <Button mnemonicParsing="false" onAction="#EndGame" text="End Game" />
                   </children>
                </VBox>

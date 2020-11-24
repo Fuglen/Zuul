@@ -12,7 +12,7 @@
             <children>
                <VBox prefHeight="200.0" prefWidth="100.0">
                   <children>
-                     <Button mnemonicParsing="false" onAction="#StartGame" text="Start Game" />
+                     <Label alignment="CENTER" text="Window" />
                      <Button mnemonicParsing="false" onAction="#EndGame" text="End Game" />
                   </children>
                </VBox>

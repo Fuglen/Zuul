@@ -8,4 +8,8 @@ public class HomeController {
     private void EndGame () {
         Platform.exit();
     }
+    @FXML
+    private void goMain() {
+
+    }
 }

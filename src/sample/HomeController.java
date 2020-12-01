@@ -16,6 +16,5 @@ public class HomeController {
     private void goMain() throws IOException {
         Stage windowStage = FXMLLoader.load(getClass().getResource("window.fxml"));
         windowStage.show();
-
     }
 }

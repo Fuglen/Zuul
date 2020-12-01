@@ -80,13 +80,8 @@ public class Game {
         for (Quest q : quests) {
             questList.addQuest(q);
         }
-
-        //Create NPC's
-        NPC douchebagBrian = new NPC("Brian");
-        douchebagBrian.addDialog("F*ck this trash! *Throws trash out of the window*", 0.0);
-        douchebagBrian.addDialog("Damn I hate trash, gotta find a trashcan asap..", 0.5);
-        douchebagBrian.addDialog("Hahahaha know your f*cking place, trash!", 1.1);
-        douchebagBrian.addDialog("Yo bro!?! What da hell???", 1.);
+        //Create NPC object
+        NPC npcs = new NPC();
     }
 
     public void play() {

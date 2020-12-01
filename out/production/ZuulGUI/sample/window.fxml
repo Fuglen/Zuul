@@ -15,6 +15,7 @@
                      <Label alignment="CENTER" text="Window" />
                      <Button mnemonicParsing="false" onAction="#goMain" text="Go Home" />
                      <Button mnemonicParsing="false" onAction="#EndGame" text="End Game" />
+                     <Label text="UpdateTest" />
                   </children>
                </VBox>
             </children>

@@ -1,23 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.stage.*?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.stage.Stage?>
 
 <Stage xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainController">
 <scene>
 <Scene>
-<AnchorPane>
+<AnchorPane prefHeight="298.0" prefWidth="323.0">
             <children>
-               <VBox prefHeight="200.0" prefWidth="100.0">
+               <ImageView fitHeight="302.0" fitWidth="325.0" layoutX="-1.0" layoutY="-2.0">
+                  <image>
+                     <Image url="@../Images/blue_panel.png" />
+                  </image>
+               </ImageView>
+               <VBox layoutX="84.0" layoutY="86.0" prefHeight="200.0" prefWidth="155.0">
                   <children>
-                     <Label alignment="CENTER" text="Window" />
-                     <Button mnemonicParsing="false" onAction="#goMain" text="Go Home" />
-                     <Button mnemonicParsing="false" onAction="#EndGame" text="End Game" />
-                     <Label text="UpdateTest" />
+                     <StackPane onMouseClicked="#goMain" prefHeight="39.0" prefWidth="134.0">
+                        <children>
+                           <ImageView fitHeight="45.0" fitWidth="155.0" onMouseClicked="#goMain" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../Images/green_button00.png" />
+                              </image>
+                           </ImageView>
+                           <Label alignment="CENTER" prefHeight="28.0" prefWidth="155.0" text="START GAME!" textFill="#f9ff00">
+                              <font>
+                                 <Font name="Gill Sans Ultra Bold" size="12.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </StackPane>
+                     <StackPane onMouseClicked="#EndGame" prefHeight="140.0" prefWidth="155.0">
+                        <children>
+                           <ImageView fitHeight="44.0" fitWidth="155.0">
+                              <image>
+                                 <Image url="@../Images/green_button00.png" />
+                              </image>
+                           </ImageView>
+                           <Label text="QUIT" textFill="#fff200">
+                              <font>
+                                 <Font name="Gill Sans Ultra Bold" size="12.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </StackPane>
                   </children>
                </VBox>
+               <Label layoutX="59.0" layoutY="14.0" prefHeight="46.0" prefWidth="205.0" text="Trash Master" textFill="#f6ff00">
+                  <font>
+                     <Font name="Gill Sans Ultra Bold" size="23.0" />
+                  </font>
+               </Label>
             </children>
 </AnchorPane>
 </Scene>

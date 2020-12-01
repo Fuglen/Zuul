@@ -2,7 +2,7 @@ package worldofzuul;
 
 import java.util.ArrayList;
 
-public class Item {
+class Item {
     //Attributes
     private String name;
 

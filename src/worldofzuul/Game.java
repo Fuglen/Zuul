@@ -1,7 +1,7 @@
 package worldofzuul;
 import java.util.ArrayList;
 
-public class Game {
+class Game {
     private Parser parser;
     private Room currentRoom;
     //Player inventory

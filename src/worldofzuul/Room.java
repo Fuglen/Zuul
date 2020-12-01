@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
 
-public class Room {
+class Room {
     private String description;
     private HashMap<String, Room> exits;
     private ArrayList<Item> roomItems = new ArrayList<>();

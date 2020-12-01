@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Scene?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.stage.Stage?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.stage.*?>
 
 <Stage xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainController">
 <scene>
@@ -22,7 +19,7 @@
                </ImageView>
                <VBox layoutX="84.0" layoutY="86.0" prefHeight="200.0" prefWidth="155.0">
                   <children>
-                     <StackPane onMouseClicked="#goMain" prefHeight="39.0" prefWidth="134.0">
+                     <StackPane layoutX="10.0" layoutY="10.0" onMouseClicked="#goMain" prefHeight="39.0" prefWidth="134.0">
                         <children>
                            <ImageView fitHeight="45.0" fitWidth="155.0" onMouseClicked="#goMain" pickOnBounds="true" preserveRatio="true">
                               <image>
@@ -30,6 +27,34 @@
                               </image>
                            </ImageView>
                            <Label alignment="CENTER" prefHeight="28.0" prefWidth="155.0" text="START GAME!" textFill="#f9ff00">
+                              <font>
+                                 <Font name="Gill Sans Ultra Bold" size="12.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </StackPane>
+                     <StackPane onMouseClicked="#addItem" prefHeight="39.0" prefWidth="134.0">
+                        <children>
+                           <ImageView fitHeight="45.0" fitWidth="155.0" onMouseClicked="#goMain" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../Images/green_button00.png" />
+                              </image>
+                           </ImageView>
+                           <Label alignment="CENTER" prefHeight="28.0" prefWidth="155.0" text="ADD ITEM" textFill="#f9ff00">
+                              <font>
+                                 <Font name="Gill Sans Ultra Bold" size="12.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </StackPane>
+                     <StackPane layoutX="10.0" layoutY="50.0" onMouseClicked="#printInventory" prefHeight="39.0" prefWidth="134.0">
+                        <children>
+                           <ImageView fitHeight="45.0" fitWidth="155.0" onMouseClicked="#goMain" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../Images/green_button00.png" />
+                              </image>
+                           </ImageView>
+                           <Label alignment="CENTER" prefHeight="28.0" prefWidth="155.0" text="INVENTORY" textFill="#f9ff00">
                               <font>
                                  <Font name="Gill Sans Ultra Bold" size="12.0" />
                               </font>

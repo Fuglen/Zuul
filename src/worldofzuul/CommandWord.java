@@ -1,6 +1,6 @@
 package worldofzuul;
 
-public enum CommandWord {
+enum CommandWord {
     GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?"), INVENTORY("inventory"), DROP("drop"), COLLECT("collect");
 
     private String commandString;

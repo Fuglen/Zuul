@@ -1,6 +1,6 @@
 package worldofzuul;
 
-public class Point {
+class Point {
 
     //Attributes
     private int point;

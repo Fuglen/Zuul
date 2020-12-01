@@ -1,7 +1,7 @@
 package worldofzuul;
 import java.util.ArrayList;
 
-public class Inventory {
+class Inventory {
     // Attributes
     private ArrayList<Item> items;
 

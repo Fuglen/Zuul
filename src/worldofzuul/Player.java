@@ -2,7 +2,7 @@ package worldofzuul;
 
 import java.util.Scanner;
 
-public class Player {
+class Player {
     private String playerName;
     private int playerAge;
     private String playerGender;

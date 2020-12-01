@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
 
-public class Room {
+class Room {
     private String description;
     private HashMap<String, Room> exits;
     private ArrayList<NPC> NPCs = new ArrayList<>();
     private ArrayList<Item> roomItems = new ArrayList<>();
     private Inventory roomInventory = new Inventory(roomItems);
+    private Point point = new Point();
 
     public Room(String description) {
         this.description = description;
@@ -34,7 +35,7 @@ public class Room {
         for (String exit : keys) {
             returnString += " " + exit;
         }
-        returnString += " | List of room items: " + printRoomItems();
+        returnString += " | List of room items: " + printRoomItems() + "| Score:" + point.getPoint();
         return returnString;
     }
 

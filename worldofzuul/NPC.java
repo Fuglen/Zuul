@@ -1,24 +1,44 @@
 package worldofzuul;
 
+import org.w3c.dom.Document;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 public class NPC {
     private String name;
-    private String iceBreaker;
-    private Map<Double, String> dialogMap;
+    private String description;
+    private int id;
+    private File file = new File("worldofzuul/npcs/npcs.xml");
 
-    public NPC(String name) {
-        this.name = name;
-        dialogMap = new HashMap<>();
+    public NPC() {
+        try {
+            DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
+                    .newDocumentBuilder();
+
+            Document doc = dBuilder.parse(file);
+
+//            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+            System.out.println(doc.getDocumentElement().getElementsByTagName("option").item(1).getTextContent());
+
+            /* if (doc.hasChildNodes()) {
+
+                printNote(doc.getChildNodes());
+
+            } */
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void addDialog(String dialog, Double num) {
-        dialogMap.put(num, dialog);
+    public String getName() {
+        return name;
     }
 
-    public String getDialog(Double num) {
-        String dialog = dialogMap.get(num);
-        return dialog;
+    public void setMet() {
     }
 }

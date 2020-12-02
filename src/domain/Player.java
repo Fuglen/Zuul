@@ -1,4 +1,4 @@
-package worldofzuul;
+package domain;
 
 import java.util.Scanner;
 

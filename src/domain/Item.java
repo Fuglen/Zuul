@@ -1,6 +1,4 @@
-package worldofzuul;
-
-import java.util.ArrayList;
+package domain;
 
 class Item {
     //Attributes

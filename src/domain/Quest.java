@@ -1,6 +1,4 @@
-package worldofzuul;
-
-import java.util.ArrayList;
+package domain;
 
 public class Quest {
 

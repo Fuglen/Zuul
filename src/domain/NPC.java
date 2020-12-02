@@ -1,18 +1,16 @@
-package worldofzuul;
+package domain;
 
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 public class NPC {
     private String name;
     private String description;
     private int id;
-    private File file = new File("worldofzuul/npcs/npcs.xml");
+    private File file = new File("domain/npcs/npcs.xml");
 
     public NPC() {
         try {

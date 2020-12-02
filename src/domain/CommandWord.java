@@ -1,4 +1,4 @@
-package worldofzuul;
+package domain;
 
 public enum CommandWord {
     GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?"), INVENTORY("inventory"), DROP("drop"), COLLECT("collect"), QUESTS("quests");

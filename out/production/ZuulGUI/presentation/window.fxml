@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.stage.*?>
 
-<Stage xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainController">
+<Stage xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.MainController">
 <scene>
 <Scene>
 <AnchorPane prefHeight="298.0" prefWidth="323.0">

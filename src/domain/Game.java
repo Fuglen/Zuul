@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 class Game {
     private Parser parser;
@@ -9,84 +10,105 @@ class Game {
     private ArrayList<Item> inventoryItems = new ArrayList<>();
     private Inventory inventory = new Inventory(inventoryItems);
     private Player player = new Player();
+    private Random rand = new Random();
 
-    //Quests
+    //Quests and list of item names and item spawns
     private QuestList questList = new QuestList();
-
+    private boolean tutorial = false;
 
     public Game() {
         createRooms();
         parser = new Parser();
+
     }
 
     // Create rooms and define their exits
     private void createRooms() {
         // Create all the rooms
-        Room home, beach, forest, city, workplace, McDonalds, park, road;
-        Quest quest1, quest2;
+        Room home, beach, forest, city, work, mcdonalds, park, road, recycle, metal, glass, plastic;
 
         // Initialize all the rooms with a description
         home = new Room("at home");
         beach = new Room("at the beach");
         forest = new Room("in the forest");
         city = new Room("in the city");
-        workplace = new Room("at work");
-        McDonalds = new Room("at the McDonalds");
+        work = new Room("at work");
+        mcdonalds = new Room("at the McDonalds");
         park = new Room("at the park");
         road = new Room("on the road again");
+        recycle = new Room ("at the recycle center.\nYou see three types of containers");
+        metal = new Room ("at the metal container");
+        glass = new Room ("at the glass container");
+        plastic = new Room ("at the plastic container");
 
         // Define exits to all rooms
-        home.setExit("Road", road);
 
-        road.setExit("Home", home);
-        road.setExit("Forest", forest);
-        road.setExit("City", city);
-        road.setExit("Beach", beach);
+        home.setExit("road", road);
 
-        city.setExit("Work", workplace);
-        city.setExit("Park", park);
-        city.setExit("McDonalds", McDonalds);
 
-        forest.setExit("Road", road);
+        road.setExit("home", home);
+        road.setExit("forest", forest);
+        road.setExit("city", city);
+        road.setExit("beach", beach);
+        road.setExit("recycling", recycle);
 
-        workplace.setExit("City", city);
+        city.setExit("work", work);
+        city.setExit("park", park);
+        city.setExit("mcdonalds", mcdonalds);
+        city.setExit("road", road);
 
-        beach.setExit("Road", road);
+        forest.setExit("road", road);
 
-        park.setExit("City", city);
+        work.setExit("city", city);
 
-        McDonalds.setExit("City", city);
+        beach.setExit("road", road);
+
+        park.setExit("city", city);
+
+        mcdonalds.setExit("city", city);
+
+        recycle.setExit("road", road);
+        recycle.setExit("metal", metal);
+        recycle.setExit("glass", glass);
+        recycle.setExit("plastic", plastic);
+
+        metal.setExit("recycling", recycle);
+
+        glass.setExit("recycling", glass);
+
+        plastic.setExit("recycling", plastic);
+
+        Room.addRoomToList(beach);
+        Room.addRoomToList(forest);
+        Room.addRoomToList(city);
+        Room.addRoomToList(mcdonalds);
+        Room.addRoomToList(park);
+        Room.addRoomToList(road);
+        Room.addRoomToContainerList(glass);
+        Room.addRoomToContainerList(metal);
+        Room.addRoomToContainerList(plastic);
 
         // Set the starting room to home
         currentRoom = home;
 
         //Room inventory
-        home.setRoomItem(new Item("tool"));
+        home.setRoomItem(new Item("shoes"));
 
         //Player inventory
-        Item plastic, glass, metal;
-        plastic = new Item("plastic");
-        glass = new Item("glass");
-        metal = new Item("metal");
-        Item[] items = new Item[]{plastic, glass, metal};
+        Item plasticItem, glassItem, metalItem;
+        plasticItem = new Item("plastic");
+        glassItem = new Item("glass");
+        metalItem = new Item("metal");
+        Item[] items = new Item[]{plasticItem, glassItem, metalItem};
         for (Item item : items) {
             inventory.addItem(item);
         }
 
-        //Create Quests
-        quest1 = new Quest("Open your inventory", 10, 0);
-        quest2 = new Quest("Open your inventory2", 10, 0);
-        Quest[] quests = new Quest[]{quest1, quest2};
-        for (Quest q : quests) {
-            questList.addQuest(q);
-        }
         //Create NPC object
         NPC npcs = new NPC();
     }
-
     public void play() {
         printWelcome();
-
 
         boolean finished = false;
         while (!finished) {
@@ -132,7 +154,13 @@ class Game {
             collectItem(command);
         } else if (commandWord == CommandWord.QUESTS) {
             questList.printQuests();
+        } else if (commandWord == CommandWord.USE){
+            useItem(command);
         }
+        else if (commandWord == CommandWord.TEST){ // Will be removed
+            startQuest();
+        }
+
         return wantToQuit;
     }
 
@@ -150,14 +178,19 @@ class Game {
 
         String direction = command.getSecondWord();
 
-        Room nextRoom = currentRoom.getExit(direction);
-
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
+        if(!tutorial){
+            System.out.println("You need to put on your shoes before you can go outside.");
         } else {
-            currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
+            Room nextRoom = currentRoom.getExit(direction);
+
+            if (nextRoom == null) {
+                System.out.println("There is no door!");
+            } else {
+                currentRoom = nextRoom;
+                System.out.println(currentRoom.getLongDescription());
+            }
         }
+
     }
 
     //Drops an item from the player inventory to the room inventory
@@ -190,6 +223,27 @@ class Game {
         }
     }
 
+    //Drops an item from the player inventory to the room inventory
+    private void useItem(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Use what?");
+        } else {
+            for (int i = 0; i < inventoryItems.size(); i++) {
+                if (inventoryItems.get(i).getName().equals(command.getSecondWord())) {
+                    if(inventoryItems.get(i).getName().equals("shoes")){
+                        System.out.println("You have put on your shoes, and are ready to go to work!");
+                        tutorial = true;
+                        Point.addPoint(50);
+                    } else {
+                        System.out.println("This is not your shoes!");
+                    }
+                    inventory.removeItem(i);
+
+                }
+            }
+        }
+    }
+
     private boolean quit(Command command) {
         if (command.hasSecondWord()) {
             System.out.println("Quit what?");
@@ -197,6 +251,39 @@ class Game {
         } else {
             return true;
         }
+    }
+
+    private void startQuest(){ // Starts new quest.
+        questList.addQuest(new Quest()); //Create Quests - Will be added when talking to NPC
+        Quest questSetting = questList.getCurrentQuests().get(questList.getCurrentQuests().size() - 1); // Gets the latest added quest and call it questSetting
+        // Creates glass items
+        for(int i = 0 ; i < questSetting.getGlassNeed() ; i++ ){
+            Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
+            if(room != currentRoom){
+                room.setRoomItem(new Item("glass", Room.getContainerList().get(0)));
+            } else {
+                i--;
+            }
+        }
+        // Creates metal items
+        for(int i = 0 ; i < questSetting.getMetalNeed() ; i++ ){
+            Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
+            if(room != currentRoom){
+                room.setRoomItem(new Item("metal", Room.getContainerList().get(1)));
+            } else {
+                i--;
+            }
+        }
+        // Creates plastic items
+        for(int i = 0 ; i < questSetting.getPlasticNeed() ; i++ ){
+            Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
+            if(room != currentRoom){
+                room.setRoomItem(new Item("plastic", Room.getContainerList().get(2)));
+            } else {
+                i--;
+            }
+        }
+
     }
 
 }

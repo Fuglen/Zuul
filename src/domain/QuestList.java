@@ -22,7 +22,7 @@ public class QuestList {
     }
 
     public void addQuest(Quest quest) {
-        if (!currentQuests.contains(quest) && currentQuests.size() <= 3) {
+        if (!currentQuests.contains(quest) && currentQuests.size() < 1) {
             currentQuests.add(quest);
         } else {
             System.out.println("You have too many active quests.");

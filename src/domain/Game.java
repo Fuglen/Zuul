@@ -22,8 +22,7 @@ class Game {
     // Create rooms and define their exits
     private void createRooms() {
         // Create all the rooms
-        Room home, beach, forest, city, workplace, McDonalds, park, road;
-        Quest quest1, quest2;
+        Room home, beach, forest, city, workplace, McDonalds, park, road, recycle, metal, glass, plastic;
 
         // Initialize all the rooms with a description
         home = new Room("at home");
@@ -34,52 +33,62 @@ class Game {
         McDonalds = new Room("at the McDonalds");
         park = new Room("at the park");
         road = new Room("on the road again");
+        recycle = new Room ("at the recycle center.\nYou see three types of containers");
+        metal = new Room ("at the metal container");
+        glass = new Room ("at the glass container");
+        plastic = new Room ("at the plastic container");
 
         // Define exits to all rooms
-        home.setExit("Road", road);
+        home.setExit("road", road);
 
-        road.setExit("Home", home);
-        road.setExit("Forest", forest);
-        road.setExit("City", city);
-        road.setExit("Beach", beach);
+        road.setExit("home", home);
+        road.setExit("forest", forest);
+        road.setExit("city", city);
+        road.setExit("beach", beach);
+        road.setExit("recycling", recycle);
 
-        city.setExit("Work", workplace);
-        city.setExit("Park", park);
-        city.setExit("McDonalds", McDonalds);
+        city.setExit("work", workplace);
+        city.setExit("park", park);
+        city.setExit("mcdonalds", McDonalds);
 
-        forest.setExit("Road", road);
+        forest.setExit("road", road);
 
-        workplace.setExit("City", city);
+        workplace.setExit("city", city);
 
-        beach.setExit("Road", road);
+        beach.setExit("road", road);
 
-        park.setExit("City", city);
+        park.setExit("city", city);
 
-        McDonalds.setExit("City", city);
+        McDonalds.setExit("city", city);
+
+        recycle.setExit("road", road);
+        recycle.setExit("metal", metal);
+        recycle.setExit("glass", glass);
+        recycle.setExit("plastic", plastic);
+
+        metal.setExit("recycling", recycle);
+
+        glass.setExit("recycling", glass);
+
+        plastic.setExit("recycling", plastic);
 
         // Set the starting room to home
         currentRoom = home;
 
         //Room inventory
         home.setRoomItem(new Item("tool"));
+        home.setRoomItem(new Item("tool"));
 
         //Player inventory
-        Item plastic, glass, metal;
-        plastic = new Item("plastic");
-        glass = new Item("glass");
-        metal = new Item("metal");
-        Item[] items = new Item[]{plastic, glass, metal};
+        Item plasticItem, glassItem, metalItem;
+        plasticItem = new Item("plastic");
+        glassItem = new Item("glass");
+        metalItem = new Item("metal");
+        Item[] items = new Item[]{plasticItem, glassItem, metalItem};
         for (Item item : items) {
             inventory.addItem(item);
         }
 
-        //Create Quests
-        quest1 = new Quest("Open your inventory", 10, 0);
-        quest2 = new Quest("Open your inventory2", 10, 0);
-        Quest[] quests = new Quest[]{quest1, quest2};
-        for (Quest q : quests) {
-            questList.addQuest(q);
-        }
         //Create NPC object
         NPC npcs = new NPC();
     }
@@ -131,6 +140,7 @@ class Game {
         } else if (commandWord == CommandWord.COLLECT) {
             collectItem(command);
         } else if (commandWord == CommandWord.QUESTS) {
+            questList.addQuest(new Quest()); //Create Quests - Will be added when talking to NPC
             questList.printQuests();
         }
         return wantToQuit;

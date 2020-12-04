@@ -10,7 +10,8 @@ class Room {
     private ArrayList<NPC> NPCs = new ArrayList<>();
     private ArrayList<Item> roomItems = new ArrayList<>();
     private Inventory roomInventory = new Inventory(roomItems);
-    private Point point = new Point();
+    private static ArrayList<Room> roomList = new ArrayList<Room>();
+    private static ArrayList<Room> containerList = new ArrayList<Room>();
 
     public Room(String description) {
         this.description = description;
@@ -35,7 +36,7 @@ class Room {
         for (String exit : keys) {
             returnString += " " + exit;
         }
-        returnString += " | List of room items: " + printRoomItems() + "| Score:" + point.getPoint();
+        returnString += "\nList of room items: " + printRoomItems() + "\nScore: " + Point.getPoint();
         return returnString;
     }
 
@@ -78,6 +79,22 @@ class Room {
             roomItemsText += roomItems.get(i).getName() + " ";
         }
         return roomItemsText;
+    }
+
+    public static void addRoomToList(Room room){
+        Room.roomList.add(room);
+    }
+
+    public static ArrayList<Room> getRoomList() {
+        return roomList;
+    }
+
+    public static void addRoomToContainerList(Room room){
+        Room.roomList.add(room);
+    }
+
+    public static ArrayList<Room> getContainerList() {
+        return roomList;
     }
 }
 

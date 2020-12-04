@@ -37,6 +37,7 @@ class Player {
                 default:
                     playerName = input;
                     System.out.println("Hello there " + playerName + ", we hope you enjoy our game!");
+                    System.out.println("You are late for work! Put on your shoes and go to work!");
             }
         }
     }

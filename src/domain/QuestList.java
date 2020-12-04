@@ -26,7 +26,9 @@ public class QuestList {
     public void addQuest(Quest quest) {
         if (!currentQuests.contains(quest) && currentQuests.size() < Quest.getMaxQuests()) {
             currentQuests.add(quest);
-            System.out.println("You have started a new quest.");
+            if(currentQuests.get(0).getQuestType() != 100){
+                System.out.println("You have started a new quest.");
+            }
         } else {
             System.out.println("You have too many active quests.");
         }

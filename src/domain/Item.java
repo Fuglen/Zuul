@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.Random;
-
 class Item {
     //Attributes
     private String name; // Name and type of the item
@@ -10,12 +8,11 @@ class Item {
 
 
     //Constructor
-    public Item(String name) {
+    public Item(String name) { // For test items
         this.name = name;
     }
 
     public Item(String name, Room room){
-        Random rand = new Random();
         this.name = name;
         this.room = room;
     }
@@ -23,6 +20,10 @@ class Item {
     //Methods
     public String getName() {
         return name;
+    }
+
+    public Room getRoom() {
+        return room;
     }
 
     @Override

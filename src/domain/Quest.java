@@ -16,7 +16,7 @@ public class Quest {
     private int recycleAmount; // Amount of trash that has been recycled. When recycleAmount == collectAmount change description to "talk to 'questGiver'"
     private int recycleRight; // +1 if you recycle right
     private int recycleWrong; // +1 if you recycle wrong
-    private static final int maxQuests = 1;
+    private static final int maxQuests = 1; // Number of quests that can be active at the same time
 
     public Quest(){
         Random rand = new Random();
@@ -34,6 +34,12 @@ public class Quest {
 
         this.questGiver = ""; // Use the set method
 
+    }
+
+    public Quest(String text, int questType){
+        this.description = text;
+        this.questType = questType;
+        this.complete = false;
     }
 
     public String getDescription() {
@@ -108,8 +114,8 @@ public class Quest {
         this.questGiver = questGiver;
     }
 
-    public void removeCurrentQuests() {
-
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

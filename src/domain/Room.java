@@ -90,11 +90,11 @@ class Room {
     }
 
     public static void addRoomToContainerList(Room room){
-        Room.roomList.add(room);
+        Room.containerList.add(room);
     }
 
     public static ArrayList<Room> getContainerList() {
-        return roomList;
+        return containerList;
     }
 }
 

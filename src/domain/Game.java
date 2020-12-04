@@ -14,6 +14,7 @@ class Game {
 
     //Quests and list of item names and item spawns
     private QuestList questList = new QuestList();
+    private QuestList finishedQuestList = new QuestList();
     private boolean tutorial = false;
 
     public Game() {
@@ -74,9 +75,9 @@ class Game {
 
         metal.setExit("recycling", recycle);
 
-        glass.setExit("recycling", glass);
+        glass.setExit("recycling", recycle);
 
-        plastic.setExit("recycling", plastic);
+        plastic.setExit("recycling", recycle);
 
         Room.addRoomToList(beach);
         Room.addRoomToList(forest);
@@ -128,6 +129,7 @@ class Game {
         System.out.println("Choose wisely, as it can't be changed.");
         player.createPlayer();
         System.out.println(currentRoom.getLongDescription());
+        questList.addQuest(new Quest("Put on your shoes and go to work!\nHINT: maybe the commands 'collect' and 'use' are useful here.", 100)); // Start the tutorial
     }
 
     private boolean processCommand(Command command) {
@@ -153,12 +155,14 @@ class Game {
         } else if (commandWord == CommandWord.COLLECT) {
             collectItem(command);
         } else if (commandWord == CommandWord.QUESTS) {
-            questList.addQuest(new Quest()); //Create Quests - Will be added when talking to NPC
             questList.printQuests();
         } else if (commandWord == CommandWord.USE){
             useItem(command);
         }
         else if (commandWord == CommandWord.TEST){ // Will be removed
+            for(int i = 0 ; i < finishedQuestList.getCurrentQuests().size() ; i++){
+                System.out.println(finishedQuestList.getCurrentQuests().get(i));
+            }
             startQuest();
         }
 
@@ -230,16 +234,28 @@ class Game {
             System.out.println("Use what?");
         } else {
             for (int i = 0; i < inventoryItems.size(); i++) {
-                if (inventoryItems.get(i).getName().equals(command.getSecondWord())) {
-                    if(inventoryItems.get(i).getName().equals("shoes")){
-                        System.out.println("You have put on your shoes, and are ready to go to work!");
-                        tutorial = true;
-                        Point.addPoint(50);
-                    } else {
-                        System.out.println("This is not your shoes!");
-                    }
-                    inventory.removeItem(i);
+                if (inventoryItems.get(i).getName().equals(command.getSecondWord())) { // If the written item is in inventory
+                    if(!tutorial){
+                        if(inventoryItems.get(i).getName().equals("shoes")){ // If "use shoes" tutorial is complete
+                            System.out.println("You have put on your shoes, and are ready to go to work!");
+                            tutorial = true;
+                            Point.addPoint(50);
+                            inventory.removeItem(i);
+                            questList.getCurrentQuests().get(0).setComplete();
+                            finishQuest();
+                        } else { // Only when tutorial is ongoing
+                            System.out.println("This is not your shoes!");
+                        }
+                    } else { // If tutorial is complete
+                        if(currentRoom == Room.getContainerList().get(0) || currentRoom == Room.getContainerList().get(1) || currentRoom == Room.getContainerList().get(2)){ // Checks if 'use' command is used in one of the container rooms
+                            System.out.println("You have put "+inventoryItems.get(i).getName()+" in the container. Good job!");
+                            inventory.removeItem(i);
 
+                        } else { // If not in a container room
+                            System.out.println("You can't use that item here.");
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -282,6 +298,22 @@ class Game {
                 room.setRoomItem(new Item("plastic", Room.getContainerList().get(2)));
             } else {
                 i--;
+            }
+        }
+
+    }
+    // when quest is completed. Add finished quests to a new list for end screen, and change description.
+    private void finishQuest(){
+        for(int i = 0 ; i < questList.getCurrentQuests().size() ; i++){
+            if(questList.getCurrentQuests().get(i).isComplete()){ // Checks boolean complete
+                if(questList.getCurrentQuests().get(i).getQuestType() == 100){ // Only for the tutorial
+                    questList.getCurrentQuests().get(i).setDescription("Tutorial.");
+                }
+                if(questList.getCurrentQuests().get(i).getQuestType() == 0){ // for type 0 quests
+                    questList.getCurrentQuests().get(i).setDescription("Collect and recycle.");
+                }
+                finishedQuestList.getCurrentQuests().add(questList.getCurrentQuests().get(i));
+                questList.getCurrentQuests().remove(i);
             }
         }
 

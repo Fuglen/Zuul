@@ -153,6 +153,7 @@ class Game {
         } else if (commandWord == CommandWord.COLLECT) {
             collectItem(command);
         } else if (commandWord == CommandWord.QUESTS) {
+            questList.addQuest(new Quest()); //Create Quests - Will be added when talking to NPC
             questList.printQuests();
         } else if (commandWord == CommandWord.USE){
             useItem(command);

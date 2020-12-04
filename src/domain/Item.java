@@ -7,6 +7,8 @@ class Item {
     private String name; // Name and type of the item
     private Room room; // When used checks container
 
+
+
     //Constructor
     public Item(String name) {
         this.name = name;

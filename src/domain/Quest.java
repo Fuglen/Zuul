@@ -16,19 +16,31 @@ public class Quest {
     private int recycleAmount; // Amount of trash that has been recycled. When recycleAmount == collectAmount change description to "talk to 'questGiver'"
     private int recycleRight; // +1 if you recycle right
     private int recycleWrong; // +1 if you recycle wrong
-    private static final int maxQuests = 1; // Number of quests that can be active at the same time
+    private static final int maxQuests = 3; // Number of quests that can be active at the same time
 
     public Quest(){
         Random rand = new Random();
-        int random = rand.nextInt(1);
+        int random = rand.nextInt(3);
 
         if(random == 0){ // Type zero quest (collect and recycle)
             this.questType = random;
-            this.collectAmount = 2 + rand.nextInt(3); // From 6 to 8.
-            this.metalNeed = 0 + rand.nextInt(2);
-            this.glassNeed = 0 + rand.nextInt(2);
+            this.collectAmount = 6 + rand.nextInt(3); // From 6 to 8.
+            this.metalNeed = 2 + rand.nextInt(2);
+            this.glassNeed = 2 + rand.nextInt(2);
             this.plasticNeed = collectAmount - glassNeed - metalNeed;
             this.description = "Collect and recycle "+collectAmount+" pieces of trash.\nYou have recycled "+recycleAmount+"/"+collectAmount;
+        }
+
+        if(random == 1){
+            this.questType = random;
+            this.description = "Type 1";
+            this.complete = true;
+        }
+
+        if(random == 2){
+            this.questType = random;
+            this.description = "Type 2!!!!";
+            this.complete = true;
         }
 
         this.questGiver = "Dummy"; // Use the set method

@@ -290,36 +290,59 @@ class Game {
     }
 
     private void startQuest(){ // Starts new quest.
-        questList.addQuest(new Quest()); //Create Quests - Will be added when talking to NPC
-        Quest questSetting = questList.getCurrentQuests().get(questList.getCurrentQuests().size() - 1); // Gets the latest added quest and call it questSetting
-        // Creates glass items
-        for(int i = 0 ; i < questSetting.getGlassNeed() ; i++ ){
-            Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
-            if(room != currentRoom){
-                room.setRoomItem(new Item("glass", Room.getContainerList().get(0)));
-            } else {
-                i--;
+        Quest newQuest = new Quest();
+        int count = 0;
+        for(int i = 0 ; i < questList.getCurrentQuests().size() ; i++){ // Checks if the type of quest already exists
+            if(questList.getCurrentQuests().get(i).getQuestType() == newQuest.getQuestType()){
+                count = count + 1;
             }
         }
-        // Creates metal items
-        for(int i = 0 ; i < questSetting.getMetalNeed() ; i++ ){
-            Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
-            if(room != currentRoom){
-                room.setRoomItem(new Item("metal", Room.getContainerList().get(1)));
+        if(count > 0){ // If the quest type already exists, start the method over.
+            if(questList.getCurrentQuests().size() == Quest.getMaxQuests()){
+                System.out.println("Something went wrong. Too many quest is active.");
             } else {
-                i--;
+                startQuest();
             }
-        }
-        // Creates plastic items
-        for(int i = 0 ; i < questSetting.getPlasticNeed() ; i++ ){
-            Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
-            if(room != currentRoom){
-                room.setRoomItem(new Item("plastic", Room.getContainerList().get(2)));
-            } else {
-                i--;
-            }
-        }
 
+        } else {
+            if(newQuest.getQuestType() == 0){
+                questList.addQuest(newQuest); //Create Quests - Will be added when talking to NPC
+                Quest questSetting = questList.getCurrentQuests().get(questList.getCurrentQuests().size() - 1); // Gets the latest added quest and call it questSetting
+                // Creates glass items
+                for(int i = 0 ; i < questSetting.getGlassNeed() ; i++ ){
+                    Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
+                    if(room != currentRoom){
+                        room.setRoomItem(new Item("glass", Room.getContainerList().get(0)));
+                    } else {
+                        i--;
+                    }
+                }
+                // Creates metal items
+                for(int i = 0 ; i < questSetting.getMetalNeed() ; i++ ){
+                    Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
+                    if(room != currentRoom){
+                        room.setRoomItem(new Item("metal", Room.getContainerList().get(1)));
+                    } else {
+                        i--;
+                    }
+                }
+                // Creates plastic items
+                for(int i = 0 ; i < questSetting.getPlasticNeed() ; i++ ){
+                    Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
+                    if(room != currentRoom){
+                        room.setRoomItem(new Item("plastic", Room.getContainerList().get(2)));
+                    } else {
+                        i--;
+                    }
+                }
+            }
+            if(newQuest.getQuestType() == 1){
+                questList.addQuest(newQuest);
+            }
+            if(newQuest.getQuestType() == 2){
+                questList.addQuest(newQuest);
+            }
+        }
     }
     // Completes the quest
     private void completeQuest(){

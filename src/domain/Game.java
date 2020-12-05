@@ -250,26 +250,28 @@ class Game {
                     } else { // If tutorial is complete
                         if(currentRoom == Room.getContainerList().get(0) || currentRoom == Room.getContainerList().get(1) || currentRoom == Room.getContainerList().get(2)){ // Checks if 'use' command is used in one of the container rooms
                             System.out.println("You have put "+inventoryItems.get(i).getName()+" in the container. Good job!");
-
                             for(int j = 0 ; j < questList.getCurrentQuests().size() ; j++){
                                 if(questList.getCurrentQuests().get(j).getQuestType() == 0){
                                     questList.getCurrentQuests().get(j).setRecycleAmount(1);
                                     if(inventoryItems.get(i).getRoom() == currentRoom){
                                         questList.getCurrentQuests().get(j).setRecycleRight(1);
-                                        System.out.println(questList.getCurrentQuests().get(j).getRecycleRight());
                                     } else {
                                         questList.getCurrentQuests().get(j).setRecycleWrong(1);
-                                        System.out.println(questList.getCurrentQuests().get(j).getRecycleWrong());
                                     }
+                                    if(questList.getCurrentQuests().get(j).getRecycleAmount() == questList.getCurrentQuests().get(j).getCollectAmount()){
+                                        questList.getCurrentQuests().get(j).setDescription("You recycled all the trash you were asked to. Talk to NPC to complete the quest.");
+                                        System.out.println(questList.getCurrentQuests().get(j).getDescription());
+                                    } else {
+                                        questList.getCurrentQuests().get(j).updateDescriptionZero();
+                                    }
+                                    j = questList.getCurrentQuests().size() - 1;
                                 }
                             }
                             inventory.removeItem(i);
-                            break;
-
                         } else { // If not in a container room
                             System.out.println("You can't use that item here.");
-                            break;
                         }
+                        break;
                     }
                 }
             }

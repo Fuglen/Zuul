@@ -118,6 +118,10 @@ public class Quest {
         this.description = description;
     }
 
+    public void updateDescriptionZero() {
+        this.description = "Collect and recycle "+collectAmount+" pieces of trash.\nYou have recycled "+recycleAmount+"/"+collectAmount;
+    }
+
     @Override
     public String toString() {
         return description;

@@ -252,17 +252,18 @@ class Game {
                             System.out.println("You have put "+inventoryItems.get(i).getName()+" in the container. Good job!");
                             for(int j = 0 ; j < questList.getCurrentQuests().size() ; j++){
                                 if(questList.getCurrentQuests().get(j).getQuestType() == 0){
-                                    questList.getCurrentQuests().get(j).setRecycleAmount(1);
-                                    if(inventoryItems.get(i).getRoom() == currentRoom){
-                                        questList.getCurrentQuests().get(j).setRecycleRight(1);
+                                    Quest ThisQuest = questList.getCurrentQuests().get(j);
+                                    ThisQuest.setRecycleAmount(1); // Increases recycleAmount by 1
+                                    if(inventoryItems.get(i).getRoom() == currentRoom){ // Checks if the item is correctly recycled
+                                        ThisQuest.setRecycleRight(1);
                                     } else {
-                                        questList.getCurrentQuests().get(j).setRecycleWrong(1);
+                                        ThisQuest.setRecycleWrong(1);
                                     }
-                                    if(questList.getCurrentQuests().get(j).getRecycleAmount() == questList.getCurrentQuests().get(j).getCollectAmount()){
-                                        questList.getCurrentQuests().get(j).setDescription("You recycled all the trash you were asked to. Talk to NPC to complete the quest.");
-                                        System.out.println(questList.getCurrentQuests().get(j).getDescription());
+                                    if(ThisQuest.getRecycleAmount() == ThisQuest.getCollectAmount()){ // If all the trash has been recycled
+                                        ThisQuest.setDescription("You recycled all the trash you were asked to. Talk to NPC to complete the quest.");
+                                        System.out.println(ThisQuest.getDescription());
                                     } else {
-                                        questList.getCurrentQuests().get(j).updateDescriptionZero();
+                                        ThisQuest.updateDescriptionZero(); // Zero for the quest type 0
                                     }
                                     j = questList.getCurrentQuests().size() - 1;
                                 }

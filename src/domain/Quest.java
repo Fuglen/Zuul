@@ -24,15 +24,15 @@ public class Quest {
 
         if(random == 0){ // Type zero quest (collect and recycle)
             this.questType = random;
-            this.collectAmount = 4 + rand.nextInt(3); // From 4 to 6.
-            this.metalNeed = 1 + rand.nextInt(2);
-            this.glassNeed = 1 + rand.nextInt(2);
+            this.collectAmount = 6 + rand.nextInt(3); // From 6 to 8.
+            this.metalNeed = 2 + rand.nextInt(2);
+            this.glassNeed = 2 + rand.nextInt(2);
             this.plasticNeed = collectAmount - glassNeed - metalNeed;
             this.description = "Collect and recycle "+collectAmount+" pieces of trash.\nYou have recycled "+recycleAmount+"/"+collectAmount;
             this.points = 15 * collectAmount;
         }
 
-        this.questGiver = ""; // Use the set method
+        this.questGiver = "Dummy"; // Use the set method
 
     }
 
@@ -99,15 +99,15 @@ public class Quest {
     }
 
     public void setRecycleAmount(int recycleAmount) {
-        this.recycleAmount = recycleAmount;
+        this.recycleAmount = this.recycleAmount + recycleAmount;
     }
 
     public void setRecycleRight(int recycleRight) {
-        this.recycleRight = recycleRight;
+        this.recycleRight = this.recycleRight + recycleRight;
     }
 
     public void setRecycleWrong(int recycleWrong) {
-        this.recycleWrong = recycleWrong;
+        this.recycleWrong = this.recycleWrong + recycleWrong;
     }
 
     public void setQuestGiver(String questGiver) {

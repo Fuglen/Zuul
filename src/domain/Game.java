@@ -96,14 +96,14 @@ class Game {
         home.setRoomItem(new Item("shoes"));
 
         //Player inventory
-        Item plasticItem, glassItem, metalItem;
+        /*Item plasticItem, glassItem, metalItem;
         plasticItem = new Item("plastic");
         glassItem = new Item("glass");
         metalItem = new Item("metal");
         Item[] items = new Item[]{plasticItem, glassItem, metalItem};
         for (Item item : items) {
             inventory.addItem(item);
-        }
+        }*/
 
         //Create NPC object
         NPC npcs = new NPC();
@@ -223,6 +223,7 @@ class Game {
                     inventory.addItem(currentRoom.getRoomItem(i));
                     System.out.println("You collected: " + currentRoom.getRoomItem(i).getName());
                     currentRoom.removeRoomItem(i);
+                    break;
                 }
             }
         }
@@ -249,7 +250,21 @@ class Game {
                     } else { // If tutorial is complete
                         if(currentRoom == Room.getContainerList().get(0) || currentRoom == Room.getContainerList().get(1) || currentRoom == Room.getContainerList().get(2)){ // Checks if 'use' command is used in one of the container rooms
                             System.out.println("You have put "+inventoryItems.get(i).getName()+" in the container. Good job!");
+
+                            for(int j = 0 ; j < questList.getCurrentQuests().size() ; j++){
+                                if(questList.getCurrentQuests().get(j).getQuestType() == 0){
+                                    questList.getCurrentQuests().get(j).setRecycleAmount(1);
+                                    if(inventoryItems.get(i).getRoom() == currentRoom){
+                                        questList.getCurrentQuests().get(j).setRecycleRight(1);
+                                        System.out.println(questList.getCurrentQuests().get(j).getRecycleRight());
+                                    } else {
+                                        questList.getCurrentQuests().get(j).setRecycleWrong(1);
+                                        System.out.println(questList.getCurrentQuests().get(j).getRecycleWrong());
+                                    }
+                                }
+                            }
                             inventory.removeItem(i);
+                            break;
 
                         } else { // If not in a container room
                             System.out.println("You can't use that item here.");

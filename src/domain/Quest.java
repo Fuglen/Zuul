@@ -24,12 +24,11 @@ public class Quest {
 
         if(random == 0){ // Type zero quest (collect and recycle)
             this.questType = random;
-            this.collectAmount = 6 + rand.nextInt(3); // From 6 to 8.
-            this.metalNeed = 2 + rand.nextInt(2);
-            this.glassNeed = 2 + rand.nextInt(2);
+            this.collectAmount = 2 + rand.nextInt(3); // From 6 to 8.
+            this.metalNeed = 0 + rand.nextInt(2);
+            this.glassNeed = 0 + rand.nextInt(2);
             this.plasticNeed = collectAmount - glassNeed - metalNeed;
             this.description = "Collect and recycle "+collectAmount+" pieces of trash.\nYou have recycled "+recycleAmount+"/"+collectAmount;
-            this.points = 15 * collectAmount;
         }
 
         this.questGiver = "Dummy"; // Use the set method
@@ -120,6 +119,10 @@ public class Quest {
 
     public void updateDescriptionZero() {
         this.description = "Collect and recycle "+collectAmount+" pieces of trash.\nYou have recycled "+recycleAmount+"/"+collectAmount;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package domain;
 
 public enum CommandWord {
-    GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?"), INVENTORY("inventory"), DROP("drop"), COLLECT("collect"), QUESTS("quests"), USE("use"), TEST("test");
+    GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?"), INVENTORY("inventory"), DROP("drop"), COLLECT("collect"), QUESTS("quests"), USE("use"), TESTER("tester"), TEST("test");
 
     private String commandString;
 

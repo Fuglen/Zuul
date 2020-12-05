@@ -158,12 +158,13 @@ class Game {
             questList.printQuests();
         } else if (commandWord == CommandWord.USE){
             useItem(command);
-        }
-        else if (commandWord == CommandWord.TEST){ // Will be removed
+        } else if (commandWord == CommandWord.TEST){ // Will be removed
             for(int i = 0 ; i < finishedQuestList.getCurrentQuests().size() ; i++){
                 System.out.println(finishedQuestList.getCurrentQuests().get(i));
             }
             startQuest();
+        } else if(commandWord == CommandWord.TESTER){
+            completeQuest();
         }
 
         return wantToQuit;
@@ -243,7 +244,7 @@ class Game {
                             Point.addPoint(50);
                             inventory.removeItem(i);
                             questList.getCurrentQuests().get(0).setComplete();
-                            finishQuest();
+                            archiveQuest();
                         } else { // Only when tutorial is ongoing
                             System.out.println("This is not your shoes!");
                         }
@@ -320,17 +321,36 @@ class Game {
         }
 
     }
+    // Completes the quest
+    private void completeQuest(){
+        for(int i = 0 ; i < questList.getCurrentQuests().size() ; i++){
+            if(questList.getCurrentQuests().get(i).getQuestType() == 0){ // type 0 quests
+                if(questList.getCurrentQuests().get(i).getCollectAmount() == questList.getCurrentQuests().get(i).getRecycleAmount()){
+                    Quest completeQuest = questList.getCurrentQuests().get(i);
+                    completeQuest.setComplete();
+                    completeQuest.setPoints((completeQuest.getRecycleRight() * 10) + (completeQuest.getRecycleWrong() * 2));
+                    System.out.println("You recycled "+completeQuest.getRecycleRight()+" things correct.");
+                    System.out.println("You recycled "+completeQuest.getRecycleWrong()+" things wrong.");
+                    System.out.println("You get "+ completeQuest.getPoints() +" points for completing the quest.");
+                    Point.addPoint(completeQuest.getPoints());
+                    archiveQuest();
+                }
+            }
+        }
+    }
+
     // when quest is completed. Add finished quests to a new list for end screen, and change description.
-    private void finishQuest(){
+    private void archiveQuest(){
         for(int i = 0 ; i < questList.getCurrentQuests().size() ; i++){
             if(questList.getCurrentQuests().get(i).isComplete()){ // Checks boolean complete
-                if(questList.getCurrentQuests().get(i).getQuestType() == 100){ // Only for the tutorial
-                    questList.getCurrentQuests().get(i).setDescription("Tutorial.");
+                Quest questDone = questList.getCurrentQuests().get(i);
+                if(questDone.getQuestType() == 100){ // Only for the tutorial
+                    questDone.setDescription("Tutorial.");
                 }
-                if(questList.getCurrentQuests().get(i).getQuestType() == 0){ // for type 0 quests
-                    questList.getCurrentQuests().get(i).setDescription("Collect and recycle.");
+                if(questDone.getQuestType() == 0){ // for type 0 quests
+                    questDone.setDescription("Collect and recycle.");
                 }
-                finishedQuestList.getCurrentQuests().add(questList.getCurrentQuests().get(i));
+                finishedQuestList.getCurrentQuests().add(questDone);
                 questList.getCurrentQuests().remove(i);
             }
         }

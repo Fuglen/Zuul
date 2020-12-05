@@ -379,4 +379,20 @@ class Game {
             }
         }
     }
+
+    // New day
+    private void newDay(){
+        Timer.setDay();
+        if(Timer.getWorkTimer() < Timer.getMovesMade()){
+            Timer.setWorkEffort(Timer.getMovesMade() - Timer.getWorkTimer());
+        } else {
+            Point.addPoint(Timer.getWorkTimer() - Timer.getMovesMade());
+        }
+        if(Timer.getWorkEffortThreshold() < Timer.getWorkEffort()){
+            Timer.setFired();
+        }
+        Timer.setWorkTimer(Timer.getWorkTimer() - 1);
+        Timer.setMovesMade(0);
+
+    }
 }

@@ -165,6 +165,7 @@ class Game {
             startQuest();
         } else if(commandWord == CommandWord.TESTER){
             completeQuest();
+            archiveQuest();
         }
 
         return wantToQuit;
@@ -377,7 +378,5 @@ class Game {
                 questList.getCurrentQuests().remove(i);
             }
         }
-
     }
-
 }

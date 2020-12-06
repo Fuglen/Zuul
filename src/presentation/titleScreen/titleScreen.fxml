@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="293.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.titleScreen.titleScreenController">
    <children>
       <ImageView fitHeight="293.0" fitWidth="335.0" layoutY="1.0">
@@ -15,7 +14,7 @@
             <Image url="@../Images/blue_panel.png" />
          </image>
       </ImageView>
-      <StackPane layoutX="73.0" layoutY="84.0" prefHeight="49.0" prefWidth="183.0">
+      <StackPane layoutX="73.0" layoutY="84.0" onMouseClicked="#startGame" prefHeight="49.0" prefWidth="183.0">
          <children>
             <ImageView onKeyPressed="#startGame">
                <image>

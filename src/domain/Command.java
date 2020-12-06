@@ -17,9 +17,9 @@
  * @version 2006.03.30
  */
 
-package worldofzuul;
+package domain;
 
-public class Command {
+class Command {
     private CommandWord commandWord;
     private String secondWord;
 

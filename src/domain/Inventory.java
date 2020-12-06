@@ -1,4 +1,4 @@
-package worldofzuul;
+package domain;
 import java.util.ArrayList;
 
 public class Inventory {
@@ -22,6 +22,7 @@ public class Inventory {
     public void removeItem(int i) {
         items.remove(i);
     }
+
     public void printInventory() {
         if (items.size() == 0) {
             System.out.println("Your inventory is empty...");

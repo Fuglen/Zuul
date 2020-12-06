@@ -1,8 +1,6 @@
-package worldofzuul;
+package domain;
 
-import java.util.ArrayList;
-
-public class Item {
+class Item {
     //Attributes
     private String name;
 

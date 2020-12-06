@@ -1,9 +1,8 @@
-package worldofzuul;
+package domain;
 
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
-public class Parser {
+class Parser {
     private CommandWords commands;
     private Scanner reader;
 

@@ -1,11 +1,13 @@
-package worldofzuul;
+package domain;
+
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
 
-public class Room {
+class Room {
     private String description;
     private HashMap<String, Room> exits;
+    private ArrayList<NPC> NPCs = new ArrayList<>();
     private ArrayList<Item> roomItems = new ArrayList<>();
     private Inventory roomInventory = new Inventory(roomItems);
     private Point point = new Point();
@@ -37,26 +39,45 @@ public class Room {
         return returnString;
     }
 
+    public void addNPC(NPC npc) {
+        NPCs.add(npc);
+    }
+
+    public String getNPCs(Room room) {
+        StringBuilder NPCList = new StringBuilder();
+        for (NPC npc : NPCs) {
+            NPCList.append(npc.getName()).append(" ");
+        }
+        return NPCList.toString();
+    }
+
+
     public Room getExit(String direction) {
         return exits.get(direction);
     }
+
     public Item getRoomItem(int i) {
         return roomItems.get(i);
     }
+
     public int getRoomItems() {
         return roomItems.size();
     }
+
     public void setRoomItem(Item item) {
         roomItems.add(item);
     }
+
     public void removeRoomItem(int i) {
         roomItems.remove(i);
     }
+
     public String printRoomItems() {
         String roomItemsText = "";
         for (int i = 0; i < roomItems.size(); i++) {
             roomItemsText += roomItems.get(i).getName() + " ";
-        } return roomItemsText;
+        }
+        return roomItemsText;
     }
 }
 

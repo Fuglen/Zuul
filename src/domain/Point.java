@@ -1,6 +1,6 @@
-package worldofzuul;
+package domain;
 
-public class Point {
+class Point {
 
     //Attributes
     private int point;

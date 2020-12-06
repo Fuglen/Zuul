@@ -1,13 +1,17 @@
-package worldofzuul;
+package domain;
+
 import java.util.ArrayList;
 
-public class Game {
+class Game {
     private Parser parser;
     private Room currentRoom;
     //Player inventory
     private ArrayList<Item> inventoryItems = new ArrayList<>();
     private Inventory inventory = new Inventory(inventoryItems);
     private Player player = new Player();
+
+    //Quests
+    private QuestList questList = new QuestList();
 
 
     public Game() {
@@ -19,6 +23,7 @@ public class Game {
     private void createRooms() {
         // Create all the rooms
         Room home, beach, forest, city, workplace, McDonalds, park, road;
+        Quest quest1, quest2;
 
         // Initialize all the rooms with a description
         home = new Room("at home");
@@ -63,10 +68,20 @@ public class Game {
         plastic = new Item("plastic");
         glass = new Item("glass");
         metal = new Item("metal");
-        Item[] items = new Item[] {plastic, glass, metal};
-        for (Item item: items) {
+        Item[] items = new Item[]{plastic, glass, metal};
+        for (Item item : items) {
             inventory.addItem(item);
         }
+
+        //Create Quests
+        quest1 = new Quest("Open your inventory", 10, 0);
+        quest2 = new Quest("Open your inventory2", 10, 0);
+        Quest[] quests = new Quest[]{quest1, quest2};
+        for (Quest q : quests) {
+            questList.addQuest(q);
+        }
+        //Create NPC object
+        NPC npcs = new NPC();
     }
 
     public void play() {
@@ -109,12 +124,14 @@ public class Game {
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
-        } else if (commandWord == CommandWord.INVENTORY){
+        } else if (commandWord == CommandWord.INVENTORY) {
             inventory.printInventory();
         } else if (commandWord == CommandWord.DROP) {
             dropItem(command);
         } else if (commandWord == CommandWord.COLLECT) {
             collectItem(command);
+        } else if (commandWord == CommandWord.QUESTS) {
+            questList.printQuests();
         }
         return wantToQuit;
     }
@@ -152,7 +169,7 @@ public class Game {
                 if (inventoryItems.get(i).getName().equals(command.getSecondWord())) {
                     currentRoom.setRoomItem(inventoryItems.get(i));
                     inventory.removeItem(i);
-                    System.out.println("You dropped: "+command.getSecondWord());
+                    System.out.println("You dropped: " + command.getSecondWord());
                 }
             }
         }
@@ -166,7 +183,7 @@ public class Game {
             for (int i = 0; i < currentRoom.getRoomItems(); i++) {
                 if (currentRoom.getRoomItem(i).getName().equals(command.getSecondWord())) {
                     inventory.addItem(currentRoom.getRoomItem(i));
-                    System.out.println("You collected: " +currentRoom.getRoomItem(i).getName());
+                    System.out.println("You collected: " + currentRoom.getRoomItem(i).getName());
                     currentRoom.removeRoomItem(i);
                 }
             }
@@ -181,5 +198,5 @@ public class Game {
             return true;
         }
     }
-    
+
 }

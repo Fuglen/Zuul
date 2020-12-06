@@ -179,14 +179,29 @@ class Game {
             questList.printQuests();
         } else if (commandWord == CommandWord.USE){
             useItem(command);
-        } else if (commandWord == CommandWord.TEST){ // Will be removed
-            startQuest();
-        } else if(commandWord == CommandWord.TESTER){
-            for(int i = 0 ; i < finishedQuestList.getCurrentQuests().size() ; i++){
-                System.out.println(finishedQuestList.getCurrentQuests().get(i));
+        } else if (commandWord == CommandWord.CHEAT){ // Will be removed
+            System.out.println("Cheat menu!");
+            System.out.println("1) Start a new quest");
+            System.out.println("2) List of quests completed");
+            System.out.println("3) Get fired");
+            Scanner scanCheat = new Scanner(System.in);
+            String cheat = scanCheat.nextLine();
+            System.out.println(cheat);
+            switch (cheat) {
+                case "1" -> {
+                    startQuest();
+                }
+                case "2" -> {
+                    for (int i = 0; i < finishedQuestList.getCurrentQuests().size(); i++) {
+                        System.out.println(finishedQuestList.getCurrentQuests().get(i));
+                    }
+                }
+                case "3" -> {
+                    Timer.setFired();
+                }
+                default -> System.out.println("No cheat");
             }
-        } else if(commandWord == CommandWord.TEST2){
-            Timer.setFired();
+
         }
 
         return wantToQuit;
@@ -290,7 +305,7 @@ class Game {
                                         ThisQuest.setRecycleWrong(1);
                                     }
                                     if(ThisQuest.getRecycleAmount() == ThisQuest.getCollectAmount()){ // If all the trash has been recycled
-                                        ThisQuest.setDescription("You recycled all the trash you were asked to. Talk to NPC to complete the quest.");
+                                        ThisQuest.setDescription("You recycled all the trash you were asked to. Talk to *GET_NPC_NAME* to complete the quest.");
                                         System.out.println(ThisQuest.getDescription());
                                     } else {
                                         ThisQuest.updateDescriptionZero(); // Zero for the quest type 0
@@ -342,7 +357,7 @@ class Game {
                 for(int i = 0 ; i < questSetting.getGlassNeed() ; i++ ){
                     Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
                     if(room != currentRoom){
-                        room.setRoomItem(new Item("glass", Room.getContainerList().get(0)));
+                        room.setRoomItem(new Item(Item.getGlassTypes()[rand.nextInt(Item.getGlassTypes().length)], Room.getContainerList().get(0)));
                     } else {
                         i--;
                     }
@@ -351,7 +366,7 @@ class Game {
                 for(int i = 0 ; i < questSetting.getMetalNeed() ; i++ ){
                     Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
                     if(room != currentRoom){
-                        room.setRoomItem(new Item("metal", Room.getContainerList().get(1)));
+                        room.setRoomItem(new Item(Item.getMetalTypes()[rand.nextInt(Item.getMetalTypes().length)], Room.getContainerList().get(1)));
                     } else {
                         i--;
                     }
@@ -360,7 +375,7 @@ class Game {
                 for(int i = 0 ; i < questSetting.getPlasticNeed() ; i++ ){
                     Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
                     if(room != currentRoom){
-                        room.setRoomItem(new Item("plastic", Room.getContainerList().get(2)));
+                        room.setRoomItem(new Item(Item.getPlasticTypes()[rand.nextInt(Item.getPlasticTypes().length)], Room.getContainerList().get(2)));
                     } else {
                         i--;
                     }
@@ -374,6 +389,7 @@ class Game {
             }
         }
     }
+
     // Completes the quest
     private void completeQuest(){
         for(int i = 0 ; i < questList.getCurrentQuests().size() ; i++){

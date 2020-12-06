@@ -4,7 +4,9 @@ class Item {
     //Attributes
     private String name; // Name and type of the item
     private Room room; // When used checks container
-
+    private static String[] glassTypes = {"windowPiece", "beerBottle", "brokenLightBulb"};
+    private static String[] metalTypes = {"spoon", "fork", "cookingPot", "keyLock", "screw", "can", "nail"};
+    private static String[] plasticTypes = {"waterBottle", "bottleCap", "foodWrapper", "groceryBag", "straw"};
 
 
     //Constructor
@@ -24,6 +26,18 @@ class Item {
 
     public Room getRoom() {
         return room;
+    }
+
+    public static String[] getGlassTypes() {
+        return glassTypes;
+    }
+
+    public static String[] getMetalTypes() {
+        return metalTypes;
+    }
+
+    public static String[] getPlasticTypes() {
+        return plasticTypes;
     }
 
     @Override

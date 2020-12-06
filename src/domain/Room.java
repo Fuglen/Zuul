@@ -36,7 +36,10 @@ class Room {
         for (String exit : keys) {
             returnString += " " + exit;
         }
-        returnString += "\nList of room items: " + printRoomItems() + "\nScore: " + Point.getPoint();
+        returnString += "\nList of room items: " + printRoomItems() + "\nScore: " + Point.getPoint() + "\nDay: " + Timer.getDay();
+        if(Timer.getDay() != 0){
+            returnString += "\nMoves: " + Timer.getMovesMade() + "/" + Timer.getWorkTimer();
+        }
         return returnString;
     }
 

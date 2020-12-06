@@ -23,7 +23,7 @@ public class titleScreenController {
 
     @FXML
     public void startGame(MouseEvent event) throws IOException {
-        Parent startGameParent = FXMLLoader.load(getClass().getResource("titleScreen.fxml"));
+        Parent startGameParent = FXMLLoader.load(getClass().getResource("gameStart.fxml"));
         Scene homeViewScene = new Scene(startGameParent);
 
         //This line gets the stage information

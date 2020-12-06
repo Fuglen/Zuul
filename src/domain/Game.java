@@ -179,7 +179,9 @@ class Game {
             questList.printQuests();
         } else if (commandWord == CommandWord.USE){
             useItem(command);
-        } else if (commandWord == CommandWord.CHEAT){ // Will be removed
+        } else if (commandWord == CommandWord.FACT){
+            randomFact();
+        }else if (commandWord == CommandWord.CHEAT){ // Will be removed
             System.out.println("Cheat menu!");
             System.out.println("1) Start a new quest");
             System.out.println("2) List of quests completed");
@@ -455,5 +457,9 @@ class Game {
         Timer.setWorkTimer(Timer.getWorkTimer() - 1);
         Timer.setMovesMade(-1);
         System.out.println("You completed "+(questsAfterNewDay - questsBeforeNewDay)+" quests yesterday.");
+    }
+
+    private void randomFact(){
+        System.out.println(Fact.getFact()[rand.nextInt(Fact.getFact().length)]);
     }
 }

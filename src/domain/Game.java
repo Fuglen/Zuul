@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 class Game {
     private Parser parser;
@@ -88,6 +89,8 @@ class Game {
         Room.addRoomToContainerList(glass);
         Room.addRoomToContainerList(metal);
         Room.addRoomToContainerList(plastic);
+        Timer.getWorkHome().add(work);
+        Timer.getWorkHome().add(home);
 
         // Set the starting room to home
         currentRoom = home;
@@ -95,26 +98,45 @@ class Game {
         //Room inventory
         home.setRoomItem(new Item("shoes"));
 
-        //Player inventory
-        /*Item plasticItem, glassItem, metalItem;
-        plasticItem = new Item("plastic");
-        glassItem = new Item("glass");
-        metalItem = new Item("metal");
-        Item[] items = new Item[]{plasticItem, glassItem, metalItem};
-        for (Item item : items) {
-            inventory.addItem(item);
-        }*/
-
         //Create NPC object
         NPC npcs = new NPC();
     }
     public void play() {
         printWelcome();
-
         boolean finished = false;
         while (!finished) {
+            if(Timer.isFired()){
+                break;
+            }
             Command command = parser.getCommand();
             finished = processCommand(command);
+        }
+        // Shows endscreen
+        while(Timer.isFired() && !finished){
+            System.out.println("You got fired...");
+            System.out.println("Final score: "+Point.getPoint());
+            System.out.println("You kept your job in "+Timer.getDay()+" day(s).");
+            System.out.println("You completed "+finishedQuestList.getCurrentQuests().size()+" quests:");
+            for(int i = 0 ; i < finishedQuestList.getCurrentQuests().size() ; i++){
+                System.out.println(finishedQuestList.getCurrentQuests().get(i));
+            }
+            while(!finished){
+                System.out.println("Type 'retry' to try again.");
+                System.out.println("Type 'quit' to quit the game.");
+                Scanner scannerRetry = new Scanner(System.in);
+                String retry = scannerRetry.nextLine();
+                if(retry.equals("retry")){
+                    Timer.setFired();
+                    Game woz = new Game();
+                    woz.play();
+                } else if (retry.equals("quit")){
+                    finished = true;
+                    break;
+                } else {
+                    System.out.println("I didn't get that.");
+                }
+            }
+
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
@@ -134,14 +156,13 @@ class Game {
 
     private boolean processCommand(Command command) {
         boolean wantToQuit = false;
-
+        currentRoom.printRoomItems();
         CommandWord commandWord = command.getCommandWord();
 
         if (commandWord == CommandWord.UNKNOWN) {
             System.out.println("I don't know what you mean...");
             return false;
         }
-
         if (commandWord == CommandWord.HELP) {
             printHelp();
         } else if (commandWord == CommandWord.GO) {
@@ -159,13 +180,13 @@ class Game {
         } else if (commandWord == CommandWord.USE){
             useItem(command);
         } else if (commandWord == CommandWord.TEST){ // Will be removed
+            startQuest();
+        } else if(commandWord == CommandWord.TESTER){
             for(int i = 0 ; i < finishedQuestList.getCurrentQuests().size() ; i++){
                 System.out.println(finishedQuestList.getCurrentQuests().get(i));
             }
-            startQuest();
-        } else if(commandWord == CommandWord.TESTER){
-            completeQuest();
-            archiveQuest();
+        } else if(commandWord == CommandWord.TEST2){
+            Timer.setFired();
         }
 
         return wantToQuit;
@@ -194,6 +215,11 @@ class Game {
                 System.out.println("There is no door!");
             } else {
                 currentRoom = nextRoom;
+                if(currentRoom == Timer.getWorkHome().get(0)){
+                    currentRoom = Timer.getWorkHome().get(1);
+                    newDay();
+                }
+                Timer.setMovesMade();
                 System.out.println(currentRoom.getLongDescription());
             }
         }
@@ -210,6 +236,7 @@ class Game {
                     currentRoom.setRoomItem(inventoryItems.get(i));
                     inventory.removeItem(i);
                     System.out.println("You dropped: " + command.getSecondWord());
+                    Timer.setMovesMade();
                 }
             }
         }
@@ -225,6 +252,7 @@ class Game {
                     inventory.addItem(currentRoom.getRoomItem(i));
                     System.out.println("You collected: " + currentRoom.getRoomItem(i).getName());
                     currentRoom.removeRoomItem(i);
+                    Timer.setMovesMade();
                     break;
                 }
             }
@@ -271,6 +299,7 @@ class Game {
                                 }
                             }
                             inventory.removeItem(i);
+                            Timer.setMovesMade();
                         } else { // If not in a container room
                             System.out.println("You can't use that item here.");
                         }
@@ -357,7 +386,6 @@ class Game {
                     System.out.println("You recycled "+completeQuest.getRecycleWrong()+" things wrong.");
                     System.out.println("You get "+ completeQuest.getPoints() +" points for completing the quest.");
                     Point.addPoint(completeQuest.getPoints());
-                    archiveQuest();
                 }
             }
         }
@@ -372,7 +400,11 @@ class Game {
                     questDone.setDescription("Tutorial.");
                 }
                 if(questDone.getQuestType() == 0){ // for type 0 quests
-                    questDone.setDescription("Collect and recycle.");
+                    questDone.setDescription("Collect and recycle - Completed at day "+Timer.getDay());
+                } else if(questDone.getQuestType() == 1){ // for type 0 quests
+                    questDone.setDescription("Type 1 - Completed at day "+Timer.getDay());
+                } else if(questDone.getQuestType() == 2){ // for type 0 quests
+                    questDone.setDescription("Type 2 - Completed at day "+Timer.getDay());
                 }
                 finishedQuestList.getCurrentQuests().add(questDone);
                 questList.getCurrentQuests().remove(i);
@@ -382,17 +414,30 @@ class Game {
 
     // New day
     private void newDay(){
+        int questsBeforeNewDay = finishedQuestList.getCurrentQuests().size();
+        archiveQuest();
+        archiveQuest();
+        int questsAfterNewDay = finishedQuestList.getCurrentQuests().size();
         Timer.setDay();
+        int pointsGainedThisDay = 0;
+        int movesLate = 0;
         if(Timer.getWorkTimer() < Timer.getMovesMade()){
-            Timer.setWorkEffort(Timer.getMovesMade() - Timer.getWorkTimer());
+            movesLate = Timer.getMovesMade() - Timer.getWorkTimer();
+            Timer.setWorkEffort(Timer.getWorkEffort() + movesLate);
+            System.out.println("You are late for work. If you keep getting late, you will get fired.");
+            System.out.println("Today you were "+movesLate+" moves late. And you are a total of "+Timer.getWorkEffort()+" moves late.");
+            System.out.println("If your total exceeds "+Timer.getWorkEffortThreshold()+" you will get fired.");
         } else {
-            Point.addPoint(Timer.getWorkTimer() - Timer.getMovesMade());
+            pointsGainedThisDay = Timer.getWorkTimer() - Timer.getMovesMade();
+            Point.addPoint(pointsGainedThisDay);
+            System.out.println("You came early to work and got "+pointsGainedThisDay+" points.");
+            System.out.println("A new day has started, and you are ready for work.");
         }
         if(Timer.getWorkEffortThreshold() < Timer.getWorkEffort()){
             Timer.setFired();
         }
         Timer.setWorkTimer(Timer.getWorkTimer() - 1);
-        Timer.setMovesMade(0);
-
+        Timer.setMovesMade(-1);
+        System.out.println("You completed "+(questsAfterNewDay - questsBeforeNewDay)+" quests yesterday.");
     }
 }

@@ -19,7 +19,6 @@ public class NPC {
 
             Document doc = dBuilder.parse(file);
 
-
 //            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
             System.out.println(doc.getDocumentElement().getElementsByTagName("option").item(1).getTextContent());
 

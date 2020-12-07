@@ -47,7 +47,6 @@ class Game {
 
         home.setExit("road", road);
 
-
         road.setExit("home", home);
         road.setExit("forest", forest);
         road.setExit("city", city);
@@ -80,27 +79,39 @@ class Game {
 
         plastic.setExit("recycling", recycle);
 
+        // List of rooms items can spawn in
         Room.addRoomToList(beach);
         Room.addRoomToList(forest);
         Room.addRoomToList(city);
         Room.addRoomToList(mcdonalds);
         Room.addRoomToList(park);
         Room.addRoomToList(road);
+
+        // List of rooms with containers
         Room.addRoomToContainerList(glass);
         Room.addRoomToContainerList(metal);
         Room.addRoomToContainerList(plastic);
+
+        // List used for starting a new day
         Timer.getWorkHome().add(work);
         Timer.getWorkHome().add(home);
 
         // Set the starting room to home
         currentRoom = home;
 
-        //Room inventory
+        //Room inventory for the start of the game
         home.setRoomItem(new Item("shoes"));
 
         //Create NPC object
         NPC npcs = new NPC();
+
+        // Create achievements
+        Achievements.getAchievementList().add(new Achievements("Book worm.", Achievements.getZeroDescription(),Achievements.getNumToComplete0()));
+        Achievements.getAchievementList().add(new Achievements("Workaholic.", Achievements.getFirstDescription(),Achievements.getNumToComplete1()));
+        Achievements.getAchievementList().add(new Achievements("Mother Nature’s champion.", Achievements.getSecondDescription(),Achievements.getNumToComplete2()));
+        Achievements.getAchievementList().add(new Achievements("Friend of the people.", Achievements.getThirdDescription(),Achievements.getNumToComplete3()));
     }
+
     public void play() {
         printWelcome();
         boolean finished = false;
@@ -108,18 +119,31 @@ class Game {
             if(Timer.isFired()){
                 break;
             }
+            achievementCheck();
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        // Shows endscreen
+        // Shows end screen when get fired
         while(Timer.isFired() && !finished){
-            System.out.println("You got fired...");
-            System.out.println("Final score: "+Point.getPoint());
-            System.out.println("You kept your job in "+Timer.getDay()+" day(s).");
-            System.out.println("You completed "+finishedQuestList.getCurrentQuests().size()+" quests:");
-            for(int i = 0 ; i < finishedQuestList.getCurrentQuests().size() ; i++){
-                System.out.println(finishedQuestList.getCurrentQuests().get(i));
+            System.out.println(">You got fired...");
+            System.out.println(">Final score: "+Point.getPoint());
+            System.out.println(">You kept your job in "+Timer.getDay()+" day(s).");
+            System.out.println("-Achievements unlocked:");
+            for(int i = 0 ; i < Achievements.getAchievementList().size() ; i++){
+                Achievements achievement = Achievements.getAchievementList().get(i);
+                if(achievement.isComplete()){
+                    System.out.println("-Name: "+achievement.getName()+" - Complete.");
+                    System.out.println("-"+achievement.getDescription());
+                } else {
+                    System.out.println("-Name: "+achievement.getName());
+                    System.out.println("-"+Achievements.getDefaultDescription());
+                }
             }
+            System.out.println("#You completed "+finishedQuestList.getCurrentQuests().size()+" quests:");
+            for(int i = 0 ; i < finishedQuestList.getCurrentQuests().size() ; i++){
+                System.out.println("# "+finishedQuestList.getCurrentQuests().get(i));
+            }
+            // Can start the game over or quit
             while(!finished){
                 System.out.println("Type 'retry' to try again.");
                 System.out.println("Type 'quit' to quit the game.");
@@ -138,9 +162,14 @@ class Game {
             }
 
         }
+        System.out.println("#########################");
+        System.out.println("# THANK YOU FOR PLAYING #");
+        System.out.println("#        GOODBYE        #");
+        System.out.println("#########################");
         System.out.println("Thank you for playing.  Good bye.");
     }
 
+    // Welcome text and player creation. Also starts tutorial quest
     private void printWelcome() {
         System.out.println();
         System.out.println("Welcome to our game!");
@@ -182,30 +211,42 @@ class Game {
         } else if (commandWord == CommandWord.FACT){
             randomFact();
         }else if (commandWord == CommandWord.CHEAT){ // Will be removed
-            System.out.println("Cheat menu!");
-            System.out.println("1) Start a new quest");
-            System.out.println("2) List of quests completed");
-            System.out.println("3) Get fired");
-            Scanner scanCheat = new Scanner(System.in);
-            String cheat = scanCheat.nextLine();
-            System.out.println(cheat);
-            switch (cheat) {
-                case "1" -> {
-                    startQuest();
-                }
-                case "2" -> {
-                    for (int i = 0; i < finishedQuestList.getCurrentQuests().size(); i++) {
-                        System.out.println(finishedQuestList.getCurrentQuests().get(i));
+            boolean cheater = true;
+            while (cheater){
+                System.out.println("Cheat menu!");
+                System.out.println("1) Start a new quest");
+                System.out.println("2) List of quests completed");
+                System.out.println("3) Get fired");
+                System.out.println("4) Complete quest. (Talking to NPC)");
+                System.out.println("5) Archive quests");
+                System.out.println("6) Back to the game");
+                Scanner scanCheat = new Scanner(System.in);
+                String cheat = scanCheat.nextLine();
+                switch (cheat) {
+                    case "1" -> {
+                        startQuest();
                     }
+                    case "2" -> {
+                        for (int i = 0; i < finishedQuestList.getCurrentQuests().size(); i++) {
+                            System.out.println(finishedQuestList.getCurrentQuests().get(i));
+                        }
+                    }
+                    case "3" -> {
+                        Timer.setFired();
+                    }
+                    case "4" -> {
+                        completeQuest();
+                    }
+                    case "5" -> {
+                        archiveQuest();
+                    }
+                    case "6" -> {
+                        cheater = false;
+                    }
+                    default -> System.out.println("No cheat");
                 }
-                case "3" -> {
-                    Timer.setFired();
-                }
-                default -> System.out.println("No cheat");
             }
-
         }
-
         return wantToQuit;
     }
 
@@ -232,6 +273,7 @@ class Game {
                 System.out.println("There is no door!");
             } else {
                 currentRoom = nextRoom;
+                // If you go to work. Set currentRoom to home and start new day
                 if(currentRoom == Timer.getWorkHome().get(0)){
                     currentRoom = Timer.getWorkHome().get(1);
                     newDay();
@@ -268,6 +310,9 @@ class Game {
                 if (currentRoom.getRoomItem(i).getName().equals(command.getSecondWord())) {
                     inventory.addItem(currentRoom.getRoomItem(i));
                     System.out.println("You collected: " + currentRoom.getRoomItem(i).getName());
+                    if(!currentRoom.getRoomItem(i).getName().equals("shoes")){
+                        Achievements.getAchievementList().get(2).setCount();
+                    }
                     currentRoom.removeRoomItem(i);
                     Timer.setMovesMade();
                     break;
@@ -282,20 +327,26 @@ class Game {
             System.out.println("Use what?");
         } else {
             for (int i = 0; i < inventoryItems.size(); i++) {
-                if (inventoryItems.get(i).getName().equals(command.getSecondWord())) { // If the written item is in inventory
+                // If the written item is in inventory
+                if (inventoryItems.get(i).getName().equals(command.getSecondWord())) {
+                    // Checks for tutorial completion
                     if(!tutorial){
-                        if(inventoryItems.get(i).getName().equals("shoes")){ // If "use shoes" tutorial is complete
+                        // If "use shoes" tutorial is complete
+                        if(inventoryItems.get(i).getName().equals("shoes")){
                             System.out.println("You have put on your shoes, and are ready to go to work!");
                             tutorial = true;
                             Point.addPoint(50);
                             inventory.removeItem(i);
                             questList.getCurrentQuests().get(0).setComplete();
                             archiveQuest();
-                        } else { // Only when tutorial is ongoing
+                        } else {
+                            // Only when tutorial is ongoing
                             System.out.println("This is not your shoes!");
                         }
-                    } else { // If tutorial is complete
-                        if(currentRoom == Room.getContainerList().get(0) || currentRoom == Room.getContainerList().get(1) || currentRoom == Room.getContainerList().get(2)){ // Checks if 'use' command is used in one of the container rooms
+                    } else {
+                        // If tutorial is complete
+                        // Checks if 'use' command is used in one of the container rooms
+                        if(currentRoom == Room.getContainerList().get(0) || currentRoom == Room.getContainerList().get(1) || currentRoom == Room.getContainerList().get(2)){
                             System.out.println("You have put "+inventoryItems.get(i).getName()+" in the container. Good job!");
                             for(int j = 0 ; j < questList.getCurrentQuests().size() ; j++){
                                 if(questList.getCurrentQuests().get(j).getQuestType() == 0){
@@ -306,7 +357,8 @@ class Game {
                                     } else {
                                         ThisQuest.setRecycleWrong(1);
                                     }
-                                    if(ThisQuest.getRecycleAmount() == ThisQuest.getCollectAmount()){ // If all the trash has been recycled
+                                    // If all the trash from quest has been recycled
+                                    if(ThisQuest.getRecycleAmount() == ThisQuest.getCollectAmount()){
                                         ThisQuest.setDescription("You recycled all the trash you were asked to. Talk to *GET_NPC_NAME* to complete the quest.");
                                         System.out.println(ThisQuest.getDescription());
                                     } else {
@@ -317,7 +369,8 @@ class Game {
                             }
                             inventory.removeItem(i);
                             Timer.setMovesMade();
-                        } else { // If not in a container room
+                            // If not in a container room
+                        } else {
                             System.out.println("You can't use that item here.");
                         }
                         break;
@@ -336,7 +389,8 @@ class Game {
         }
     }
 
-    private void startQuest(){ // Starts new quest.
+    // Starts new quest
+    private void startQuest(){
         Quest newQuest = new Quest();
         int count = 0;
         for(int i = 0 ; i < questList.getCurrentQuests().size() ; i++){ // Checks if the type of quest already exists
@@ -346,11 +400,10 @@ class Game {
         }
         if(count > 0){ // If the quest type already exists, start the method over.
             if(questList.getCurrentQuests().size() == Quest.getMaxQuests()){
-                System.out.println("Something went wrong. Too many quest is active.");
+                System.out.println("Something went wrong.");
             } else {
                 startQuest();
             }
-
         } else {
             if(newQuest.getQuestType() == 0){
                 questList.addQuest(newQuest); //Create Quests - Will be added when talking to NPC
@@ -411,7 +464,7 @@ class Game {
 
     // when quest is completed. Add finished quests to a new list for end screen, and change description.
     private void archiveQuest(){
-        for(int i = 0 ; i < questList.getCurrentQuests().size() ; i++){
+        for(int i = questList.getCurrentQuests().size() - 1 ; i >= 0 ; i--){
             if(questList.getCurrentQuests().get(i).isComplete()){ // Checks boolean complete
                 Quest questDone = questList.getCurrentQuests().get(i);
                 if(questDone.getQuestType() == 100){ // Only for the tutorial
@@ -426,6 +479,7 @@ class Game {
                 }
                 finishedQuestList.getCurrentQuests().add(questDone);
                 questList.getCurrentQuests().remove(i);
+                Achievements.getAchievementList().get(3).setCount();
             }
         }
     }
@@ -433,7 +487,6 @@ class Game {
     // New day
     private void newDay(){
         int questsBeforeNewDay = finishedQuestList.getCurrentQuests().size();
-        archiveQuest();
         archiveQuest();
         int questsAfterNewDay = finishedQuestList.getCurrentQuests().size();
         Timer.setDay();
@@ -457,9 +510,24 @@ class Game {
         Timer.setWorkTimer(Timer.getWorkTimer() - 1);
         Timer.setMovesMade(-1);
         System.out.println("You completed "+(questsAfterNewDay - questsBeforeNewDay)+" quests yesterday.");
+        Achievements.getAchievementList().get(1).setCount();
     }
 
     private void randomFact(){
         System.out.println(Fact.getFact()[rand.nextInt(Fact.getFact().length)]);
+        Achievements.getAchievementList().get(0).setCount();
+    }
+
+    private void achievementCheck(){
+        // Checks for book worm
+        for(int i = 0 ; i < Achievements.getAchievementList().size() ; i++){
+            Achievements thisAchievement = Achievements.getAchievementList().get(i);
+            if(thisAchievement.getCount() >= thisAchievement.getNumberToComplete() && !thisAchievement.isComplete()){
+                thisAchievement.setComplete();
+                System.out.println("ACHIEVEMENT UNLOCKED - "+thisAchievement.getName());
+                System.out.println(thisAchievement.getDescription());
+            }
+        }
+
     }
 }

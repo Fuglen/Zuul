@@ -9,9 +9,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Stack;
 
 public class titleScreenController {
     DomainI domainI = new Domain();
@@ -31,7 +33,26 @@ public class titleScreenController {
         start.setScene(homeViewScene);
         start.show();
     }
-
+    @FXML
+    private StackPane stackPane1;
+    @FXML
+    public void hover1() {
+        if (stackPane1.getOpacity() == 1) {
+            stackPane1 .setOpacity(0.75);
+        } else {
+            stackPane1.setOpacity(1);
+        }
+    }
+    @FXML
+    private StackPane stackPane2;
+    @FXML
+    public void hover2() {
+        if (stackPane2.getOpacity() == 1) {
+            stackPane2.setOpacity(0.75);
+        } else {
+            stackPane2.setOpacity(1);
+        }
+    }
     @FXML
     private void addItem() {
         domainI.addItem("Plastic");

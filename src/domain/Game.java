@@ -125,24 +125,7 @@ class Game {
         }
         // Shows end screen when get fired
         while(Timer.isFired() && !finished){
-            System.out.println(">You got fired...");
-            System.out.println(">Final score: "+Point.getPoint());
-            System.out.println(">You kept your job in "+Timer.getDay()+" day(s).");
-            System.out.println("-Achievements unlocked:");
-            for(int i = 0 ; i < Achievements.getAchievementList().size() ; i++){
-                Achievements achievement = Achievements.getAchievementList().get(i);
-                if(achievement.isComplete()){
-                    System.out.println("-Name: "+achievement.getName()+" - Complete.");
-                    System.out.println("-"+achievement.getDescription());
-                } else {
-                    System.out.println("-Name: "+achievement.getName());
-                    System.out.println("-"+Achievements.getDefaultDescription());
-                }
-            }
-            System.out.println("#You completed "+finishedQuestList.getCurrentQuests().size()+" quests:");
-            for(int i = 0 ; i < finishedQuestList.getCurrentQuests().size() ; i++){
-                System.out.println("# "+finishedQuestList.getCurrentQuests().get(i));
-            }
+            printEndScreen();
             // Can start the game over or quit
             while(!finished){
                 System.out.println("Type 'retry' to try again.");
@@ -529,5 +512,26 @@ class Game {
             }
         }
 
+    }
+
+    private void printEndScreen(){
+        System.out.println(">You got fired...");
+        System.out.println(">Final score: "+Point.getPoint());
+        System.out.println(">You kept your job in "+Timer.getDay()+" day(s).");
+        System.out.println("-Achievements unlocked:");
+        for(int i = 0 ; i < Achievements.getAchievementList().size() ; i++){
+            Achievements achievement = Achievements.getAchievementList().get(i);
+            if(achievement.isComplete()){
+                System.out.println("-Name: "+achievement.getName()+" - Complete.");
+                System.out.println("-"+achievement.getDescription());
+            } else {
+                System.out.println("-Name: "+achievement.getName());
+                System.out.println("-"+Achievements.getDefaultDescription());
+            }
+        }
+        System.out.println("#You completed "+finishedQuestList.getCurrentQuests().size()+" quests:");
+        for(int i = 0 ; i < finishedQuestList.getCurrentQuests().size() ; i++){
+            System.out.println("# "+finishedQuestList.getCurrentQuests().get(i));
+        }
     }
 }

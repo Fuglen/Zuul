@@ -7,7 +7,7 @@ public class Quest {
     private String description; // Description of what to do
     private int questType; // Different types of quests
     private int points; // Points after completion
-    private String questGiver; // NPC who gave the quest. And NPC who ends the quest
+    private NPC questGiver; // NPC who gave the quest. And NPC who ends the quest
     private boolean complete = false; // True when complete
     private int metalNeed; // Amount of metal needed, and spawned in the world
     private int glassNeed; // Amount of glass needed, and spawned in the world
@@ -18,13 +18,14 @@ public class Quest {
     private int recycleWrong; // +1 if you recycle wrong
     private static final int maxQuests = 3; // Number of quests that can be active at the same time
 
-    public Quest(){
+    public Quest(NPC questGiver){
         Random rand = new Random();
         int random = rand.nextInt(3);
+        this.questGiver = questGiver;
 
         if(random == 0){ // Type zero quest (collect and recycle)
             this.questType = random;
-            this.collectAmount = 6 + rand.nextInt(3); // From 6 to 8.
+            this.collectAmount = 6 + rand.nextInt(1); // From 6 to 8.
             this.metalNeed = 2 + rand.nextInt(2);
             this.glassNeed = 2 + rand.nextInt(2);
             this.plasticNeed = collectAmount - glassNeed - metalNeed;
@@ -42,9 +43,6 @@ public class Quest {
             this.description = "Type 2!!!!";
             this.complete = true;
         }
-
-        this.questGiver = "Dummy"; // Use the set method
-
     }
 
     public Quest(String text, int questType){
@@ -65,7 +63,7 @@ public class Quest {
         return points;
     }
 
-    public String getQuestGiver() {
+    public NPC getQuestGiver() {
         return questGiver;
     }
 
@@ -119,10 +117,6 @@ public class Quest {
 
     public void setRecycleWrong(int recycleWrong) {
         this.recycleWrong = this.recycleWrong + recycleWrong;
-    }
-
-    public void setQuestGiver(String questGiver) {
-        this.questGiver = questGiver;
     }
 
     public void setDescription(String description) {

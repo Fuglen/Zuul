@@ -7,7 +7,7 @@ import java.util.HashMap;
 class Room {
     private String description;
     private HashMap<String, Room> exits;
-    private ArrayList<NPC> NPCs = new ArrayList<>();
+    private NPC npc;
     private ArrayList<Item> roomItems = new ArrayList<>();
     private Inventory roomInventory = new Inventory(roomItems);
     private static ArrayList<Room> roomList = new ArrayList<Room>();
@@ -36,7 +36,13 @@ class Room {
         for (String exit : keys) {
             returnString += " " + exit;
         }
-        returnString += "\nList of room items: " + printRoomItems() + "\nScore: " + Point.getPoint() + "\nDay: " + Timer.getDay();
+        returnString += "\nList of room items: " + printRoomItems() + "\nScore: " + Point.getPoint() + "\nDay: " + Timer.getDay()+"\nNPCS: ";
+        if(this.npc != null){
+            returnString += getNPC().getName();
+        } else {
+            returnString += "None";
+        }
+
         if(Timer.getDay() != 0){
             returnString += "\nMoves: " + Timer.getMovesMade() + "/" + Timer.getWorkTimer();
         }
@@ -44,17 +50,12 @@ class Room {
     }
 
     public void addNPC(NPC npc) {
-        NPCs.add(npc);
+        this.npc = npc;
     }
 
-    public String getNPCs(Room room) {
-        StringBuilder NPCList = new StringBuilder();
-        for (NPC npc : NPCs) {
-            NPCList.append(npc.getName()).append(" ");
-        }
-        return NPCList.toString();
+    public NPC getNPC() {
+        return npc;
     }
-
 
     public Room getExit(String direction) {
         return exits.get(direction);

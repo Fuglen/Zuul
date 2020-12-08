@@ -27,7 +27,7 @@ public class Achievements {
     private static final String secondDescription = "Collect "+Achievements.getNumToComplete2()+" pieces of trash.";
 
     // Achievement 3 settings (Friend of the people) - Complete *numToComplete* quests
-    private static final int numToComplete3 = 2;
+    private static final int numToComplete3 = 25;
     private static final String ThirdDescription = "At the end of the day. Have completed "+Achievements.getNumToComplete3()+" quests.";
 
     // Default description if achievement is not complete

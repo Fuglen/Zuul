@@ -19,6 +19,11 @@ public class NPC {
 
     }
 
+    public NPC(String name, String description){
+        this.name = name;
+        this.description = description;
+    }
+
     public void getDialog(String name) {
         try {
             DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()

@@ -17,7 +17,7 @@ class Item {
 
 
     //Constructor
-    public Item(String name) { // For test items
+    public Item(String name) { // For test items / tutorial
         this.name = name;
     }
 

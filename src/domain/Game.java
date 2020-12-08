@@ -395,7 +395,8 @@ class Game {
                 for(int i = 0 ; i < questSetting.getGlassNeed() ; i++ ){
                     Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
                     if(room != currentRoom){
-                        room.setRoomItem(new Item(Item.getGlassTypes()[rand.nextInt(Item.getGlassTypes().length)], Room.getContainerList().get(0)));
+                        int itemNumber = rand.nextInt(Item.getGlassTypes().length);
+                        room.setRoomItem(new Item(Item.getGlassTypes()[itemNumber], Item.getGlassTypesBtn()[itemNumber], Room.getContainerList().get(0)));
                     } else {
                         i--;
                     }
@@ -404,7 +405,8 @@ class Game {
                 for(int i = 0 ; i < questSetting.getMetalNeed() ; i++ ){
                     Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
                     if(room != currentRoom){
-                        room.setRoomItem(new Item(Item.getMetalTypes()[rand.nextInt(Item.getMetalTypes().length)], Room.getContainerList().get(1)));
+                        int itemNumber = rand.nextInt(Item.getMetalTypes().length);
+                        room.setRoomItem(new Item(Item.getMetalTypes()[itemNumber], Item.getMetalTypesBtn()[itemNumber], Room.getContainerList().get(1)));
                     } else {
                         i--;
                     }
@@ -413,7 +415,8 @@ class Game {
                 for(int i = 0 ; i < questSetting.getPlasticNeed() ; i++ ){
                     Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
                     if(room != currentRoom){
-                        room.setRoomItem(new Item(Item.getPlasticTypes()[rand.nextInt(Item.getPlasticTypes().length)], Room.getContainerList().get(2)));
+                        int itemNumber = rand.nextInt(Item.getPlasticTypes().length);
+                        room.setRoomItem(new Item(Item.getPlasticTypes()[itemNumber], Item.getPlasticTypesBtn()[itemNumber], Room.getContainerList().get(2)));
                     } else {
                         i--;
                     }

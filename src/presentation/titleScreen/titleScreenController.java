@@ -13,7 +13,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Stack;
 
 public class titleScreenController {
     DomainI domainI = new Domain();
@@ -25,7 +24,7 @@ public class titleScreenController {
 
     @FXML
     public void startGame(MouseEvent event) throws IOException {
-        Parent startGameParent = FXMLLoader.load(getClass().getResource("gameStart.fxml"));
+        Parent startGameParent = FXMLLoader.load(getClass().getResource("nameSelect.fxml"));
         Scene homeViewScene = new Scene(startGameParent);
 
         //This line gets the stage information

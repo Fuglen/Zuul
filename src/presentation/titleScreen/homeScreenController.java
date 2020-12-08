@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class gameStartController {
+public class homeScreenController {
     @FXML
     public void goBack(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("titleScreen.fxml"));

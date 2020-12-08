@@ -21,13 +21,3 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-<<<<<<< Updated upstream
-=======
-
-# Ignore project modules
-.idea/libraries/javafx.xml
-.idea/libraries/lib.xml
-.idea/misc.xml
-.idea/libraries/lib.xml
-.idea/libraries/lib.xml
->>>>>>> Stashed changes

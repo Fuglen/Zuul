@@ -82,6 +82,7 @@ class Game {
         }
         //Create NPC object
         NPC npcs = new NPC();
+        npcs.getDialog("Brian");
     }
 
     public void play() {

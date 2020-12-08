@@ -105,11 +105,15 @@ class Game {
         //Create NPC object
         NPC npcs = new NPC();
 
+
         // Create achievements
         Achievements.getAchievementList().add(new Achievements("Book worm.", Achievements.getZeroDescription(),Achievements.getNumToComplete0()));
         Achievements.getAchievementList().add(new Achievements("Workaholic.", Achievements.getFirstDescription(),Achievements.getNumToComplete1()));
         Achievements.getAchievementList().add(new Achievements("Mother Nature’s champion.", Achievements.getSecondDescription(),Achievements.getNumToComplete2()));
         Achievements.getAchievementList().add(new Achievements("Friend of the people.", Achievements.getThirdDescription(),Achievements.getNumToComplete3()));
+
+        npcs.getDialog("Brian");
+
     }
 
     public void play() {

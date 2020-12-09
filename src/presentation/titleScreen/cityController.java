@@ -20,7 +20,6 @@ public class cityController {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
-        start.setFullScreen(true);
     }
 
     @FXML
@@ -32,7 +31,6 @@ public class cityController {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
-        start.setFullScreen(true);
     }
 
     @FXML
@@ -44,7 +42,6 @@ public class cityController {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
-        start.setFullScreen(true);
     }
 
     @FXML
@@ -56,6 +53,5 @@ public class cityController {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
-        start.setFullScreen(true);
     }
 }

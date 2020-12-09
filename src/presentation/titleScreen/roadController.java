@@ -49,7 +49,7 @@ public class roadController extends Main {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
-        start.setFullScreen(true);
+
     }
 
     @FXML
@@ -61,7 +61,6 @@ public class roadController extends Main {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
-        start.setFullScreen(true);
     }
 
     @FXML
@@ -73,7 +72,6 @@ public class roadController extends Main {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
-        start.setFullScreen(true);
     }
 
     @FXML
@@ -85,7 +83,6 @@ public class roadController extends Main {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
-        start.setFullScreen(true);
     }
 
     @FXML
@@ -97,6 +94,5 @@ public class roadController extends Main {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
-        start.setFullScreen(true);
     }
 }

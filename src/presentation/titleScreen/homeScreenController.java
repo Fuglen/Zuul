@@ -59,9 +59,7 @@ public class homeScreenController extends Main {
         //This line gets the stage information
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
-        start.show();
-        start.setMaximized(true);
-        start.setFullScreen(true);
+        start.show();;
         domainI.load();
     }
 

@@ -8,21 +8,21 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onMouseMoved="#loadSceneData" prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.titleScreen.roadController">
+<AnchorPane onMouseMoved="#loadSceneData" prefHeight="537.0" prefWidth="943.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.titleScreen.roadController">
    <children>
-      <ImageView fitHeight="730.0" fitWidth="1280.0" layoutY="-7.0">
+      <ImageView fitHeight="600.0" fitWidth="980.0" layoutY="-7.0">
          <image>
             <Image url="@../Images/Road.jpg" />
          </image>
       </ImageView>
       <Button layoutX="640.0" layoutY="512.0" mnemonicParsing="false" onMouseClicked="#printInventory" text="Inventory" />
       <Button layoutX="735.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#addItem" text="AddItem" />
-      <ImageView layoutX="1242.0" onMouseClicked="#EndGame">
+      <ImageView layoutX="942.0" layoutY="-4.0" onMouseClicked="#EndGame">
          <image>
             <Image url="@../Images/green_boxCross.png" />
          </image>
       </ImageView>
-      <StackPane layoutX="1198.0" layoutY="405.0" onMouseClicked="#goForest" prefHeight="31.0" prefWidth="81.0">
+      <StackPane layoutX="884.0" layoutY="347.0" onMouseClicked="#goForest" prefHeight="31.0" prefWidth="81.0">
          <children>
             <ImageView fitHeight="33.0" fitWidth="81.0">
                <image>
@@ -36,7 +36,7 @@
             </Label>
          </children>
       </StackPane>
-      <StackPane layoutX="1198.0" layoutY="439.0" onMouseClicked="#goBeach" prefHeight="36.0" prefWidth="81.0">
+      <StackPane layoutX="884.0" layoutY="383.0" onMouseClicked="#goBeach" prefHeight="36.0" prefWidth="81.0">
          <children>
             <ImageView fitHeight="31.0" fitWidth="81.0">
                <image>
@@ -50,7 +50,7 @@
             </Label>
          </children>
       </StackPane>
-      <StackPane layoutX="628.0" layoutY="680.0" onMouseClicked="#goHome" prefHeight="36.0" prefWidth="81.0">
+      <StackPane layoutX="463.0" layoutY="537.0" onMouseClicked="#goHome" prefHeight="36.0" prefWidth="81.0">
          <children>
             <ImageView fitHeight="33.0" fitWidth="78.0">
                <image>
@@ -69,7 +69,7 @@
             </Label>
          </children>
       </StackPane>
-      <StackPane layoutX="617.0" layoutY="396.0" onMouseClicked="#goCity" prefHeight="31.0" prefWidth="78.0">
+      <StackPane layoutX="465.0" layoutY="314.0" onMouseClicked="#goCity" prefHeight="31.0" prefWidth="78.0">
          <children>
             <ImageView fitHeight="33.0" fitWidth="78.0">
                <image>
@@ -83,7 +83,7 @@
             </Label>
          </children>
       </StackPane>
-      <StackPane layoutX="238.0" layoutY="456.0" onMouseClicked="#goRecyclingHome" prefHeight="36.0" prefWidth="148.0">
+      <StackPane layoutX="140.0" layoutY="357.0" onMouseClicked="#goRecyclingHome" prefHeight="36.0" prefWidth="148.0">
          <children>
             <ImageView fitHeight="37.0" fitWidth="143.0">
                <image>

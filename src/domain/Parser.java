@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Scanner;
 
-class Parser {
+public class Parser {
     private CommandWords commands;
     private Scanner reader;
 

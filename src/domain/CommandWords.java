@@ -3,7 +3,7 @@ package domain;
 import java.util.HashMap;
 
 
-class CommandWords {
+public class CommandWords {
     private HashMap<String, CommandWord> validCommands;
 
     public CommandWords() {

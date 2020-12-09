@@ -1,10 +1,12 @@
 package domain;
 
+import interfaceI.DomainI;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-class Game {
+public class Game implements DomainI {
     private Parser parser;
     private Room currentRoom;
     //Player inventory

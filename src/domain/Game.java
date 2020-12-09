@@ -103,18 +103,17 @@ class Game {
         home.setRoomItem(new Item("shoes"));
 
         //Create NPC in room
-        NPC npcs = new NPC();
-        road.addNPC(new NPC("Tommy", "En dude."));
-        city.addNPC(new NPC("Signe", "Ikke en dude."));
+        road.addNPC(new NPC("Tommy", "I'm a weird motherfucker!", true));
+        city.addNPC(new NPC("Signe", "I'm a girl. fyldetekst fyldetekst fyldetekst fyldetekst fyldetekst!", true));
+        beach.addNPC(new NPC("Dummy 1", "Jeg er ligegyldig", false));
+        park.addNPC(new NPC("Dummy 2", "Jeg er ligegyldig", false));
+        forest.addNPC(new NPC("Dummy 3", "Jeg er ligegyldig", false));
 
         // Create achievements
         Achievements.getAchievementList().add(new Achievements("Book worm.", Achievements.getZeroDescription(),Achievements.getNumToComplete0()));
         Achievements.getAchievementList().add(new Achievements("Workaholic.", Achievements.getFirstDescription(),Achievements.getNumToComplete1()));
         Achievements.getAchievementList().add(new Achievements("Mother Nature’s champion.", Achievements.getSecondDescription(),Achievements.getNumToComplete2()));
         Achievements.getAchievementList().add(new Achievements("Friend of the people.", Achievements.getThirdDescription(),Achievements.getNumToComplete3()));
-
-        npcs.getDialog("Brian");
-
     }
 
     public void play() {
@@ -195,8 +194,8 @@ class Game {
             questList.printQuests();
         } else if (commandWord == CommandWord.USE){
             useItem(command);
-        } else if (commandWord == CommandWord.FACT){
-            randomFact();
+        }else if (commandWord == CommandWord.TALK){
+            startQuest();
         }else if (commandWord == CommandWord.CHEAT){ // Will be removed
             boolean cheater = true;
             while (cheater){
@@ -211,7 +210,9 @@ class Game {
                 String cheat = scanCheat.nextLine();
                 switch (cheat) {
                     case "1" -> {
-                        startQuest();
+                        for(Room rooms : Room.getAllRoomList()){
+                            System.out.println(rooms);
+                        }
                     }
                     case "2" -> {
                         for (int i = 0; i < finishedQuestList.getCurrentQuests().size(); i++) {
@@ -379,63 +380,54 @@ class Game {
     // Starts new quest
     private void startQuest(){
         if(currentRoom.getNPC() != null){
-            Quest newQuest = new Quest(currentRoom.getNPC());
-            int count = 0;
-            for(int i = 0 ; i < questList.getCurrentQuests().size() ; i++){ // Checks if the type of quest already exists
-                if(questList.getCurrentQuests().get(i).getQuestType() == newQuest.getQuestType()){
-                    count = count + 1;
-                }
-            }
-            if(count > 0){ // If the quest type already exists, start the method over.
-                if(questList.getCurrentQuests().size() == Quest.getMaxQuests()){
-                    System.out.println("Something went wrong.");
-                } else {
-                    startQuest();
-                }
+            // Greetings from npc
+            System.out.println("Hello "+player.getPlayerName()+".");
+            // Prints description first time you talk to this NPC
+            if(!currentRoom.getNPC().getMet()){
+                System.out.println(currentRoom.getNPC().getDescription());
+                currentRoom.getNPC().setMet();
             } else {
-                if(newQuest.getQuestType() == 0){
-                    questList.addQuest(newQuest); //Create Quests - Will be added when talking to NPC
-                    Quest questSetting = questList.getCurrentQuests().get(questList.getCurrentQuests().size() - 1); // Gets the latest added quest and call it questSetting
-                    // Creates glass items
-                    for(int i = 0 ; i < questSetting.getGlassNeed() ; i++ ){
-                        Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
-                        if(room != currentRoom){
-                            int itemNumber = rand.nextInt(Item.getGlassTypes().length);
-                            room.setRoomItem(new Item(Item.getGlassTypes()[itemNumber], Item.getGlassTypesBtn()[itemNumber], Room.getContainerList().get(0)));
-                        } else {
-                            i--;
+                System.out.println("Good to see you again!");
+            }
+            if(questList.getCurrentQuests().size() == Quest.getMaxQuests()){
+                System.out.println("I'm sorry, but I'm busy right now. Talk to you later.");
+            } else {
+                // If you already have an active quest from this NPC, you get a random fact instead
+                if(currentRoom.getNPC().getQuestActive() || !currentRoom.getNPC().isQuestGiver()){
+                    System.out.println("Did you know:");
+                    randomFact();
+                } else{
+                    currentRoom.getNPC().setQuestActive();
+                    Quest newQuest = new Quest(currentRoom.getNPC());
+                    int count = 0;
+                    for(int i = 0 ; i < questList.getCurrentQuests().size() ; i++){ // Checks if the type of quest already exists
+                        if(questList.getCurrentQuests().get(i).getQuestType() == newQuest.getQuestType()){
+                            count = count + 1;
                         }
                     }
-                    // Creates metal items
-                    for(int i = 0 ; i < questSetting.getMetalNeed() ; i++ ){
-                        Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
-                        if(room != currentRoom){
-                            int itemNumber = rand.nextInt(Item.getMetalTypes().length);
-                            room.setRoomItem(new Item(Item.getMetalTypes()[itemNumber], Item.getMetalTypesBtn()[itemNumber], Room.getContainerList().get(1)));
+                    if(count > 0){ // If the quest type already exists, start the method over.
+                        if(questList.getCurrentQuests().size() == Quest.getMaxQuests()){
+                            System.out.println("Something went wrong.");
                         } else {
-                            i--;
+                            startQuest();
                         }
-                    }
-                    // Creates plastic items
-                    for(int i = 0 ; i < questSetting.getPlasticNeed() ; i++ ){
-                        Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
-                        if(room != currentRoom){
-                            int itemNumber = rand.nextInt(Item.getPlasticTypes().length);
-                            room.setRoomItem(new Item(Item.getPlasticTypes()[itemNumber], Item.getPlasticTypesBtn()[itemNumber], Room.getContainerList().get(2)));
-                        } else {
-                            i--;
+                    } else {
+                        if(newQuest.getQuestType() == 0){
+                            createTypeZeroQuest(newQuest);
                         }
+                        if(newQuest.getQuestType() == 1){
+                            questList.addQuest(newQuest);
+                        }
+                        if(newQuest.getQuestType() == 2){
+                            questList.addQuest(newQuest);
+                        }
+                        System.out.println("I need you to do something for me.");
+                        System.out.println(questList.getCurrentQuests().get(questList.getCurrentQuests().size() - 1).getDescription());
                     }
-                }
-                if(newQuest.getQuestType() == 1){
-                    questList.addQuest(newQuest);
-                }
-                if(newQuest.getQuestType() == 2){
-                    questList.addQuest(newQuest);
                 }
             }
         } else {
-            System.out.println("There is no one nearby to give you a quest.");
+            System.out.println("You are talking to yourself.");
         }
     }
 
@@ -450,6 +442,7 @@ class Game {
                         Quest completeQuest = questList.getCurrentQuests().get(i);
                         completeQuest.setComplete();
                         completeQuest.setPoints((completeQuest.getRecycleRight() * 10) + (completeQuest.getRecycleWrong() * 2));
+                        System.out.println("Thank you for your help "+player.getPlayerName()+"!");
                         System.out.println("You recycled "+completeQuest.getRecycleRight()+" things correct.");
                         System.out.println("You recycled "+completeQuest.getRecycleWrong()+" things wrong.");
                         System.out.println("You get "+ completeQuest.getPoints() +" points for completing the quest.");
@@ -477,6 +470,14 @@ class Game {
                     questDone.setDescription("Type 1 - Completed at day "+Timer.getDay());
                 } else if(questDone.getQuestType() == 2){ // for type 0 quests
                     questDone.setDescription("Type 2 - Completed at day "+Timer.getDay());
+                }
+                for(int j = 0 ; j < Room.getAllRoomList().size() - 1 ; j++){
+                    if(questDone.getQuestGiver() != null){
+                        if(Room.getAllRoomList().get(j).getNPC() == questDone.getQuestGiver()){
+                            Room.getAllRoomList().get(j).getNPC().setQuestActive();
+                            System.out.println("Hej");
+                        }
+                    }
                 }
                 finishedQuestList.getCurrentQuests().add(questDone);
                 questList.getCurrentQuests().remove(i);
@@ -529,9 +530,8 @@ class Game {
                 thisAchievement.setComplete();
                 System.out.println("ACHIEVEMENT UNLOCKED - "+thisAchievement.getName());
                 System.out.println(thisAchievement.getDescription());
-            }
+                            }
         }
-
     }
 
     private void printEndScreen(){
@@ -552,6 +552,41 @@ class Game {
         System.out.println("#You completed "+finishedQuestList.getCurrentQuests().size()+" quests:");
         for(int i = 0 ; i < finishedQuestList.getCurrentQuests().size() ; i++){
             System.out.println("# "+finishedQuestList.getCurrentQuests().get(i));
+        }
+    }
+    // Type 0 quest. Collect and recycle
+    private void createTypeZeroQuest(Quest newQuest){
+        questList.addQuest(newQuest); //Create Quests - Will be added when talking to NPC
+        Quest questSetting = questList.getCurrentQuests().get(questList.getCurrentQuests().size() - 1); // Gets the latest added quest and call it questSetting
+        // Creates glass items
+        for(int i = 0 ; i < questSetting.getGlassNeed() ; i++ ){
+            Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
+            if(room != currentRoom){
+                int itemNumber = rand.nextInt(Item.getGlassTypes().length);
+                room.setRoomItem(new Item(Item.getGlassTypes()[itemNumber], Item.getGlassTypesBtn()[itemNumber], Room.getContainerList().get(0)));
+            } else {
+                i--;
+            }
+        }
+        // Creates metal items
+        for(int i = 0 ; i < questSetting.getMetalNeed() ; i++ ){
+            Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
+            if(room != currentRoom){
+                int itemNumber = rand.nextInt(Item.getMetalTypes().length);
+                room.setRoomItem(new Item(Item.getMetalTypes()[itemNumber], Item.getMetalTypesBtn()[itemNumber], Room.getContainerList().get(1)));
+            } else {
+                i--;
+            }
+        }
+        // Creates plastic items
+        for(int i = 0 ; i < questSetting.getPlasticNeed() ; i++ ){
+            Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
+            if(room != currentRoom){
+                int itemNumber = rand.nextInt(Item.getPlasticTypes().length);
+                room.setRoomItem(new Item(Item.getPlasticTypes()[itemNumber], Item.getPlasticTypesBtn()[itemNumber], Room.getContainerList().get(2)));
+            } else {
+                i--;
+            }
         }
     }
 }

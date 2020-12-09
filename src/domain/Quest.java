@@ -16,7 +16,7 @@ public class Quest {
     private int recycleAmount; // Amount of trash that has been recycled. When recycleAmount == collectAmount change description to "talk to 'questGiver'"
     private int recycleRight; // +1 if you recycle right
     private int recycleWrong; // +1 if you recycle wrong
-    private static final int maxQuests = 3; // Number of quests that can be active at the same time
+    private static final int maxQuests = 2; // Number of quests that can be active at the same time
 
     public Quest(NPC questGiver){
         Random rand = new Random();

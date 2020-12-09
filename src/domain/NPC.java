@@ -1,59 +1,45 @@
 package domain;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-
 public class NPC {
     private String name;
     private String description;
-    private int id;
-    private File file = new File("src/domain/npcs/npcs.xml");
+    private boolean questActive;
+    private boolean met;
+    private boolean questGiver;
 
-    public NPC() {
-
-    }
-
-    public NPC(String name, String description){
+    public NPC(String name, String description, boolean questGiver){
         this.name = name;
         this.description = description;
-    }
-
-    public void getDialog(String name) {
-        try {
-            DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
-                    .newDocumentBuilder();
-
-            Document doc = dBuilder.parse(file);
-            doc.getDocumentElement().normalize();
-            NodeList nList = doc.getElementsByTagName("npc");
-
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-                Node nNode = nList.item(temp);
-
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode;
-                    if (eElement.getAttribute("name").equals("Brian")) {
-                        System.out.println("NPC: "
-                                + eElement.getAttribute("name"));
-                    }
-                }
-            }
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        this.questActive = false;
+        this.met = false;
+        this.questGiver = questGiver;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setMet() {
+    public void setMet(){
+        this.met = !this.met;
+    }
+
+    public boolean getMet(){
+        return met;
+    }
+
+    public boolean getQuestActive(){
+        return questActive;
+    }
+
+    public void setQuestActive(){
+        this.questActive = !this.questActive;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isQuestGiver() {
+        return questGiver;
     }
 }

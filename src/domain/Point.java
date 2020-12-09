@@ -3,24 +3,19 @@ package domain;
 class Point {
 
     //Attributes
-    private int point;
+    private static int point = 0;
 
     //Constructors
     public Point(){
-        this.point = 0;
     }
 
     //Methods
-    public int getPoint() {
+    public static int getPoint() {
         return point;
     }
 
-    public void addPoint(int point){
-        this.point = getPoint() + point;
-    }
-
-    public void removePoint(int point){
-        this.point = getPoint() - point;
+    public static void addPoint(int point){
+        Point.point = getPoint() + point;
     }
     
 }

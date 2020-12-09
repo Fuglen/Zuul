@@ -7,10 +7,11 @@ import java.util.HashMap;
 class Room {
     private String description;
     private HashMap<String, Room> exits;
-    private ArrayList<NPC> NPCs = new ArrayList<>();
+    private NPC npc;
     private ArrayList<Item> roomItems = new ArrayList<>();
     private Inventory roomInventory = new Inventory(roomItems);
-    private Point point = new Point();
+    private static ArrayList<Room> roomList = new ArrayList<Room>();
+    private static ArrayList<Room> containerList = new ArrayList<Room>();
 
     public Room(String description) {
         this.description = description;
@@ -35,22 +36,26 @@ class Room {
         for (String exit : keys) {
             returnString += " " + exit;
         }
-        returnString += " | List of room items: " + printRoomItems() + "| Score:" + point.getPoint();
+        returnString += "\nList of room items: " + printRoomItems() + "\nScore: " + Point.getPoint() + "\nDay: " + Timer.getDay()+"\nNPCS: ";
+        if(this.npc != null){
+            returnString += getNPC().getName();
+        } else {
+            returnString += "None";
+        }
+
+        if(Timer.getDay() != 0){
+            returnString += "\nMoves: " + Timer.getMovesMade() + "/" + Timer.getWorkTimer();
+        }
         return returnString;
     }
 
     public void addNPC(NPC npc) {
-        NPCs.add(npc);
+        this.npc = npc;
     }
 
-    public String getNPCs(Room room) {
-        StringBuilder NPCList = new StringBuilder();
-        for (NPC npc : NPCs) {
-            NPCList.append(npc.getName()).append(" ");
-        }
-        return NPCList.toString();
+    public NPC getNPC() {
+        return npc;
     }
-
 
     public Room getExit(String direction) {
         return exits.get(direction);
@@ -78,6 +83,22 @@ class Room {
             roomItemsText += roomItems.get(i).getName() + " ";
         }
         return roomItemsText;
+    }
+
+    public static void addRoomToList(Room room){
+        Room.roomList.add(room);
+    }
+
+    public static ArrayList<Room> getRoomList() {
+        return roomList;
+    }
+
+    public static void addRoomToContainerList(Room room){
+        Room.containerList.add(room);
+    }
+
+    public static ArrayList<Room> getContainerList() {
+        return containerList;
     }
 }
 

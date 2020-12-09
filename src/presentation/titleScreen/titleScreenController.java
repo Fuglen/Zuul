@@ -15,13 +15,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class titleScreenController {
-    DomainI domainI = new Domain();
-
     @FXML
     private void EndGame () {
         Platform.exit();
     }
-
     @FXML
     public void startGame(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("nameSelect.fxml"));
@@ -52,13 +49,4 @@ public class titleScreenController {
             stackPane2.setOpacity(1);
         }
     }
-    @FXML
-    private void addItem() {
-        domainI.addItem("Plastic");
-    }
-    @FXML
-    private void printInventory() {
-        domainI.printInventory();
-    }
-
 }

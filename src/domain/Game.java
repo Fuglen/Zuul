@@ -200,7 +200,7 @@ class Game {
             boolean cheater = true;
             while (cheater){
                 System.out.println("Cheat menu!");
-                System.out.println("1) Start a new quest");
+                System.out.println("1) Show room objects");
                 System.out.println("2) List of quests completed");
                 System.out.println("3) Get fired");
                 System.out.println("4) Complete quest. (Talking to NPC)");

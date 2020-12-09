@@ -4,9 +4,6 @@ import java.util.Scanner;
 
 class Player {
     private String playerName;
-    private int playerAge;
-    private String playerGender;
-
     public Player() {
     }
 
@@ -59,26 +56,6 @@ class Player {
                 }
             }
         }
-    }
-
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
-
-    public int getPlayerAge() {
-        return playerAge;
-    }
-
-    public void setPlayerAge(int playerAge) {
-        this.playerAge = playerAge;
-    }
-
-    public String getPlayerGender() {
-        return playerGender;
-    }
-
-    public void setPlayerGender(String playerGender) {
-        this.playerGender = playerGender;
     }
 
     public String getPlayerName() {

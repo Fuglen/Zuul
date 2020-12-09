@@ -1,5 +1,8 @@
 package domain;
+import data.FileBackend;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Inventory {
     // Attributes
@@ -32,5 +35,31 @@ public class Inventory {
                 System.out.println(item);
             }
         }
+    }
+    public boolean load (String filename) {
+        FileBackend fb = new FileBackend(filename);
+        if (fb==null) return false;
+
+        List<String> entries = fb.load();
+        if (entries==null) return false;
+
+        for (String entry: entries) {
+            Item item = new Item(entry);
+            if (item!=null) addItem(item);
+        }
+
+        return true;
+    }
+
+    public boolean store (String filename) {
+        FileBackend fb = new FileBackend(filename);
+        if (fb==null) return false;
+
+        List<String> entries = new ArrayList<String>();
+        for (Item item: items) {
+            entries.add(item.getName());
+        }
+
+        return fb.store(entries);
     }
 }

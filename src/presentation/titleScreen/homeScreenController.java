@@ -1,5 +1,7 @@
 package presentation.titleScreen;
 
+import domain.Domain;
+import interfaceI.DomainI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -46,4 +48,24 @@ public class homeScreenController {
             stackPane.setOpacity(1);
         }
     }
+
+    @FXML
+    public void goRoad(MouseEvent event) throws IOException {
+        Parent startGameParent = FXMLLoader.load(getClass().getResource("road.fxml"));
+        Scene homeViewScene = new Scene(startGameParent);
+
+        //This line gets the stage information
+        Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
+        start.setScene(homeViewScene);
+        start.show();
+        domainI.load();
+    }
+
+
+    DomainI domainI = new Domain("dataFile.txt");
+    @FXML
+    private void addItem() {
+        domainI.addItem("Plastic");
+    }
+
 }

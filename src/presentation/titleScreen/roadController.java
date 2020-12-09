@@ -9,10 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import presentation.Main;
 
 import java.io.IOException;
 
-public class roadController {
+public class roadController extends Main {
     DomainI domainI = new Domain("dataFile.txt");
 
     private boolean sceneLoaded = false;
@@ -48,6 +49,7 @@ public class roadController {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
+        start.setFullScreen(true);
     }
 
     @FXML
@@ -59,6 +61,7 @@ public class roadController {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
+        start.setFullScreen(true);
     }
 
     @FXML
@@ -70,6 +73,7 @@ public class roadController {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
+        start.setFullScreen(true);
     }
 
     @FXML
@@ -81,6 +85,7 @@ public class roadController {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
+        start.setFullScreen(true);
     }
 
     @FXML
@@ -92,5 +97,6 @@ public class roadController {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
+        start.setFullScreen(true);
     }
 }

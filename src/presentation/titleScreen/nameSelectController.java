@@ -52,5 +52,7 @@ public class nameSelectController {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
+        start.setMaximized(true);
+        start.setFullScreen(true);
     }
 }

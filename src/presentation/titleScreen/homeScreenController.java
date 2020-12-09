@@ -2,6 +2,7 @@ package presentation.titleScreen;
 
 import domain.Domain;
 import interfaceI.DomainI;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,10 +13,11 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import presentation.Main;
 
 import java.io.IOException;
 
-public class homeScreenController {
+public class homeScreenController extends Main {
     @FXML
     public void goBack(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("titleScreen.fxml"));
@@ -58,6 +60,8 @@ public class homeScreenController {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
+        start.setMaximized(true);
+        start.setFullScreen(true);
         domainI.load();
     }
 

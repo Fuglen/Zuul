@@ -9,12 +9,12 @@
 
 <AnchorPane prefHeight="344.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.titleScreen.homeScreenController">
    <children>
-      <ImageView fitHeight="350.0" fitWidth="495.0" layoutY="-1.0">
+      <ImageView fitHeight="730.0" fitWidth="1280.0" layoutY="-1.0">
          <image>
             <Image url="file:/C:/Users/Holst/OneDrive/Documents/Diplomingeniør%20i%20softwareteknologi/Semesterprojekt/Zuul/src/presentation/Images/—Pngtree—3d%20contemporary%20living%20room%20interior_4093673.png" />
          </image>
       </ImageView>
-      <StackPane layoutX="390.0" layoutY="302.0" onMouseClicked="#goRoad" prefHeight="31.0" prefWidth="98.0">
+      <StackPane layoutX="1160.0" layoutY="665.0" onMouseClicked="#goRoad" prefHeight="31.0" prefWidth="98.0">
          <children>
             <ImageView fitHeight="40.0" fitWidth="105.0">
                <image>
@@ -27,9 +27,14 @@
                </font></Label>
          </children>
       </StackPane>
-      <ImageView fitHeight="63.0" fitWidth="53.0" layoutX="153.0" layoutY="184.0" onMouseClicked="#addItem">
+      <ImageView fitHeight="63.0" fitWidth="53.0" layoutX="444.0" layoutY="431.0" onMouseClicked="#addItem">
          <image>
             <Image url="@../Images/bottle.png" />
+         </image>
+      </ImageView>
+      <ImageView layoutX="1235.0" layoutY="7.0" onMouseClicked="#EndGame">
+         <image>
+            <Image url="@../Images/green_boxCross.png" />
          </image>
       </ImageView>
    </children>

@@ -58,10 +58,11 @@ public class homeScreenController {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
+        domainI.load();
     }
 
 
-    DomainI domainI = new Domain();
+    DomainI domainI = new Domain("dataFile.txt");
     @FXML
     private void addItem() {
         domainI.addItem("Plastic");

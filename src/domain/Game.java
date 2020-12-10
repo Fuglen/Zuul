@@ -329,7 +329,7 @@ public class Game implements DomainI {
     }
 
     //Drops an item from the player inventory to the room inventory
-    private void useItem(Command command) {
+    public void useItem(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Use what?");
         } else {

@@ -59,8 +59,6 @@ public class Main extends Application {
         Platform.exit();
     }
 
-<<<<<<< HEAD
-=======
     //Collect Items with these methods
     public void collectBottle() {
         getGame().collectItem(new Command(CommandWord.COLLECT, "waterBottle"));
@@ -74,7 +72,6 @@ public class Main extends Application {
         inventoryField.setText("Your inventory: " + game.getInventory().printInventory());
     }
 
->>>>>>> 59b13ea465bdb17651ad3d5753ee4feb57c25234
     public static void main(String[] args) {
         game = new Game();
         launch(args);

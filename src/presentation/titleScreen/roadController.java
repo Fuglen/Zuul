@@ -15,7 +15,6 @@ import java.beans.EventHandler;
 import java.io.IOException;
 
 public class roadController extends Main {
-<<<<<<< HEAD
 /*    //Hover-effect for buttons
     @FXML
     private Node tempNode;
@@ -46,8 +45,6 @@ public class roadController extends Main {
             tempStackPane.setOpacity(1);
         }
     }*/
-=======
->>>>>>> 59b13ea465bdb17651ad3d5753ee4feb57c25234
 
     //Changing rooms
     @FXML

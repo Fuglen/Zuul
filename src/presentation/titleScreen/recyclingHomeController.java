@@ -6,11 +6,22 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class recyclingHomeController {
+    @FXML
+    private StackPane roadButton;
+    @FXML
+    public void hover() {
+        if (roadButton.getOpacity() == 1) {
+            roadButton.setOpacity(0.75);
+        } else {
+            roadButton.setOpacity(1);
+        }
+    }
     @FXML
     public void goRoad(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("road.fxml"));

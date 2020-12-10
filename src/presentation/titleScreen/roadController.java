@@ -8,38 +8,46 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import presentation.Main;
 
+import java.beans.EventHandler;
 import java.io.IOException;
 
 public class roadController extends Main {
-    DomainI domainI = new Domain("dataFile.txt");
-
-    private boolean sceneLoaded = false;
- /*   public boolean getSceneLoaded() {
-        return sceneLoaded;
-    }
-    public void setSceneLoaded(boolean sceneLoaded) {
-        this.sceneLoaded = sceneLoaded;
-    }*/
+/*    //Hover-effect for buttons
     @FXML
-    private void loadSceneData() {
-        if (!sceneLoaded) {
-            domainI.load();
-            sceneLoaded = true;
+    private Node tempNode;
+    @FXML
+    private StackPane tempStackPane;
+    @FXML
+    private StackPane forestButton;
+    @FXML
+    private StackPane cityButton;
+    @FXML
+    private StackPane beachButton;
+    @FXML
+    private StackPane recyclingHomeButton;
+    @FXML
+    private StackPane homeButton;
+
+    @FXML
+    public void anchorPaneHover(MouseEvent event) {
+        stackPaneHover(event);
+    }
+    @FXML
+    public void stackPaneHover(MouseEvent event){
+        StackPane stackPane = (StackPane) event.getPickResult().getIntersectedNode();
+        this.tempStackPane = stackPane;
+        if (tempStackPane.getOpacity() == 1) {
+            tempStackPane.setOpacity(0.75);
+        } else {
+            tempStackPane.setOpacity(1);
         }
-    }
-    @FXML
-    private void addItem() {
-        domainI.addItem("Plastic");
-        domainI.store();
-    }
-    @FXML
-    private void printInventory() {
-        domainI.printInventory();
-    }
+    }*/
 
+    //Changing rooms
     @FXML
     public void goForest(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("forest.fxml"));
@@ -49,9 +57,7 @@ public class roadController extends Main {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
-
     }
-
     @FXML
     public void goCity(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("city.fxml"));
@@ -62,7 +68,6 @@ public class roadController extends Main {
         start.setScene(homeViewScene);
         start.show();
     }
-
     @FXML
     public void goBeach(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("beach.fxml"));
@@ -73,7 +78,6 @@ public class roadController extends Main {
         start.setScene(homeViewScene);
         start.show();
     }
-
     @FXML
     public void goRecyclingHome(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("recyclingHome.fxml"));
@@ -84,7 +88,6 @@ public class roadController extends Main {
         start.setScene(homeViewScene);
         start.show();
     }
-
     @FXML
     public void goHome(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("homeScreen.fxml"));

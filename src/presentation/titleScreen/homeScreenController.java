@@ -2,14 +2,11 @@ package presentation.titleScreen;
 
 import domain.Domain;
 import interfaceI.DomainI;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -29,28 +26,15 @@ public class homeScreenController extends Main {
         start.show();
     }
     @FXML
-    private ProgressBar progressBar;
-    @FXML
-    private CheckBox checkBox;
-    @FXML
-    public void toggleProgress() {
-        if (checkBox.isSelected()) {
-            progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
-        } else {
-            progressBar.setProgress(0);
-        }
-    }
-    @FXML
-    private StackPane stackPane;
+    private StackPane roadButton;
     @FXML
     public void hover() {
-        if (stackPane.getOpacity() == 1) {
-            stackPane.setOpacity(0.75);
+        if (roadButton.getOpacity() == 1) {
+            roadButton.setOpacity(0.75);
         } else {
-            stackPane.setOpacity(1);
+            roadButton.setOpacity(1);
         }
     }
-
     @FXML
     public void goRoad(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("road.fxml"));
@@ -59,15 +43,27 @@ public class homeScreenController extends Main {
         //This line gets the stage information
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
-        start.show();;
+        start.show();
         domainI.load();
     }
 
-
     DomainI domainI = new Domain("dataFile.txt");
+
+    private boolean sceneLoaded = false;
+    @FXML
+    private void loadSceneData() {
+        if (!sceneLoaded) {
+            domainI.load();
+            sceneLoaded = true;
+        }
+    }
     @FXML
     private void addItem() {
         domainI.addItem("Plastic");
+        domainI.store();
     }
-
+    @FXML
+    private void printInventory() {
+        domainI.printInventory();
+    }
 }

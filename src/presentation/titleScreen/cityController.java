@@ -21,7 +21,6 @@ public class cityController {
         start.setScene(homeViewScene);
         start.show();
     }
-
     @FXML
     public void goWork(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("work.fxml"));
@@ -32,7 +31,6 @@ public class cityController {
         start.setScene(homeViewScene);
         start.show();
     }
-
     @FXML
     public void goMcdonalds(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("mcdonalds.fxml"));
@@ -43,7 +41,6 @@ public class cityController {
         start.setScene(homeViewScene);
         start.show();
     }
-
     @FXML
     public void goPark(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("park.fxml"));

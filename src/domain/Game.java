@@ -295,9 +295,9 @@ public class Game implements DomainI {
         }
     }
 
-    public String printInventory(Inventory inventory) {
-        this.inventory = inventory;
-        return inventory.printInventory();
+    public String printInventory() {
+        inventory.printInventory();
+        return null;
     }
 
     public void addItem(Item item) {

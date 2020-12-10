@@ -9,7 +9,7 @@ public interface DomainI {
 
     public void collectItem (Command command);
 
-    public String printInventory(Inventory inventory);
+    String printInventory();
 
     void play();
 

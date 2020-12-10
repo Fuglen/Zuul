@@ -51,8 +51,11 @@ class Player {
                         break;
                     default:
                         playerName = input;
-                        System.out.println("Hello there " + playerName + ", we hope you enjoy our game!");
-                        System.out.println("You are late for work! Put on your shoes and go to work!");
+                        System.out.println("Hello there " + playerName + ".");
+                        System.out.println("Sadly, you got fired yesterday, and you need to find a new job.");
+                        System.out.println("You heard about a place that is hiring. Go check it out!");
+                        System.out.println("Before you can go outside, you need to put your shoes on.");
+                        System.out.println("Type 'help' to see all available commands. Type 'quests' to see your active quests.");
                 }
             }
         }

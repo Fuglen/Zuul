@@ -5,6 +5,7 @@ class Item {
     private String name; // Name and type of the item
     private String nameBtn; // Name for buttons
     private String container; // When used checks container
+    private int questType;
 
     private static final String[] glassTypes = {"windowPiece", "beerBottle", "brokenLightBulb"};
     private static final String[] glassTypesBtn = {"Window piece", "Beer bottle", "Broken light bulb"};
@@ -21,16 +22,26 @@ class Item {
     private static final String[] organicTypes = {"sandwich", "bananaPeel", "appleCarcass", "eggShells"};
     private static final String[] organicTypesBtn = {"Sandwich", "Banana Peel", "Apple Carcass", "Egg Shells"};
 
+    private static final String[] clothingTypes = {"oldJacket", "jacket", "dirtyPants", "wornOutPants", "oldShoes", "dirtyScarf", "gloves"};
+    private static final String[] clothingTypesBtn = {"Old jacket", "jacket", "Dirty pants", "Worn out pants", "Old shoes", "Dirty scarf", "Gloves"};
+
 
     //Constructor
     public Item(String name) { // For test items / tutorial
         this.name = name;
     }
 
-    public Item(String name, String nameBtn, String container){
+    public Item(String name, String nameBtn, String container, int questType){
         this.name = name;
         this.nameBtn = nameBtn;
         this.container = container;
+        this.questType = questType;
+    }
+
+    public Item(String name, String nameBtn, int questType){
+        this.name = name;
+        this.nameBtn = nameBtn;
+        this.questType = questType;
     }
 
     //Methods
@@ -89,5 +100,17 @@ class Item {
 
     public static String[] getOrganicTypesBtn() {
         return organicTypesBtn;
+    }
+
+    public int getQuestType() {
+        return questType;
+    }
+
+    public static String[] getClothingTypes() {
+        return clothingTypes;
+    }
+
+    public static String[] getClothingTypesBtn() {
+        return clothingTypesBtn;
     }
 }

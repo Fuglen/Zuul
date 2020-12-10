@@ -17,7 +17,7 @@ public class QuestList {
             System.out.println("Your active quests are:");
             int i = 1;
             for (Quest quest : currentQuests) {
-                System.out.println(i+") "+quest);
+                System.out.println(i+") "+quest+" "+quest.isRewarded()+" "+quest.isComplete());
                 i++;
             }
         }

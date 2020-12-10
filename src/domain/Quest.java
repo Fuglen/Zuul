@@ -18,35 +18,36 @@ public class Quest {
     private int recycleAmount; // Amount of trash that has been recycled. When recycleAmount == collectAmount change description to "talk to 'questGiver'"
     private int recycleRight; // +1 if you recycle right
     private int recycleWrong; // +1 if you recycle wrong
-    private static final int maxQuests = 3; // Number of quests that can be active at the same time
-    private boolean rewarded = false;
+    private static final int maxQuests = 2; // Number of quests that can be active at the same time
+    private boolean rewarded = false; // True when talking to NPC after completion
 
     public Quest(NPC questGiver){
         Random rand = new Random();
-        int random = rand.nextInt(3);
+        int random = rand.nextInt(2);
         this.questGiver = questGiver;
 
         if(random == 0){ // Type zero quest (collect and recycle)
             this.questType = random;
-            this.collectAmount = 4 + rand.nextInt(1); // From 5 to 9.
+            this.collectAmount = 2 + rand.nextInt(1); // From 5 to 9.
             this.metalNeed = 0 + rand.nextInt(2);
-            this.glassNeed = 0 + rand.nextInt(2);
-            this.paperNeed = 0 + rand.nextInt(2);
-            this.organicNeed = 0 + rand.nextInt(2);
+            this.glassNeed = 0 + rand.nextInt(1);
+            this.paperNeed = 0 + rand.nextInt(1);
+            this.organicNeed = 0 + rand.nextInt(1);
             this.plasticNeed = collectAmount - glassNeed - metalNeed - paperNeed - organicNeed;
             this.description = "Collect and recycle "+collectAmount+" pieces of trash.\nYou have recycled "+recycleAmount+"/"+collectAmount;
         }
 
         if(random == 1){
             this.questType = random;
-            this.description = "Type 1";
-            this.complete = false;
+            this.collectAmount = 2 + rand.nextInt(1);
+            this.description = "Collect "+collectAmount+" pieces of clothing, and drop it in the park.\nI will get someone to pick it up later.";
         }
 
         if(random == 2){
             this.questType = random;
             this.description = "Type 2!!!!";
             this.complete = false;
+            this.rewarded = false;
         }
     }
 

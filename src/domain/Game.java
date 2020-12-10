@@ -38,12 +38,7 @@ class Game {
         mcdonalds = new Room("at the McDonalds");
         park = new Room("at the park");
         road = new Room("on the road again");
-        recycle = new Room ("at the recycle center.\nYou see three types of containers");
-        metal = new Room ("at the metal container");
-        glass = new Room ("at the glass container");
-        plastic = new Room ("at the plastic container");
-        paper = new Room ("at the paper container");
-        organic = new Room ("at the organic container");
+        recycle = new Room ("at the recycle center.\nYou see five types of containers:\nType 'use *Item name*' for dropping the trash in a container. ");
 
         // Define exits to all rooms
 
@@ -157,7 +152,7 @@ class Game {
         System.out.println("Choose wisely, as it can't be changed.");
         player.createPlayer();
         System.out.println(currentRoom.getLongDescription());
-        questList.addQuest(new Quest("Put on your shoes and go to work!\nHINT: maybe the commands 'collect' and 'use' are useful here.", 100)); // Start the tutorial
+        questList.addQuest(new Quest("Put on your shoes and get outside!\nHINT: maybe the commands 'collect' and 'use' are useful here.", 100)); // Start the tutorial
     }
 
     private boolean processCommand(Command command) {
@@ -187,44 +182,6 @@ class Game {
             useItem(command, currentRoom);
         }else if (commandWord == CommandWord.TALK){
             startQuest();
-        }else if (commandWord == CommandWord.CHEAT){ // Will be removed
-            boolean cheater = true;
-            while (cheater){
-                System.out.println("Cheat menu!");
-                System.out.println("1) Show room objects");
-                System.out.println("2) List of quests completed");
-                System.out.println("3) Get fired");
-                System.out.println("4) Complete quest. (Talking to NPC)");
-                System.out.println("5) Archive quests");
-                System.out.println("6) Back to the game");
-                Scanner scanCheat = new Scanner(System.in);
-                String cheat = scanCheat.nextLine();
-                switch (cheat) {
-                    case "1" -> {
-                        for(Room rooms : Room.getAllRoomList()){
-                            System.out.println(rooms);
-                        }
-                    }
-                    case "2" -> {
-                        for (int i = 0; i < finishedQuestList.getCurrentQuests().size(); i++) {
-                            System.out.println(finishedQuestList.getCurrentQuests().get(i));
-                        }
-                    }
-                    case "3" -> {
-                        Timer.setFired();
-                    }
-                    case "4" -> {
-                        completeQuest(currentRoom);
-                    }
-                    case "5" -> {
-                        archiveQuest();
-                    }
-                    case "6" -> {
-                        cheater = false;
-                    }
-                    default -> System.out.println("No cheat");
-                }
-            }
         }
         return wantToQuit;
     }
@@ -247,38 +204,68 @@ class Game {
             System.out.println("You need to put on your shoes before you can go outside.");
         } else {
             Room nextRoom = currentRoom.getExit(direction);
-
             if (nextRoom == null) {
                 System.out.println("There is no door!");
             } else {
-                currentRoom = nextRoom;
-                // If you go to work. Set currentRoom to home and start new day
-                if(currentRoom == Timer.getWorkHome().get(0)){
-                    currentRoom = Timer.getWorkHome().get(1);
-                    newDay();
+                int count = 0;
+                for(Quest quest : questList.getCurrentQuests()){
+                    if(quest.isRewarded()){
+                        count += 1;
+                    }
                 }
-                Timer.setMovesMade();
-                System.out.println(currentRoom.getLongDescription());
+                if(Timer.getDay() == 0 && count < 2 && nextRoom.equals(Timer.getWorkHome().get(0))){
+                    System.out.println("They are not open yet. You need to kill some time. Time flies when you are in good company. *HINT*");
+                } else {
+                    currentRoom = nextRoom;
+
+                    // If you go to work. Set currentRoom to home and start new day
+                    if(currentRoom == Timer.getWorkHome().get(0)){
+                        currentRoom = Timer.getWorkHome().get(1);
+                        newDay();
+                    }
+                    Timer.setMovesMade();
+                    System.out.println(currentRoom.getLongDescription());
+                }
             }
         }
-
     }
 
     //Drops an item from the player inventory to the room inventory
     private void dropItem(Command command) {
+        Quest thisQuest = null;
+        for(Quest quest : questList.getCurrentQuests()){
+            if(quest.getQuestType() == 1){
+                thisQuest = quest;
+            }
+        }
         if (!command.hasSecondWord()) {
             System.out.println("Drop what?");
         } else {
             for (int i = 0; i < inventoryItems.size(); i++) {
                 if (inventoryItems.get(i).getName().equals(command.getSecondWord())) {
-                    currentRoom.setRoomItem(inventoryItems.get(i));
-                    inventory.removeItem(i);
                     System.out.println("You dropped: " + command.getSecondWord());
+                    if(thisQuest == null){
+                        currentRoom.setRoomItem(inventoryItems.get(i));
+                    } else {
+                        if(currentRoom == Room.getRoomList().get(4)){
+                            thisQuest.setRecycleAmount(1);
+                            thisQuest.setDescription("Collect "+thisQuest.getRecycleAmount()+"/"+thisQuest.getCollectAmount()+" pieces of clothing, and drop it in the park.");
+                            if(thisQuest.getRecycleAmount() == thisQuest.getCollectAmount()){
+                                thisQuest.setDescription("You have delivered all the clothes you were asked to. Talk to "+thisQuest.getQuestGiver().getName()+" to complete the quest.");
+                                System.out.println(thisQuest.getDescription());
+                                thisQuest.setComplete();
+                            }
+                        }
+                    }
+                    inventory.removeItem(i);
                     Timer.setMovesMade();
+                    break;
                 }
             }
         }
     }
+
+
 
     //Collect an item from the room inventory and puts it into the player inventory
     private void collectItem(Command command) {
@@ -322,7 +309,7 @@ class Game {
                             System.out.println("This is not your shoes!");
                         }
                     } else {
-                        if(thisRoom.equals(Room.getContainerList().get(0))){
+                        if(thisRoom.equals(Room.getContainerList().get(0)) && inventoryItems.get(i).getQuestType() == 0){
                             System.out.println("What container will you put "+command.getSecondWord()+" in?");
                             System.out.println("metal");
                             System.out.println("glass");
@@ -350,7 +337,7 @@ class Game {
                                 default -> System.out.println("I can't find that container.");
                             }
                         } else {
-                            System.out.println("You can't use that item here.");
+                            System.out.println("You can't use that item here. Maybe it should be used somewhere else?");
                         }
                         break;
                     }
@@ -447,13 +434,17 @@ class Game {
                             createTypeZeroQuest(newQuest);
                         }
                         if(newQuest.getQuestType() == 1){
-                            questList.addQuest(newQuest);
+                            createTypeOneQuest(newQuest);
                         }
                         if(newQuest.getQuestType() == 2){
                             questList.addQuest(newQuest);
                         }
                         System.out.println("I need you to do something for me.");
-                        System.out.println(questList.getCurrentQuests().get(questList.getCurrentQuests().size() - 1).getDescription());
+                        Quest questAdded = questList.getCurrentQuests().get(questList.getCurrentQuests().size() - 1);
+                        System.out.println(questAdded.getDescription());
+                        if(questAdded.getQuestType() == 1){
+                            questAdded.setDescription("Collect "+questAdded.getRecycleAmount()+"/"+questAdded.getCollectAmount()+" pieces of clothing, and drop it in the park.");
+                        }
                     }
                 }
             }
@@ -484,7 +475,13 @@ class Game {
                     }
                     // If type one quest
                     if (quest.getQuestType() == 1) {
-
+                        quest.setPoints(quest.getCollectAmount() * 8);
+                        System.out.println("Thank you for your help " + player.getPlayerName() + "!");
+                        System.out.println("You get " + quest.getPoints() + " points for completing the quest.");
+                        Point.addPoint(quest.getPoints());
+                        quest.setDescription("You delivered all the clothes you were asked to.");
+                        quest.setRewarded();
+                        return;
                     }
                     // If type two quest
                     if (quest.getQuestType() == 2) {
@@ -506,7 +503,7 @@ class Game {
                 if(questDone.getQuestType() == 0){ // for type 0 quests
                     questDone.setDescription("Collect and recycle - Completed at day "+Timer.getDay());
                 } else if(questDone.getQuestType() == 1){ // for type 0 quests
-                    questDone.setDescription("Type 1 - Completed at day "+Timer.getDay());
+                    questDone.setDescription("Clothes for the homeless - Completed at day "+Timer.getDay());
                 } else if(questDone.getQuestType() == 2){ // for type 0 quests
                     questDone.setDescription("Type 2 - Completed at day "+Timer.getDay());
                 }
@@ -529,30 +526,45 @@ class Game {
         int questsBeforeNewDay = finishedQuestList.getCurrentQuests().size();
         archiveQuest();
         int questsAfterNewDay = finishedQuestList.getCurrentQuests().size();
-        Timer.setDay();
-        int pointsGainedThisDay = 0;
-        int movesLate = 0;
-        if(Timer.getWorkTimer() < Timer.getMovesMade()){
-            movesLate = Timer.getMovesMade() - Timer.getWorkTimer();
-            Timer.setWorkEffort(Timer.getWorkEffort() + movesLate);
-            System.out.println("You are late for work. If you keep getting late, you will get fired.");
-            System.out.println("Today you were "+movesLate+" moves late. And you are a total of "+Timer.getWorkEffort()+" moves late.");
-            System.out.println("If your total exceeds "+Timer.getWorkEffortThreshold()+" you will get fired.");
+
+
+        if(Timer.getDay() == 0){
+            System.out.println("Congratulation with your new job!");
+            System.out.println("You are ready for your first day at work.");
+            System.out.println("From now on you should keep track on time, or else you will be late for work.");
+            System.out.println("It's okay to be a bit late, but if you are late too often, you will get fired.");
+            System.out.println("Today you have time enough to explore the areas and talk to people.");
+            System.out.println("But remember to keep track of the timer.");
         } else {
-            if(Timer.getDay() > 1){
-                pointsGainedThisDay = Timer.getWorkTimer() - Timer.getMovesMade();
-                Point.addPoint(pointsGainedThisDay);
-                System.out.println("You came early to work and got "+pointsGainedThisDay+" points.");
+            Timer.setDay();
+            int pointsGainedThisDay = 0;
+            int movesLate = 0;
+            if(Timer.getWorkTimer() < Timer.getMovesMade()){
+                movesLate = Timer.getMovesMade() - Timer.getWorkTimer();
+                Timer.setWorkEffort(Timer.getWorkEffort() + movesLate);
+
+                System.out.println("You are late for work. If you keep getting late, you will get fired.");
+                System.out.println("Today you were "+movesLate+" moves late. And you are a total of "+Timer.getWorkEffort()+" moves late.");
+                System.out.println("If your total exceeds "+Timer.getWorkEffortThreshold()+" you will get fired.");
+
+
+            } else {
+                if(Timer.getDay() > 2){
+                    pointsGainedThisDay = Timer.getWorkTimer() - Timer.getMovesMade();
+                    Point.addPoint(pointsGainedThisDay);
+                    System.out.println("You came early to work and got "+pointsGainedThisDay+" points.");
+                }
+                System.out.println("A new day has started, and you are ready for work.");
             }
-            System.out.println("A new day has started, and you are ready for work.");
+            if(Timer.getWorkEffortThreshold() < Timer.getWorkEffort()){
+                Timer.setFired();
+            }
+            Timer.setWorkTimer(Timer.getWorkTimer() - 1);
+            Timer.setMovesMade(-1);
+            System.out.println("You completed "+(questsAfterNewDay - questsBeforeNewDay)+" quests yesterday.");
+            Achievements.getAchievementList().get(1).setCount();
         }
-        if(Timer.getWorkEffortThreshold() < Timer.getWorkEffort()){
-            Timer.setFired();
-        }
-        Timer.setWorkTimer(Timer.getWorkTimer() - 1);
-        Timer.setMovesMade(-1);
-        System.out.println("You completed "+(questsAfterNewDay - questsBeforeNewDay)+" quests yesterday.");
-        Achievements.getAchievementList().get(1).setCount();
+
     }
 
     private void randomFact(){
@@ -601,7 +613,7 @@ class Game {
             Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
             if(room != currentRoom){
                 int itemNumber = rand.nextInt(Item.getGlassTypes().length);
-                room.setRoomItem(new Item(Item.getGlassTypes()[itemNumber], Item.getGlassTypesBtn()[itemNumber], "glass"));
+                room.setRoomItem(new Item(Item.getGlassTypes()[itemNumber], Item.getGlassTypesBtn()[itemNumber], "glass", 0));
             } else {
                 i--;
             }
@@ -611,7 +623,7 @@ class Game {
             Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
             if(room != currentRoom){
                 int itemNumber = rand.nextInt(Item.getMetalTypes().length);
-                room.setRoomItem(new Item(Item.getMetalTypes()[itemNumber], Item.getMetalTypesBtn()[itemNumber], "metal"));
+                room.setRoomItem(new Item(Item.getMetalTypes()[itemNumber], Item.getMetalTypesBtn()[itemNumber], "metal", 0));
             } else {
                 i--;
             }
@@ -621,7 +633,7 @@ class Game {
             Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
             if(room != currentRoom){
                 int itemNumber = rand.nextInt(Item.getPlasticTypes().length);
-                room.setRoomItem(new Item(Item.getPlasticTypes()[itemNumber], Item.getPlasticTypesBtn()[itemNumber], "plastic"));
+                room.setRoomItem(new Item(Item.getPlasticTypes()[itemNumber], Item.getPlasticTypesBtn()[itemNumber], "plastic", 0));
             } else {
                 i--;
             }
@@ -631,7 +643,7 @@ class Game {
             Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
             if(room != currentRoom){
                 int itemNumber = rand.nextInt(Item.getPaperTypes().length);
-                room.setRoomItem(new Item(Item.getPaperTypes()[itemNumber], Item.getPaperTypesBtn()[itemNumber], "paper"));
+                room.setRoomItem(new Item(Item.getPaperTypes()[itemNumber], Item.getPaperTypesBtn()[itemNumber], "paper", 0));
             } else {
                 i--;
             }
@@ -641,7 +653,21 @@ class Game {
             Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
             if(room != currentRoom){
                 int itemNumber = rand.nextInt(Item.getOrganicTypes().length);
-                room.setRoomItem(new Item(Item.getOrganicTypes()[itemNumber], Item.getOrganicTypesBtn()[itemNumber], "organic"));
+                room.setRoomItem(new Item(Item.getOrganicTypes()[itemNumber], Item.getOrganicTypesBtn()[itemNumber], "organic", 0));
+            } else {
+                i--;
+            }
+        }
+    }
+    // Type one quest. Clothes for the homeless
+    private void createTypeOneQuest(Quest newQuest){
+        questList.addQuest(newQuest); //Create Quests - Will be added when talking to NPC
+        Quest questSetting = questList.getCurrentQuests().get(questList.getCurrentQuests().size() - 1); // Gets the latest added quest and call it questSetting
+        for(int i = 0 ; i < questSetting.getCollectAmount() ; i++ ){
+            Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
+            if(room != currentRoom && room != Room.getRoomList().get(4)){
+                int itemNumber = rand.nextInt(Item.getClothingTypes().length);
+                room.setRoomItem(new Item(Item.getClothingTypes()[itemNumber], Item.getClothingTypesBtn()[itemNumber], 1));
             } else {
                 i--;
             }

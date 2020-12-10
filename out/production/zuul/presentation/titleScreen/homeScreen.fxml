@@ -13,7 +13,7 @@
             <Image url="@../Images/homeImage.png" />
          </image>
       </ImageView>
-      <StackPane layoutX="867.0" layoutY="548.0" onMouseClicked="#goRoadv2" prefHeight="31.0" prefWidth="98.0">
+      <StackPane fx:id="roadButton" layoutX="867.0" layoutY="548.0" onMouseClicked="#goRoadv2" onMouseEntered="#hover" onMouseExited="#hover" prefHeight="31.0" prefWidth="98.0">
          <children>
             <ImageView fitHeight="40.0" fitWidth="105.0">
                <image>

@@ -18,4 +18,6 @@ public interface DomainI {
     public void addItem(Item item);
 
     public Inventory getInventory();
+
+    public void useItem(Command command);
 }

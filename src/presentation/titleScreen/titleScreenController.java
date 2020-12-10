@@ -1,6 +1,5 @@
 package presentation.titleScreen;
 
-import domain.Domain;
 import interfaceI.DomainI;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -15,6 +14,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class titleScreenController {
+    private static DomainI game;
+
     @FXML
     private void EndGame () {
         Platform.exit();

@@ -172,7 +172,12 @@ public class Game implements DomainI {
         questList.addQuest(new Quest("Put on your shoes and go to work!\nHINT: maybe the commands 'collect' and 'use' are useful here.", 100)); // Start the tutorial
     }
 
-    private boolean processCommand(Command command) {
+    //makes it possible to simply write what command and what to do in it in GUI
+    public boolean processCommand(CommandWord commandWord, String secondWord) {
+        return processCommand(new Command(commandWord, secondWord));
+    }
+
+    public boolean processCommand(Command command) {
         boolean wantToQuit = false;
         currentRoom.printRoomItems();
         CommandWord commandWord = command.getCommandWord();
@@ -245,7 +250,7 @@ public class Game implements DomainI {
         parser.showCommands();
     }
 
-    private void goRoom(Command command) {
+    public void goRoom(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Go where?");
             return;
@@ -290,8 +295,21 @@ public class Game implements DomainI {
         }
     }
 
+    public String printInventory() {
+        inventory.printInventory();
+        return null;
+    }
+
+    public void addItem(Item item) {
+        inventory.addItem(item);
+    }
+
+    public Inventory getInventory(){
+        return inventory;
+    }
+
     //Collect an item from the room inventory and puts it into the player inventory
-    private void collectItem(Command command) {
+    public void collectItem(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Collect what?");
         } else {

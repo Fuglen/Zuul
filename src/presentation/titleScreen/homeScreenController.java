@@ -1,5 +1,8 @@
 package presentation.titleScreen;
 
+import domain.Command;
+import domain.CommandWord;
+import domain.Item;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -50,6 +53,13 @@ public class homeScreenController extends Main {
         } else {
             stackPane.setOpacity(1);
         }
+    }
+
+    public void collectShoes(){
+        getGame().collectItem(new Command(CommandWord.COLLECT, "shoes"));
+        shoes.setVisible(false);
+        Item item = new Item("shoes");
+
     }
 
     @FXML

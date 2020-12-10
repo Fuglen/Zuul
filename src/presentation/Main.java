@@ -3,28 +3,27 @@ package presentation;
 import interfaceI.DomainI;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import domain.*;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main extends Application {
     private static Stage stage = new Stage();
     private static DomainI game;
-    private ArrayList<Item> inventoryItems = new ArrayList<>();
-    private Inventory inventory = new Inventory(inventoryItems);
+    public ArrayList<Item> inventoryItems = new ArrayList<>();
+    public Inventory inventory = new Inventory(inventoryItems);
+    public TextField inventoryField = new TextField();
 
     @FXML
     public ImageView bottle, shoes;
@@ -65,19 +64,12 @@ public class Main extends Application {
         getGame().collectItem(new Command(CommandWord.COLLECT, "waterBottle"));
         bottle.setVisible(false);
         Item item = new Item("bottle");
-        getGame().getInventory().addItem(item);
-        getGame().printInventory();
+        game.getInventory().addItem(item);
+
     }
 
-    public void collectShoes(){
-        getGame().collectItem(new Command(CommandWord.COLLECT, "shoes"));
-        shoes.setVisible(false);
-        Item item = new Item("shoes");
-        getGame().getInventory().addItem(item);
-    }
-
-    public void setLabelText() {
-        label.setText(getGame().printInventory());
+    public void setTextfieldText() {
+        inventoryField.setText("Your inventory: " + game.getInventory().printInventory());
     }
 
     public static void main(String[] args) {

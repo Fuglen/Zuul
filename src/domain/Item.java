@@ -1,6 +1,6 @@
 package domain;
 
-class Item {
+public class Item {
     //Attributes
     private String name; // Name and type of the item
     private String nameBtn; // Name for buttons

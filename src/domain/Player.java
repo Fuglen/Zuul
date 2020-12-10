@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Scanner;
 
-class Player {
+public class Player {
     private String playerName;
     private int playerAge;
     private String playerGender;

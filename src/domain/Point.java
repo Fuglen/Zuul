@@ -1,6 +1,6 @@
 package domain;
 
-class Point {
+public class Point {
 
     //Attributes
     private static int point = 0;

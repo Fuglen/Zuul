@@ -1,6 +1,5 @@
 package presentation.titleScreen;
 
-import domain.Domain;
 import interfaceI.DomainI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +15,7 @@ import java.beans.EventHandler;
 import java.io.IOException;
 
 public class roadController extends Main {
+<<<<<<< HEAD
 /*    //Hover-effect for buttons
     @FXML
     private Node tempNode;
@@ -46,6 +46,8 @@ public class roadController extends Main {
             tempStackPane.setOpacity(1);
         }
     }*/
+=======
+>>>>>>> 59b13ea465bdb17651ad3d5753ee4feb57c25234
 
     //Changing rooms
     @FXML
@@ -97,5 +99,10 @@ public class roadController extends Main {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
+    }
+
+    @FXML
+    public void goHomev2() throws IOException {
+        changeRooms("home", "homeScreen.fxml");
     }
 }

@@ -7,11 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -23,9 +22,6 @@ import java.util.ArrayList;
 public class Main extends Application {
     private static Stage stage = new Stage();
     private static DomainI game;
-    public ArrayList<Item> inventoryItems = new ArrayList<>();
-    public Inventory inventory = new Inventory(inventoryItems);
-/*    public TextField inventoryField = new TextField();*/
 
     @FXML
     public ImageView bottle, shoes, shoesInv;
@@ -38,6 +34,9 @@ public class Main extends Application {
 
     @FXML
     public ScrollPane inventoryScroll;
+
+    @FXML
+    public TextArea gameText;
 
     @Override
     public void start(Stage primaryStage) throws IOException{
@@ -79,7 +78,12 @@ public class Main extends Application {
     }
 
     public void pointsText(){
-        points.setText(Integer.toString(Point.getPoint()));
+        points.setText("Score: " + Integer.toString(Point.getPoint()));
+    }
+
+    public void setGameText(KeyEvent event){
+        if(event.getCode() == KeyCode.ENTER)
+        gameText.setText(game.getCurrentRoom().getLongDescription());
     }
 
     //Use items

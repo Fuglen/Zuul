@@ -69,6 +69,7 @@ public class Main extends Application {
         bottle.setVisible(false);
         Item item = new Item("bottle");
         game.getInventory().addItem(item);
+        game.store();
     }
 
     public void collectShoes(){
@@ -107,6 +108,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         game = new Game();
+        game.load();
         launch(args);
     }
 }

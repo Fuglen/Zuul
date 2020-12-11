@@ -36,16 +36,14 @@ public class homeScreenController extends Main {
             roadButton.setOpacity(1);
         }
     }
-<<<<<<< HEAD
+
     public void collectShoes(){
         getGame().collectItem(new Command(CommandWord.COLLECT, "shoes"));
         shoes.setVisible(false);
         Item item = new Item("shoes");
 
     }
-=======
 
->>>>>>> GUITest
     @FXML
     public void goRoad(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("road.fxml"));

@@ -25,7 +25,7 @@ public class Main extends Application {
     private static DomainI game;
     public ArrayList<Item> inventoryItems = new ArrayList<>();
     public Inventory inventory = new Inventory(inventoryItems);
-    public TextField inventoryField = new TextField();
+/*    public TextField inventoryField = new TextField();*/
 
     @FXML
     public ImageView bottle, shoes, shoesInv;

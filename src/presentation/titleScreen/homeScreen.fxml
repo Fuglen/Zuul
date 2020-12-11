@@ -42,14 +42,6 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ImageView layoutX="942.0" onMouseClicked="#EndGame">
-         <image>
-            <Image url="@../Images/green_boxCross.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
       <ImageView fx:id="shoes" fitHeight="99.0" fitWidth="117.0" layoutX="837.0" layoutY="401.0" onMouseClicked="#collectShoes">
          <image>
             <Image url="@../Images/Shoes.png" />

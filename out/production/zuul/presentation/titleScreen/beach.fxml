@@ -8,7 +8,7 @@
 
 <AnchorPane onMouseMoved="#setGameText" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.titleScreen.beachController">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="980.0">
+      <ImageView fitHeight="600.0" fitWidth="980.0" onMouseMoved="#pointsText">
          <image>
             <Image url="@../Images/Beach.jpg" />
          </image>
@@ -30,6 +30,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </StackPane>
+      <Label fx:id="points" layoutX="21.0" layoutY="14.0">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="14.0" />
+         </font>
+      </Label>
       <TextArea fx:id="gameText" layoutX="14.0" layoutY="443.0" prefHeight="100.0" prefWidth="255.0" text="Room details" />
+
    </children>
 </AnchorPane>

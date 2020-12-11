@@ -61,7 +61,7 @@ public class roadController extends Main {
     }
     @FXML
     public void goRecyclingHome() throws IOException {
-        changeRooms("recycle", "recyclingHome.fxml");
+        changeRooms("recycling", "recyclingHome.fxml");
     }
     @FXML
     public void goHome() throws IOException {

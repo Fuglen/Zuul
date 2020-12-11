@@ -89,6 +89,7 @@ public class Main extends Application {
     //Use items
     public void useShoes() {
         game.useItem(new Command(CommandWord.USE, "shoes"), game.getCurrentRoom());
+        shoesInv.setVisible(false);
     }
 
    public void getInventory(){

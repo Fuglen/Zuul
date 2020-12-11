@@ -91,11 +91,11 @@ public class Game implements DomainI {
         home.setRoomItem(new Item("shoes"));
 
         //Create NPC in room
-        road.addNPC(new NPC("Tommy", "I'm a weird motherfucker!", true));
-        city.addNPC(new NPC("Signe", "I'm a girl. fyldetekst fyldetekst fyldetekst fyldetekst fyldetekst!", true));
-        beach.addNPC(new NPC("Dummy 1", "Jeg er ligegyldig", false));
-        park.addNPC(new NPC("Dummy 2", "Jeg er ligegyldig", true));
-        forest.addNPC(new NPC("Dummy 3", "Jeg er ligegyldig", false));
+        road.addNPC(new NPC("Edward Abbey", "My name is Edward Abbey.\nI'm writing a novel. You should check it out when I'm done.\nI think I will call it: The Monkey Wrench Gang.", false));
+        city.addNPC(new NPC("Naomi Klein", "My name is Naomi Klein.\nMaybe you have read my book 'No Logo'?", true));
+        park.addNPC(new NPC("Mark Lynas", "My name is Mark Lynas.\nI'm a journalist that focus on climate change.\nI think there is a 50–50 chance we can avoid a devastating rise in global temperature.", true));
+        mcdonalds.addNPC(new NPC("John Muir", "My name is John Muir.\nBut maybe you know as 'John of the Mountains' or 'Father of the National Parks'.", true));
+        forest.addNPC(new NPC("Chico Mendes", "My name is Chico Mendes.\nI once fought to preserve the Amazon rainforest.", false));
 
         // Create achievements
         Achievements.getAchievementList().add(new Achievements("Book worm.", Achievements.getZeroDescription(),Achievements.getNumToComplete0()));
@@ -482,7 +482,7 @@ public class Game implements DomainI {
                     // If type zero quest
                     if (quest.getQuestType() == 0) {
                         quest.setComplete();
-                        quest.setPoints((quest.getRecycleRight() * 10) + (quest.getRecycleWrong() * 2));
+                        quest.setPoints((quest.getRecycleRight() * 9) + (quest.getRecycleWrong() * 2));
                         System.out.println("Thank you for your help " + player.getPlayerName() + "!");
                         System.out.println("You recycled " + quest.getRecycleRight() + " things correct.");
                         System.out.println("You recycled " + quest.getRecycleWrong() + " things wrong.");
@@ -494,7 +494,7 @@ public class Game implements DomainI {
                     }
                     // If type one quest
                     if (quest.getQuestType() == 1) {
-                        quest.setPoints(quest.getCollectAmount() * 8);
+                        quest.setPoints(quest.getCollectAmount() * 7);
                         System.out.println("Thank you for your help " + player.getPlayerName() + "!");
                         System.out.println("You get " + quest.getPoints() + " points for completing the quest.");
                         Point.addPoint(quest.getPoints());

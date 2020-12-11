@@ -38,7 +38,7 @@ public class Room {
         for (String exit : keys) {
             returnString += " " + exit;
         }
-        returnString += "\nList of room items: " + printRoomItems() + "\nScore: " + Point.getPoint() + "\nDay: " + Timer.getDay()+"\nNPCS: ";
+        returnString += "\nList of room items: " + printRoomItems() + "\nScore: " + Point.getPoint() + "\nDay: " + Timer.getDay()+"\nPeople in the area: ";
         if(this.npc != null){
             returnString += getNPC().getName();
         } else {

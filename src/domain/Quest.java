@@ -28,27 +28,21 @@ public class Quest {
 
         if(random == 0){ // Type zero quest (collect and recycle)
             this.questType = random;
-            this.collectAmount = 2 + rand.nextInt(1); // From 5 to 9.
-            this.metalNeed = 0 + rand.nextInt(2);
-            this.glassNeed = 0 + rand.nextInt(1);
-            this.paperNeed = 0 + rand.nextInt(1);
-            this.organicNeed = 0 + rand.nextInt(1);
+            this.collectAmount = 5 + rand.nextInt(4); // From 5 to 8.
+            this.metalNeed = 1 + rand.nextInt(2);
+            this.glassNeed = 1 + rand.nextInt(2);
+            this.paperNeed = 1 + rand.nextInt(2);
+            this.organicNeed = 1 + rand.nextInt(2);
             this.plasticNeed = collectAmount - glassNeed - metalNeed - paperNeed - organicNeed;
             this.description = "Collect and recycle "+collectAmount+" pieces of trash.\nYou have recycled "+recycleAmount+"/"+collectAmount;
         }
 
         if(random == 1){
             this.questType = random;
-            this.collectAmount = 2 + rand.nextInt(1);
+            this.collectAmount = 3 + rand.nextInt(3);
             this.description = "Collect "+collectAmount+" pieces of clothing, and drop it in the park.\nI will get someone to pick it up later.";
         }
 
-        if(random == 2){
-            this.questType = random;
-            this.description = "Type 2!!!!";
-            this.complete = false;
-            this.rewarded = false;
-        }
     }
 
     public Quest(String text, int questType){

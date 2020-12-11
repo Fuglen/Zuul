@@ -30,7 +30,6 @@ public class homeScreenController extends Main {
         getGame().collectItem(new Command(CommandWord.COLLECT, "shoes"));
         shoes.setVisible(false);
         Item item = new Item("shoes");
-
     }
     @FXML
     public void goRoad() throws IOException {

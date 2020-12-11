@@ -5,25 +5,29 @@ import domain.*;
 public interface DomainI {
     boolean processCommand(CommandWord commandWord, String secondWord);
 
-    public boolean processCommand(Command command);
+    boolean processCommand(Command command);
 
-    public void collectItem (Command command);
-
-    public String printInventory(Inventory inventory);
-
-    void play();
-
-    public void goRoom(Command command);
-
-    public void addItem(Item item);
-
-    public Inventory getInventory();
-
-    public void useItem(Command command, Room thisRoom);
+    void collectItem(Command command);
 
     //public void dropItem();
 
-    public Room getCurrentRoom();
+    String printInventory(Inventory inventory);
+
+    void play();
+
+    void goRoom(Command command);
+
+    void addItem(Item item);
+
+    Inventory getInventory();
+
+    void useItem(Command command, Room thisRoom);
+
+    Room getCurrentRoom();
+
+    void load();
+
+    void store();
 
 
 }

@@ -14,6 +14,7 @@ public class Game implements DomainI {
     private Inventory inventory = new Inventory(inventoryItems);
     private Player player = new Player();
     private Random rand = new Random();
+    private String filename = "dataFile.txt";
 
     //Quests and list of item names and item spawns
     private QuestList questList = new QuestList();
@@ -24,6 +25,15 @@ public class Game implements DomainI {
         createRooms();
         parser = new Parser();
 
+    }
+
+    @Override
+    public void load() {
+        inventory.load(filename);
+    }
+    @Override
+    public void store() {
+        inventory.store(filename);
     }
 
     // Create rooms and define their exits

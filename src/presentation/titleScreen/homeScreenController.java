@@ -4,8 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import presentation.Main;
-
-import java.awt.*;
 import java.io.IOException;
 
 public class homeScreenController extends Main {
@@ -21,7 +19,6 @@ public class homeScreenController extends Main {
             roadButton.setOpacity(1);
         }
     }
-
     @FXML
     public void goRoad() throws IOException {
         if (!shoes.isVisible() && !shoesInv.isVisible()) {

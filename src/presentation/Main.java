@@ -26,7 +26,15 @@ public class Main extends Application {
     public static DomainI game;
 
     @FXML
-    public ImageView bottle, shoes, shoesInv;
+    public ImageView bottle, shoes, shoesInv, oldShoes, dirtyScarf;
+
+    @FXML
+    public ImageView[] images = {oldShoes, dirtyScarf};
+
+    public String[] itemNames = {"dirtyScarf", "oldShoes"};
+
+    @FXML
+    public String[] agd;
 
     @FXML
     public Button use, drop;
@@ -100,6 +108,21 @@ public class Main extends Application {
 
     public void getCurrentRoom(){
         game.getCurrentRoom();
+    }
+
+    public void itemShow(ImageView imageView, String itemName) {
+        for (int i = 0; i < game.getCurrentRoom().getRoomItems(); i++) {
+            if (game.getCurrentRoom().getRoomItem(i).getName().equals(itemName)) {
+                imageView.setVisible(true);
+            }
+        }
+/*        for (int i = 0; i < game.getCurrentRoom().getRoomItems(); i++) {
+            for (int j = 0; j < itemNames.length; j++) {
+                if (game.getCurrentRoom().getRoomItem(i).getName().equals(itemNames[j])) {
+                    images[j].setVisible(true);
+                }
+            }
+        }*/
     }
 
     //show use and drop button

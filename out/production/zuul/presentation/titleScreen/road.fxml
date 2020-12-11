@@ -13,11 +13,6 @@
             <Image url="@../Images/Road.jpg" />
          </image>
       </ImageView>
-      <ImageView layoutX="942.0" layoutY="-4.0" onMouseClicked="#EndGame">
-         <image>
-            <Image url="@../Images/green_boxCross.png" />
-         </image>
-      </ImageView>
       <StackPane fx:id="forestButton" layoutX="884.0" layoutY="347.0" onMouseClicked="#goForest" prefHeight="31.0" prefWidth="81.0">
          <children>
             <ImageView fitHeight="33.0" fitWidth="81.0">

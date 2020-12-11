@@ -16,10 +16,12 @@ public class Game implements DomainI {
     private Random rand = new Random();
     private String filename = "dataFile.txt";
 
+
     //Quests and list of item names and item spawns
     private QuestList questList = new QuestList();
     private QuestList finishedQuestList = new QuestList();
     private boolean tutorial = false;
+
 
     public Game() {
         createRooms();
@@ -294,6 +296,7 @@ public class Game implements DomainI {
     public Inventory getInventory(){
         return inventory;
     }
+
 
     //Collect an item from the room inventory and puts it into the player inventory
     public void collectItem(Command command) {

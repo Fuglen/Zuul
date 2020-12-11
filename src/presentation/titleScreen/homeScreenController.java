@@ -26,11 +26,15 @@ public class homeScreenController extends Main {
             roadButton.setOpacity(1);
         }
     }
+<<<<<<< HEAD
     public void collectShoes(){
         getGame().collectItem(new Command(CommandWord.COLLECT, "shoes"));
         shoes.setVisible(false);
         Item item = new Item("shoes");
     }
+=======
+
+>>>>>>> a2feb6b8261ffaf2dcbdb2a2a64b37b97e2439de
     @FXML
     public void goRoad() throws IOException {
         changeRooms("road", "road.fxml");

@@ -23,9 +23,14 @@ public interface DomainI {
 
     void useItem(Command command, Room thisRoom);
 
+<<<<<<< HEAD
     Room getCurrentRoom();
 
     void load();
+=======
+
+    //public void dropItem();
+>>>>>>> a2feb6b8261ffaf2dcbdb2a2a64b37b97e2439de
 
     void store();
 

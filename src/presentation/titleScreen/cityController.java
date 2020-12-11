@@ -7,48 +7,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import presentation.Main;
 
 import java.io.IOException;
 
-public class cityController {
+public class cityController extends Main {
     @FXML
-    public void goRoad(MouseEvent event) throws IOException {
-        Parent startGameParent = FXMLLoader.load(getClass().getResource("road.fxml"));
-        Scene homeViewScene = new Scene(startGameParent);
-
-        //This line gets the stage information
-        Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
-        start.setScene(homeViewScene);
-        start.show();
+    public void goRoad() throws IOException {
+        changeRooms("road", "road.fxml");
     }
     @FXML
-    public void goWork(MouseEvent event) throws IOException {
-        Parent startGameParent = FXMLLoader.load(getClass().getResource("work.fxml"));
-        Scene homeViewScene = new Scene(startGameParent);
-
-        //This line gets the stage information
-        Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
-        start.setScene(homeViewScene);
-        start.show();
+    public void goWork() throws IOException {
+        changeRooms("work", "work.fxml");
     }
     @FXML
-    public void goMcdonalds(MouseEvent event) throws IOException {
-        Parent startGameParent = FXMLLoader.load(getClass().getResource("mcdonalds.fxml"));
-        Scene homeViewScene = new Scene(startGameParent);
-
-        //This line gets the stage information
-        Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
-        start.setScene(homeViewScene);
-        start.show();
+    public void goMcdonalds() throws IOException {
+        changeRooms("mcdonalds", "mcdonalds.fxml");
     }
     @FXML
-    public void goPark(MouseEvent event) throws IOException {
-        Parent startGameParent = FXMLLoader.load(getClass().getResource("park.fxml"));
-        Scene homeViewScene = new Scene(startGameParent);
-
-        //This line gets the stage information
-        Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
-        start.setScene(homeViewScene);
-        start.show();
+    public void goPark() throws IOException {
+        changeRooms("park", "park.fxml");
     }
 }

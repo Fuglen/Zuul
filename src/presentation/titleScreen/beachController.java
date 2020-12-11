@@ -8,10 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import presentation.Main;
 
 import java.io.IOException;
 
-public class beachController {
+public class beachController extends Main {
     //Hover-effect for buttons
     @FXML
     private StackPane roadButton;
@@ -26,12 +27,6 @@ public class beachController {
     //Changing rooms
     @FXML
     public void goRoad(MouseEvent event) throws IOException {
-        Parent startGameParent = FXMLLoader.load(getClass().getResource("road.fxml"));
-        Scene homeViewScene = new Scene(startGameParent);
-
-        //This line gets the stage information
-        Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
-        start.setScene(homeViewScene);
-        start.show();
+        changeRooms("road", "road.fxml");
     }
 }

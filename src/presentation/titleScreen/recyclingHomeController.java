@@ -8,10 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import presentation.Main;
 
 import java.io.IOException;
 
-public class recyclingHomeController {
+public class recyclingHomeController extends Main {
     @FXML
     private StackPane roadButton;
     @FXML
@@ -23,47 +24,7 @@ public class recyclingHomeController {
         }
     }
     @FXML
-    public void goRoad(MouseEvent event) throws IOException {
-        Parent startGameParent = FXMLLoader.load(getClass().getResource("road.fxml"));
-        Scene homeViewScene = new Scene(startGameParent);
-
-        //This line gets the stage information
-        Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
-        start.setScene(homeViewScene);
-        start.show();
+    public void goRoad() throws IOException {
+        changeRooms("road", "road.fxml");
     }
-
-    @FXML
-    public void goGlass(MouseEvent event) throws IOException {
-        Parent startGameParent = FXMLLoader.load(getClass().getResource("glass.fxml"));
-        Scene homeViewScene = new Scene(startGameParent);
-
-        //This line gets the stage information
-        Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
-        start.setScene(homeViewScene);
-        start.show();
-    }
-
-    @FXML
-    public void goPlastic(MouseEvent event) throws IOException {
-        Parent startGameParent = FXMLLoader.load(getClass().getResource("plastic.fxml"));
-        Scene homeViewScene = new Scene(startGameParent);
-
-        //This line gets the stage information
-        Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
-        start.setScene(homeViewScene);
-        start.show();
-    }
-
-    @FXML
-    public void goMetal(MouseEvent event) throws IOException {
-        Parent startGameParent = FXMLLoader.load(getClass().getResource("metal.fxml"));
-        Scene homeViewScene = new Scene(startGameParent);
-
-        //This line gets the stage information
-        Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
-        start.setScene(homeViewScene);
-        start.show();
-    }
-
 }

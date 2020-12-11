@@ -15,36 +15,19 @@ import java.beans.EventHandler;
 import java.io.IOException;
 
 public class roadController extends Main {
-/*    //Hover-effect for buttons
+    //Hover-effect for buttons
     @FXML
     private Node tempNode;
     @FXML
-    private StackPane tempStackPane;
-    @FXML
-    private StackPane forestButton;
-    @FXML
-    private StackPane cityButton;
-    @FXML
-    private StackPane beachButton;
-    @FXML
-    private StackPane recyclingHomeButton;
-    @FXML
-    private StackPane homeButton;
-
-    @FXML
-    public void anchorPaneHover(MouseEvent event) {
-        stackPaneHover(event);
+    public void nonHover() {
+        tempNode.setOpacity(1);
     }
     @FXML
-    public void stackPaneHover(MouseEvent event){
-        StackPane stackPane = (StackPane) event.getPickResult().getIntersectedNode();
-        this.tempStackPane = stackPane;
-        if (tempStackPane.getOpacity() == 1) {
-            tempStackPane.setOpacity(0.75);
-        } else {
-            tempStackPane.setOpacity(1);
-        }
-    }*/
+    public void hover(MouseEvent event){
+        Node tempNode = event.getPickResult().getIntersectedNode();
+        this.tempNode = tempNode;
+        event.getPickResult().getIntersectedNode().setOpacity(0.75);
+    }
 
     //Changing rooms
     @FXML

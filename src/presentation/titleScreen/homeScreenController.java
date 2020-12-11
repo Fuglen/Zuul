@@ -1,23 +1,16 @@
 package presentation.titleScreen;
 
-import domain.Command;
-import domain.CommandWord;
-import domain.Item;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import presentation.Main;
-
 import java.io.IOException;
 
 public class homeScreenController extends Main {
     @FXML
     private StackPane roadButton;
+    @FXML
+    private Label roadLabel;
     @FXML
     public void hover() {
         if (roadButton.getOpacity() == 1) {
@@ -26,9 +19,12 @@ public class homeScreenController extends Main {
             roadButton.setOpacity(1);
         }
     }
-
     @FXML
     public void goRoad() throws IOException {
-        changeRooms("road", "road.fxml");
+        if (!shoes.isVisible() && !shoesInv.isVisible()) {
+            changeRooms("road", "road.fxml");
+        } else {
+            roadLabel.setText("Put on your shoes");
+        }
     }
 }

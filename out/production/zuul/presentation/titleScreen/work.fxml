@@ -36,13 +36,5 @@
             <Font name="Gill Sans Ultra Bold" size="14.0" />
          </font>
       </Label>
-      <ImageView layoutX="928.0" layoutY="14.0" onMouseClicked="#EndGame">
-         <image>
-            <Image url="@../Images/green_boxCross.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
    </children>
 </AnchorPane>

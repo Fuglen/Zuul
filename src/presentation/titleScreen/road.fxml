@@ -13,7 +13,7 @@
             <Image url="@../Images/Road.jpg" />
          </image>
       </ImageView>
-      <StackPane fx:id="forestButton" layoutX="884.0" layoutY="347.0" onMouseClicked="#goForest" prefHeight="31.0" prefWidth="81.0">
+      <StackPane layoutX="884.0" layoutY="347.0" onMouseClicked="#goForest" onMouseEntered="#hover" onMouseExited="#nonHover" prefHeight="31.0" prefWidth="81.0">
          <children>
             <ImageView fitHeight="33.0" fitWidth="81.0">
                <image>
@@ -30,7 +30,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </StackPane>
-      <StackPane fx:id="beachButton" layoutX="884.0" layoutY="383.0" onMouseClicked="#goBeach" prefHeight="36.0" prefWidth="81.0">
+      <StackPane layoutX="884.0" layoutY="383.0" onMouseClicked="#goBeach" onMouseEntered="#hover" onMouseExited="#nonHover" prefHeight="36.0" prefWidth="81.0">
          <children>
             <ImageView fitHeight="31.0" fitWidth="81.0">
                <image>
@@ -47,7 +47,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </StackPane>
-      <StackPane layoutX="463.0" layoutY="537.0" onMouseClicked="#goHome" prefHeight="36.0" prefWidth="81.0">
+      <StackPane layoutX="463.0" layoutY="537.0" onMouseClicked="#goHome" onMouseEntered="#hover" onMouseExited="#nonHover" prefHeight="36.0" prefWidth="81.0">
          <children>
             <ImageView fitHeight="33.0" fitWidth="78.0">
                <image>
@@ -69,7 +69,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </StackPane>
-      <StackPane fx:id="cityButton" layoutX="465.0" layoutY="314.0" onMouseClicked="#goCity" prefHeight="31.0" prefWidth="78.0">
+      <StackPane layoutX="465.0" layoutY="314.0" onMouseClicked="#goCity" onMouseEntered="#hover" onMouseExited="#nonHover" prefHeight="31.0" prefWidth="78.0">
          <children>
             <ImageView fitHeight="33.0" fitWidth="78.0">
                <image>
@@ -86,7 +86,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </StackPane>
-      <StackPane fx:id="recyclingHomeButton" layoutX="140.0" layoutY="357.0" onMouseClicked="#goRecyclingHome" prefHeight="36.0" prefWidth="148.0">
+      <StackPane layoutX="140.0" layoutY="357.0" onMouseClicked="#goRecyclingHome" onMouseEntered="#hover" onMouseExited="#nonHover" prefHeight="36.0" prefWidth="148.0">
          <children>
             <ImageView fitHeight="37.0" fitWidth="143.0">
                <image>

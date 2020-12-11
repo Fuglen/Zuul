@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane onMouseMoved="#setGameText" prefHeight="599.0" prefWidth="968.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.titleScreen.homeScreenController">
    <children>
@@ -18,14 +13,14 @@
             <Image url="@../Images/homeImage.png" />
          </image>
       </ImageView>
-      <StackPane fx:id="roadButton" layoutX="867.0" layoutY="548.0" onMouseClicked="#goRoad" onMouseEntered="#hover" onMouseExited="#hover" prefHeight="31.0" prefWidth="98.0">
+      <StackPane fx:id="roadButton" layoutX="801.0" layoutY="547.0" onMouseClicked="#goRoad" onMouseEntered="#hover" onMouseExited="#hover" prefHeight="40.0" prefWidth="153.0">
          <children>
-            <ImageView fitHeight="40.0" fitWidth="105.0">
+            <ImageView fitHeight="40.0" fitWidth="152.0">
                <image>
                   <Image url="@../Images/green_button00.png" />
                </image>
             </ImageView>
-            <Label text="ROAD" textFill="#fff600">
+            <Label fx:id="roadLabel" text="ROAD" textFill="#fff600">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="12.0" />
                </font></Label>

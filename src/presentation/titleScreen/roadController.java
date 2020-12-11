@@ -48,23 +48,23 @@ public class roadController extends Main {
 
     //Changing rooms
     @FXML
-    public void goForest(MouseEvent event) throws IOException {
+    public void goForest() throws IOException {
         changeRooms("forest", "forest.fxml");
     }
     @FXML
-    public void goCity(MouseEvent event) throws IOException {
+    public void goCity() throws IOException {
         changeRooms("city", "city.fxml");
     }
     @FXML
-    public void goBeach(MouseEvent event) throws IOException {
+    public void goBeach() throws IOException {
         changeRooms("beach", "beach.fxml");
     }
     @FXML
-    public void goRecyclingHome(MouseEvent event) throws IOException {
+    public void goRecyclingHome() throws IOException {
         changeRooms("recycle", "recyclingHome.fxml");
     }
     @FXML
-    public void goHome(MouseEvent event) throws IOException {
+    public void goHome() throws IOException {
         changeRooms("home", "homeScreen.fxml");
     }
 }

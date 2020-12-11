@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="599.0" prefWidth="968.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.titleScreen.homeScreenController">
+<AnchorPane onMouseMoved="#setGameText" prefHeight="599.0" prefWidth="968.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.titleScreen.homeScreenController">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="980.0" onMouseMoved="#pointsText">
+      <ImageView fitHeight="600.0" fitWidth="980.0">
          <image>
             <Image url="@../Images/homeImage.png" />
          </image>
@@ -57,7 +53,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ScrollPane layoutX="14.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0">
+      <ScrollPane layoutX="17.0" layoutY="18.0" prefHeight="200.0" prefWidth="200.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -77,5 +73,6 @@
             <Font name="Gill Sans Ultra Bold" size="14.0" />
          </font>
       </Label>
+      <TextArea fx:id="gameText" layoutX="14.0" layoutY="487.0" onKeyPressed="#setGameText" prefHeight="100.0" prefWidth="255.0" text="Room details here" />
    </children>
 </AnchorPane>

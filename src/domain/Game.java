@@ -41,7 +41,7 @@ public class Game implements DomainI {
     // Create rooms and define their exits
     private void createRooms() {
         // Create all the rooms
-        Room home, beach, forest, city, work, mcdonalds, park, road, recycle, metal, glass, plastic, paper, organic;
+        Room home, beach, forest, city, work, mcdonalds, park, road, recycle;
 
         // Initialize all the rooms with a description
         home = new Room("at home");

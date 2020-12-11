@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.titleScreen.cityController">
+<AnchorPane onMouseMoved="#setGameText" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.titleScreen.cityController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="980.0">
          <image>
@@ -81,5 +81,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </StackPane>
+      <TextArea fx:id="gameText" layoutX="363.0" layoutY="14.0" prefHeight="100.0" prefWidth="255.0" text="Room details" />
    </children>
 </AnchorPane>

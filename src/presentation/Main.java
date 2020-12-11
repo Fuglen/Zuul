@@ -82,8 +82,7 @@ public class Main extends Application {
         points.setText("Score: " + Integer.toString(Point.getPoint()));
     }
 
-    public void setGameText(KeyEvent event){
-        if(event.getCode() == KeyCode.ENTER)
+    public void setGameText(){
         gameText.setText(game.getCurrentRoom().getLongDescription());
     }
 

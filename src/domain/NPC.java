@@ -1,11 +1,11 @@
 package domain;
 
 public class NPC {
-    private String name;
-    private String description;
-    private boolean questActive;
-    private boolean met;
-    private boolean questGiver;
+    private String name; // name of NPC
+    private String description; // Introduction from first the player talks to the NPC
+    private boolean questActive; // Tells if the player already has an active quest from the NPC
+    private boolean met; // Checks if introduction is needed
+    private boolean questGiver; // Is the NPC able to give quests
 
     public NPC(String name, String description, boolean questGiver){
         this.name = name;

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane onMouseMoved="#setGameText" prefHeight="537.0" prefWidth="943.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.titleScreen.roadController">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="980.0" layoutY="-7.0">
+      <ImageView fitHeight="600.0" fitWidth="980.0" layoutY="-7.0" onMouseMoved="#pointsText">
          <image>
             <Image url="@../Images/Road.jpg" />
          </image>
@@ -108,6 +110,14 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </StackPane>
+<<<<<<< HEAD
       <TextArea fx:id="gameText" layoutX="14.0" layoutY="479.0" prefHeight="100.0" prefWidth="255.0" text="Room details here" />
+=======
+      <Label fx:id="points" layoutX="14.0" layoutY="6.0" prefHeight="31.0" prefWidth="131.0">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="14.0" />
+         </font>
+      </Label>
+>>>>>>> c88ba997bcdd2aafbe44173e22d49d256897a3a7
    </children>
 </AnchorPane>

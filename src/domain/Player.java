@@ -4,9 +4,6 @@ import java.util.Scanner;
 
 public class Player {
     private String playerName;
-    private int playerAge;
-    private String playerGender;
-
     public Player() {
     }
 
@@ -54,31 +51,14 @@ public class Player {
                         break;
                     default:
                         playerName = input;
-                        System.out.println("Hello there " + playerName + ", we hope you enjoy our game!");
-                        System.out.println("You are late for work! Put on your shoes and go to work!");
+                        System.out.println("Hello there " + playerName + ".");
+                        System.out.println("Sadly, you got fired yesterday, and you need to find a new job.");
+                        System.out.println("You heard about a place that is hiring. Go check it out!");
+                        System.out.println("Before you can go outside, you need to put your shoes on.");
+                        System.out.println("Type 'help' to see all available commands. Type 'quests' to see your active quests.");
                 }
             }
         }
-    }
-
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
-
-    public int getPlayerAge() {
-        return playerAge;
-    }
-
-    public void setPlayerAge(int playerAge) {
-        this.playerAge = playerAge;
-    }
-
-    public String getPlayerGender() {
-        return playerGender;
-    }
-
-    public void setPlayerGender(String playerGender) {
-        this.playerGender = playerGender;
     }
 
     public String getPlayerName() {

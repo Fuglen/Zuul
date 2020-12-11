@@ -12,10 +12,12 @@ public class Room {
     private Inventory roomInventory = new Inventory(roomItems);
     private static ArrayList<Room> roomList = new ArrayList<Room>();
     private static ArrayList<Room> containerList = new ArrayList<Room>();
+    private static ArrayList<Room> allRoomList = new ArrayList<Room>();
 
     public Room(String description) {
         this.description = description;
         exits = new HashMap<String, Room>();
+        addToAllRoomList(this);
     }
 
     public void setExit(String direction, Room neighbor) {
@@ -99,6 +101,14 @@ public class Room {
 
     public static ArrayList<Room> getContainerList() {
         return containerList;
+    }
+
+    public static void addToAllRoomList(Room room){
+        Room.allRoomList.add(room);
+    }
+
+    public static ArrayList<Room> getAllRoomList() {
+        return allRoomList;
     }
 }
 

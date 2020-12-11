@@ -19,5 +19,11 @@ public interface DomainI {
 
     public Inventory getInventory();
 
-    public void useItem(Command command);
+    public void useItem(Command command, Room thisRoom);
+
+    //public void dropItem();
+
+    public Room getCurrentRoom();
+
+
 }

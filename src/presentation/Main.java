@@ -81,7 +81,15 @@ public class Main extends Application {
 
     //Use items
     public void useShoes() {
-        game.useItem(new Command(CommandWord.USE, "shoes"));
+        game.useItem(new Command(CommandWord.USE, "shoes"), game.getCurrentRoom());
+    }
+
+   public void getInventory(){
+        game.getInventory();
+   }
+
+    public void getCurrentRoom(){
+        game.getCurrentRoom();
     }
 
     //show use and drop button
@@ -89,7 +97,6 @@ public class Main extends Application {
         use.setVisible(true);
         drop.setVisible(true);
     }
-
 
     public static void main(String[] args) {
         game = new Game();

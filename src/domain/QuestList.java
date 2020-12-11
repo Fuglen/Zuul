@@ -17,7 +17,7 @@ public class QuestList {
             System.out.println("Your active quests are:");
             int i = 1;
             for (Quest quest : currentQuests) {
-                System.out.println(i+") "+quest);
+                System.out.println(i+") "+quest+" "+quest.isRewarded()+" "+quest.isComplete());
                 i++;
             }
         }
@@ -26,9 +26,9 @@ public class QuestList {
     public void addQuest(Quest quest) {
         if (!currentQuests.contains(quest) && currentQuests.size() < Quest.getMaxQuests()) {
             currentQuests.add(quest);
-            if(currentQuests.get(0).getQuestType() != 100){
+            /*if(currentQuests.get(0).getQuestType() != 100){
                 System.out.println("You have started a new quest.");
-            }
+            }*/
         } else {
             System.out.println("You have too many active quests.");
         }

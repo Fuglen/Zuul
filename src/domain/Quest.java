@@ -12,36 +12,42 @@ public class Quest {
     private int metalNeed; // Amount of metal needed, and spawned in the world
     private int glassNeed; // Amount of glass needed, and spawned in the world
     private int plasticNeed; // Amount of plastic needed, and spawned in the world
+    private int paperNeed; // Amount of plastic needed, and spawned in the world
+    private int organicNeed; // Amount of plastic needed, and spawned in the world
     private int collectAmount; // Amount of trash total needed, and spawned in the world
     private int recycleAmount; // Amount of trash that has been recycled. When recycleAmount == collectAmount change description to "talk to 'questGiver'"
     private int recycleRight; // +1 if you recycle right
     private int recycleWrong; // +1 if you recycle wrong
-    private static final int maxQuests = 3; // Number of quests that can be active at the same time
+    private static final int maxQuests = 2; // Number of quests that can be active at the same time
+    private boolean rewarded = false; // True when talking to NPC after completion
 
     public Quest(NPC questGiver){
         Random rand = new Random();
-        int random = rand.nextInt(3);
+        int random = rand.nextInt(2);
         this.questGiver = questGiver;
 
         if(random == 0){ // Type zero quest (collect and recycle)
             this.questType = random;
-            this.collectAmount = 6 + rand.nextInt(1); // From 6 to 8.
-            this.metalNeed = 2 + rand.nextInt(2);
-            this.glassNeed = 2 + rand.nextInt(2);
-            this.plasticNeed = collectAmount - glassNeed - metalNeed;
+            this.collectAmount = 2 + rand.nextInt(1); // From 5 to 9.
+            this.metalNeed = 0 + rand.nextInt(2);
+            this.glassNeed = 0 + rand.nextInt(1);
+            this.paperNeed = 0 + rand.nextInt(1);
+            this.organicNeed = 0 + rand.nextInt(1);
+            this.plasticNeed = collectAmount - glassNeed - metalNeed - paperNeed - organicNeed;
             this.description = "Collect and recycle "+collectAmount+" pieces of trash.\nYou have recycled "+recycleAmount+"/"+collectAmount;
         }
 
         if(random == 1){
             this.questType = random;
-            this.description = "Type 1";
-            this.complete = true;
+            this.collectAmount = 2 + rand.nextInt(1);
+            this.description = "Collect "+collectAmount+" pieces of clothing, and drop it in the park.\nI will get someone to pick it up later.";
         }
 
         if(random == 2){
             this.questType = random;
             this.description = "Type 2!!!!";
-            this.complete = true;
+            this.complete = false;
+            this.rewarded = false;
         }
     }
 
@@ -49,6 +55,7 @@ public class Quest {
         this.description = text;
         this.questType = questType;
         this.complete = false;
+        this.rewarded = false;
     }
 
     public String getDescription() {
@@ -129,6 +136,22 @@ public class Quest {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public int getPaperNeed() {
+        return paperNeed;
+    }
+
+    public int getOrganicNeed() {
+        return organicNeed;
+    }
+
+    public boolean isRewarded() {
+        return rewarded;
+    }
+
+    public void setRewarded() {
+        this.rewarded = true;
     }
 
     @Override

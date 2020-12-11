@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="599.0" prefWidth="968.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.titleScreen.homeScreenController">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="980.0" layoutY="-1.0">
+      <ImageView fitHeight="600.0" fitWidth="980.0" onMouseMoved="#pointsText">
          <image>
             <Image url="@../Images/homeImage.png" />
          </image>
@@ -53,7 +58,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </ImageView>
-      <ScrollPane layoutX="14.0" layoutY="36.0" prefHeight="200.0" prefWidth="200.0">
+      <ScrollPane layoutX="14.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -66,7 +71,13 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Button fx:id="use" layoutX="42.0" layoutY="14.0" mnemonicParsing="false" onAction="#useShoes" text="Use" visible="false" />
-      <Button fx:id="drop" layoutX="121.0" layoutY="14.0" mnemonicParsing="false" text="Drop" visible="false" />
+      <Button fx:id="use" layoutX="46.0" layoutY="36.0" mnemonicParsing="false" onAction="#useShoes" text="Use" visible="false" />
+      <Button fx:id="drop" layoutX="125.0" layoutY="36.0" mnemonicParsing="false" text="Drop" visible="false" />
+      <Label fx:id="points" layoutX="17.0" layoutY="5.0" prefHeight="25.0" prefWidth="94.0">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="gameText" layoutX="14.0" layoutY="460.0" onKeyPressed="#setGameText" prefHeight="99.0" prefWidth="255.0" text="Press enter to show text" />
    </children>
 </AnchorPane>

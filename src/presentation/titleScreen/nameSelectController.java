@@ -12,10 +12,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import presentation.Main;
 
 import java.io.IOException;
 
-public class nameSelectController {
+public class nameSelectController extends Main {
     @FXML
     private Label label, nameLabel;
     @FXML

@@ -27,5 +27,6 @@ public interface DomainI {
 
     void store();
 
+    void startQuest();
 
 }

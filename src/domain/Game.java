@@ -449,7 +449,7 @@ public class Game implements DomainI {
     }
 
     // Start quest and talk to NPC
-    private void startQuest(){
+    public void startQuest(){
         // Checks for NPC in room
         if(currentRoom.getNPC() != null){
             for(Quest quest : questList.getCurrentQuests()){

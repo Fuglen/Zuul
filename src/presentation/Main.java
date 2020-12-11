@@ -15,13 +15,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import domain.*;
+import presentation.titleScreen.beachController;
+import presentation.titleScreen.cityController;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main extends Application {
-    private static Stage stage = new Stage();
-    private static DomainI game;
+    public static Stage stage = new Stage();
+    public static DomainI game;
 
     @FXML
     public ImageView bottle, shoes, shoesInv;

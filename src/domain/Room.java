@@ -8,8 +8,8 @@ public class Room {
     private String description;
     private HashMap<String, Room> exits;
     private NPC npc;
-    private ArrayList<Item> roomItems = new ArrayList<>();
-    private Inventory roomInventory = new Inventory(roomItems);
+    public static ArrayList<Item> roomItems = new ArrayList<>();
+    public static Inventory roomInventory = new Inventory(roomItems);
     private static ArrayList<Room> roomList = new ArrayList<Room>();
     private static ArrayList<Room> containerList = new ArrayList<Room>();
     private static ArrayList<Room> allRoomList = new ArrayList<Room>();

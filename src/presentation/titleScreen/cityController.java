@@ -17,7 +17,6 @@ public class cityController extends Main {
     //Hover-effect for buttons
 
     @FXML
-    @FXML
     private Node tempNode;
     @FXML
     private void nonHover() {
@@ -30,9 +29,6 @@ public class cityController extends Main {
         event.getPickResult().getIntersectedNode().setOpacity(0.75);
     }
     //Changing rooms
-    @FXML
-    private ImageView NaomiKlein;
-
     @FXML
     public void goRoad() throws IOException {
         changeRooms("road", "road.fxml");
@@ -51,6 +47,9 @@ public class cityController extends Main {
     }
 
     //City quests
+    @FXML
+    private ImageView NaomiKlein;
+
     public void cityQuest() {
         getGame().startQuest();
     }

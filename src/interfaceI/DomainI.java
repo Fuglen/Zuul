@@ -21,6 +21,7 @@ public interface DomainI {
 
     public void useItem(Command command, Room thisRoom);
 
+
     //public void dropItem();
 
     public Room getCurrentRoom();

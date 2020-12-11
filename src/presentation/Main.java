@@ -34,7 +34,7 @@ public class Main extends Application {
     public Button use, drop;
 
     @FXML
-    public Label label;
+    public Label points;
 
     @FXML
     public ScrollPane inventoryScroll;
@@ -76,7 +76,10 @@ public class Main extends Application {
         getGame().collectItem(new Command(CommandWord.COLLECT, "shoes"));
         shoes.setVisible(false);
         shoesInv.setVisible(true);
+    }
 
+    public void pointsText(){
+        points.setText(Integer.toString(Point.getPoint()));
     }
 
     //Use items

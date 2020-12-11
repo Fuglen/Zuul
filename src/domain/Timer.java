@@ -31,6 +31,7 @@ public class Timer {
         Timer.movesMade = movesMade;
     }
 
+    // Not if it is day 0
     public static void setMovesMade() {
         if(Timer.getDay() > 0){
             Timer.movesMade = Timer.movesMade + 1;

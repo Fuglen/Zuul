@@ -23,8 +23,8 @@ public class Achievements {
     private static final String firstDescription = "Keep your work for "+Achievements.getNumToComplete1()+" days.";
 
     // Achievement 2 settings (Mother Nature’s champion) - Collect *numToComplete* pieces og trash
-    private static final int numToComplete2 = 45;
-    private static final String secondDescription = "Collect "+Achievements.getNumToComplete2()+" pieces of trash.";
+    private static final int numToComplete2 = 55;
+    private static final String secondDescription = "Collect "+Achievements.getNumToComplete2()+" pieces of trash or clothes.";
 
     // Achievement 3 settings (Friend of the people) - Complete *numToComplete* quests
     private static final int numToComplete3 = 15;

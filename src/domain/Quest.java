@@ -23,12 +23,12 @@ public class Quest {
 
     public Quest(NPC questGiver){
         Random rand = new Random();
-        int random = rand.nextInt(2);
+        int random = rand.nextInt(2); // Chooses a random number 0-1 and decides the quest type
         this.questGiver = questGiver;
 
         if(random == 0){ // Type zero quest (collect and recycle)
             this.questType = random;
-            this.collectAmount = 5 + rand.nextInt(4); // From 5 to 8.
+            this.collectAmount = 5 + rand.nextInt(4); // The amount of items spawned. From 5 to 8.
             this.metalNeed = 1 + rand.nextInt(2);
             this.glassNeed = 1 + rand.nextInt(2);
             this.paperNeed = 1 + rand.nextInt(2);
@@ -45,6 +45,7 @@ public class Quest {
 
     }
 
+    // Used for the shoes item for tutorial
     public Quest(String text, int questType){
         this.description = text;
         this.questType = questType;

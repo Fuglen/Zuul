@@ -2,6 +2,7 @@ package domain;
 
 public class Fact {
 
+    // List of all facts NPCs can tell the player
     private static String[] fact = {
             "Recycling is a process to create new items from old and used materials. This helps in reducing energy and potentially useful materials from being wasted.",
             "Variety of raw materials including paper, plastic, metal, glass, electronics and textiles, can be recycled.",

@@ -19,15 +19,15 @@ public class Achievements {
     private static final String zeroDescription = "Read "+Achievements.getNumToComplete0()+" facts. Good job!";
 
     // Achievement 1 settings (Workaholic) - Go to work for *numToComplete* days
-    private static final int numToComplete1 = 25;
+    private static final int numToComplete1 = 15;
     private static final String firstDescription = "Keep your work for "+Achievements.getNumToComplete1()+" days.";
 
     // Achievement 2 settings (Mother Nature’s champion) - Collect *numToComplete* pieces og trash
-    private static final int numToComplete2 = 50;
+    private static final int numToComplete2 = 45;
     private static final String secondDescription = "Collect "+Achievements.getNumToComplete2()+" pieces of trash.";
 
     // Achievement 3 settings (Friend of the people) - Complete *numToComplete* quests
-    private static final int numToComplete3 = 25;
+    private static final int numToComplete3 = 15;
     private static final String ThirdDescription = "At the end of the day. Have completed "+Achievements.getNumToComplete3()+" quests.";
 
     // Default description if achievement is not complete

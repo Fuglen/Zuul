@@ -29,4 +29,6 @@ public interface DomainI {
 
     void startQuest();
 
+    void setPlayerName(String playerName);
+
 }

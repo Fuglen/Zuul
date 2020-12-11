@@ -28,6 +28,7 @@ public class nameSelectController extends Main {
                 label.setText("Please enter a name");
             } else {
                 label.setText("Hello " + textField.getText() + "\nWelcome to our game!");
+                game.setPlayerName(textField.getText());
                 nameLabel.setText(null);
                 stackPane.setVisible(true);
             }

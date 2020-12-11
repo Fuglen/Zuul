@@ -15,6 +15,7 @@ public class Game implements DomainI {
     private Player player = new Player();
     private Random rand = new Random();
     private String filename = "dataFile.txt";
+    private String playerName;
 
 
     //Quests and list of item names and item spawns
@@ -465,7 +466,11 @@ public class Game implements DomainI {
             // If the player has to many active quests (maxQuests attribute in Quest class)
             // Tells a random fact if maxQuests have been reached
             if(questList.getCurrentQuests().size() == Quest.getMaxQuests()){
-                System.out.println("Hello "+player.getPlayerName()+".");
+                if (player.getPlayerName() == null) {
+                    System.out.println("Hello "+playerName+".");
+                } else {
+                    System.out.println("Hello "+player.getPlayerName()+".");
+                }
                 // If it is the first time the player talks to the NPC. The NPC gives a short introduction
                 if(!currentRoom.getNPC().getMet()){
                     System.out.println(currentRoom.getNPC().getDescription());
@@ -489,7 +494,11 @@ public class Game implements DomainI {
                     startQuest();
                 } else {
                     // Greetings from npc
-                    System.out.println("Hello "+player.getPlayerName()+".");
+                    if (player.getPlayerName() == null) {
+                        System.out.println("Hello "+playerName+".");
+                    } else {
+                        System.out.println("Hello "+player.getPlayerName()+".");
+                    }
                     // Prints description first time you talk to this NPC
                     if(!currentRoom.getNPC().getMet()){
                         System.out.println(currentRoom.getNPC().getDescription());
@@ -768,5 +777,8 @@ public class Game implements DomainI {
     }
     public Room getCurrentRoom(){
         return currentRoom;
+    }
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 }

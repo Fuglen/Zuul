@@ -23,9 +23,6 @@ import java.util.ArrayList;
 public class Main extends Application {
     private static Stage stage = new Stage();
     private static DomainI game;
-    public ArrayList<Item> inventoryItems = new ArrayList<>();
-    public Inventory inventory = new Inventory(inventoryItems);
-/*    public TextField inventoryField = new TextField();*/
 
     @FXML
     public ImageView bottle, shoes, shoesInv;
@@ -77,13 +74,10 @@ public class Main extends Application {
         getGame().collectItem(new Command(CommandWord.COLLECT, "shoes"));
         shoes.setVisible(false);
         shoesInv.setVisible(true);
-<<<<<<< HEAD
-=======
     }
 
     public void pointsText(){
         points.setText(Integer.toString(Point.getPoint()));
->>>>>>> a2feb6b8261ffaf2dcbdb2a2a64b37b97e2439de
     }
 
     //Use items

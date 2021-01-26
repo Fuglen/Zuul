@@ -19,7 +19,7 @@
 
 package domain;
 
-class Command {
+public class Command {
     private CommandWord commandWord;
     private String secondWord;
 

@@ -9,10 +9,10 @@ public class Inventory {
     private ArrayList<Item> items;
 
     //Constructors
-    Inventory(ArrayList<Item> items) {
+    public Inventory(ArrayList<Item> items) {
         this.items = items;
     }
-    Inventory() {
+    public Inventory() {
         this(new ArrayList<Item>());
     }
 
@@ -26,7 +26,7 @@ public class Inventory {
         items.remove(i);
     }
 
-    public void printInventory() {
+    public String printInventory() {
         if (items.size() == 0) {
             System.out.println("Your inventory is empty...");
         } else {
@@ -35,7 +35,9 @@ public class Inventory {
                 System.out.println(item);
             }
         }
+        return null;
     }
+
     public boolean load (String filename) {
         FileBackend fb = new FileBackend(filename);
         if (fb==null) return false;

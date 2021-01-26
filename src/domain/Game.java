@@ -1,10 +1,12 @@
 package domain;
 
+import interfaceI.DomainI;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-class Game {
+public class Game implements DomainI {
     private Parser parser;
     private Room currentRoom;
     //Player inventory
@@ -169,7 +171,12 @@ class Game {
         questList.addQuest(new Quest("Put on your shoes and go to work!\nHINT: maybe the commands 'collect' and 'use' are useful here.", 100)); // Start the tutorial
     }
 
-    private boolean processCommand(Command command) {
+    //makes it possible to simply write what command and what to do in it in GUI
+    public boolean processCommand(CommandWord commandWord, String secondWord) {
+        return processCommand(new Command(commandWord, secondWord));
+    }
+
+    public boolean processCommand(Command command) {
         boolean wantToQuit = false;
         currentRoom.printRoomItems();
         CommandWord commandWord = command.getCommandWord();
@@ -244,7 +251,7 @@ class Game {
         parser.showCommands();
     }
 
-    private void goRoom(Command command) {
+    public void goRoom(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Go where?");
             return;
@@ -289,8 +296,21 @@ class Game {
         }
     }
 
+    public String printInventory(Inventory inventory) {
+        this.inventory = inventory;
+        return inventory.printInventory();
+    }
+
+    public void addItem(Item item) {
+        inventory.addItem(item);
+    }
+
+    public Inventory getInventory(){
+        return inventory;
+    }
+
     //Collect an item from the room inventory and puts it into the player inventory
-    private void collectItem(Command command) {
+    public void collectItem(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Collect what?");
         } else {
@@ -310,7 +330,7 @@ class Game {
     }
 
     //Drops an item from the player inventory to the room inventory
-    private void useItem(Command command) {
+    public void useItem(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Use what?");
         } else {

@@ -1,6 +1,5 @@
 package presentation.titleScreen;
 
-import domain.Domain;
 import interfaceI.DomainI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,35 +8,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import presentation.Main;
 
 import java.io.IOException;
 
-public class roadController {
-    DomainI domainI = new Domain("dataFile.txt");
-
-    private boolean sceneLoaded = false;
- /*   public boolean getSceneLoaded() {
-        return sceneLoaded;
-    }
-    public void setSceneLoaded(boolean sceneLoaded) {
-        this.sceneLoaded = sceneLoaded;
-    }*/
-    @FXML
-    private void loadSceneData() {
-        if (!sceneLoaded) {
-            domainI.load();
-            sceneLoaded = true;
-        }
-    }
-    @FXML
-    private void addItem() {
-        domainI.addItem("Plastic");
-        domainI.store();
-    }
-    @FXML
-    private void printInventory() {
-        domainI.printInventory();
-    }
+public class roadController extends Main {
 
     @FXML
     public void goForest(MouseEvent event) throws IOException {
@@ -48,6 +23,7 @@ public class roadController {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
+
     }
 
     @FXML
@@ -92,5 +68,10 @@ public class roadController {
         Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
+    }
+
+    @FXML
+    public void goHomev2() throws IOException {
+        changeRooms("home", "homeScreen.fxml");
     }
 }

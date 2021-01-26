@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="344.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.titleScreen.homeScreenController">
+<AnchorPane prefHeight="599.0" prefWidth="968.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.titleScreen.homeScreenController">
    <children>
-      <ImageView fitHeight="350.0" fitWidth="495.0" layoutY="-1.0">
+      <ImageView fitHeight="600.0" fitWidth="980.0" layoutY="-1.0">
          <image>
-            <Image url="file:/C:/Users/Holst/OneDrive/Documents/Diplomingeniør%20i%20softwareteknologi/Semesterprojekt/Zuul/src/presentation/Images/—Pngtree—3d%20contemporary%20living%20room%20interior_4093673.png" />
+            <Image url="@../Images/—Pngtree—3d%20contemporary%20living%20room%20interior_4093673.png" />
          </image>
       </ImageView>
-      <StackPane layoutX="390.0" layoutY="302.0" onMouseClicked="#goRoad" prefHeight="31.0" prefWidth="98.0">
+      <StackPane layoutX="867.0" layoutY="548.0" onMouseClicked="#goRoadv2" prefHeight="31.0" prefWidth="98.0">
          <children>
             <ImageView fitHeight="40.0" fitWidth="105.0">
                <image>
@@ -27,10 +29,35 @@
                </font></Label>
          </children>
       </StackPane>
-      <ImageView fitHeight="63.0" fitWidth="53.0" layoutX="153.0" layoutY="184.0" onMouseClicked="#addItem">
+      <ImageView fx:id="bottle" fitHeight="63.0" fitWidth="53.0" layoutX="359.0" layoutY="359.0" onMouseClicked="#collectBottle">
          <image>
             <Image url="@../Images/bottle.png" />
          </image>
       </ImageView>
+      <ImageView layoutX="942.0" onMouseClicked="#EndGame">
+         <image>
+            <Image url="@../Images/green_boxCross.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="shoes" fitHeight="99.0" fitWidth="117.0" layoutX="837.0" layoutY="401.0" onMouseClicked="#collectShoes">
+         <image>
+            <Image url="@../Images/Shoes.png" />
+         </image>
+      </ImageView>
+      <ScrollPane layoutX="14.0" layoutY="36.0" prefHeight="200.0" prefWidth="200.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="shoesInv" fitHeight="71.0" fitWidth="84.0" onMouseClicked="#showUseDrop" visible="false">
+                     <image>
+                        <Image url="@../Images/Shoes.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Button fx:id="use" layoutX="42.0" layoutY="14.0" mnemonicParsing="false" onAction="#useShoes" text="Use" visible="false" />
+      <Button fx:id="drop" layoutX="121.0" layoutY="14.0" mnemonicParsing="false" text="Drop" visible="false" />
    </children>
 </AnchorPane>

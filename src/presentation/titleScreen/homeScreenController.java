@@ -1,7 +1,8 @@
 package presentation.titleScreen;
 
-import domain.Domain;
-import interfaceI.DomainI;
+import domain.Command;
+import domain.CommandWord;
+import domain.Item;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,24 +13,27 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import presentation.Main;
 
 import java.io.IOException;
 
-public class homeScreenController {
+public class homeScreenController extends Main {
     @FXML
     public void goBack(MouseEvent event) throws IOException {
         Parent startGameParent = FXMLLoader.load(getClass().getResource("titleScreen.fxml"));
         Scene homeViewScene = new Scene(startGameParent);
 
         //This line gets the stage information
-        Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage start = (Stage) ((Node) event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
     }
+
     @FXML
     private ProgressBar progressBar;
     @FXML
     private CheckBox checkBox;
+
     @FXML
     public void toggleProgress() {
         if (checkBox.isSelected()) {
@@ -38,8 +42,10 @@ public class homeScreenController {
             progressBar.setProgress(0);
         }
     }
+
     @FXML
     private StackPane stackPane;
+
     @FXML
     public void hover() {
         if (stackPane.getOpacity() == 1) {
@@ -55,17 +61,13 @@ public class homeScreenController {
         Scene homeViewScene = new Scene(startGameParent);
 
         //This line gets the stage information
-        Stage start = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage start = (Stage) ((Node) event.getSource()).getScene().getWindow();
         start.setScene(homeViewScene);
         start.show();
-        domainI.load();
     }
 
-
-    DomainI domainI = new Domain("dataFile.txt");
     @FXML
-    private void addItem() {
-        domainI.addItem("Plastic");
+    public void goRoadv2() throws IOException {
+        changeRooms("road", "road.fxml");
     }
-
 }

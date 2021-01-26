@@ -7,6 +7,7 @@ public class NPC {
     private boolean met; // Checks if introduction is needed
     private boolean questGiver; // Is the NPC able to give quests
 
+
     public NPC(String name, String description, boolean questGiver){
         this.name = name;
         this.description = description;

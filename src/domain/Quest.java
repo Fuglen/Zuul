@@ -21,6 +21,7 @@ public class Quest {
     private static final int maxQuests = 2; // Number of quests that can be active at the same time
     private boolean rewarded = false; // True when talking to NPC after completion
 
+
     public Quest(NPC questGiver){
         Random rand = new Random();
         int random = rand.nextInt(2); // Chooses a random number 0-1 and decides the quest type

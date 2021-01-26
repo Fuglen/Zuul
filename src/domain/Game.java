@@ -104,11 +104,13 @@ public class Game implements DomainI {
         home.setRoomItem(new Item("shoes"));
 
         //Create NPC in room
+
         road.addNPC(new NPC("Edward Abbey", "My name is Edward Abbey.\nI'm writing a novel. You should check it out when I'm done.\nI think I will call it: The Monkey Wrench Gang.", false));
         city.addNPC(new NPC("Naomi Klein", "My name is Naomi Klein.\nMaybe you have read my book 'No Logo'?", true));
         park.addNPC(new NPC("Mark Lynas", "My name is Mark Lynas.\nI'm a journalist that focus on climate change.\nI think there is a 50–50 chance we can avoid a devastating rise in global temperature.", true));
         mcdonalds.addNPC(new NPC("John Muir", "My name is John Muir.\nBut maybe you know as 'John of the Mountains' or 'Father of the National Parks'.", true));
         forest.addNPC(new NPC("Chico Mendes", "My name is Chico Mendes.\nI once fought to preserve the Amazon rainforest.", false));
+
 
         // Create achievements
         Achievements.getAchievementList().add(new Achievements("Book worm.", Achievements.getZeroDescription(),Achievements.getNumToComplete0()));
@@ -202,9 +204,48 @@ public class Game implements DomainI {
         } else if (commandWord == CommandWord.QUESTS) {
             questList.printQuests();
         } else if (commandWord == CommandWord.USE){
-            useItem(command, currentRoom);
+
+            useItem(command);
         }else if (commandWord == CommandWord.TALK){
             startQuest();
+        }else if (commandWord == CommandWord.CHEAT){ // Will be removed
+            boolean cheater = true;
+            while (cheater){
+                System.out.println("Cheat menu!");
+                System.out.println("1) Start a new quest");
+                System.out.println("2) List of quests completed");
+                System.out.println("3) Get fired");
+                System.out.println("4) Complete quest. (Talking to NPC)");
+                System.out.println("5) Archive quests");
+                System.out.println("6) Back to the game");
+                Scanner scanCheat = new Scanner(System.in);
+                String cheat = scanCheat.nextLine();
+                switch (cheat) {
+                    case "1" -> {
+                        for(Room rooms : Room.getAllRoomList()){
+                            System.out.println(rooms);
+                        }
+                    }
+                    case "2" -> {
+                        for (int i = 0; i < finishedQuestList.getCurrentQuests().size(); i++) {
+                            System.out.println(finishedQuestList.getCurrentQuests().get(i));
+                        }
+                    }
+                    case "3" -> {
+                        Timer.setFired();
+                    }
+                    case "4" -> {
+                        completeQuest();
+                    }
+                    case "5" -> {
+                        archiveQuest();
+                    }
+                    case "6" -> {
+                        cheater = false;
+                    }
+                    default -> System.out.println("No cheat");
+                }
+            }
         }
         return wantToQuit;
     }
@@ -529,11 +570,15 @@ public class Game implements DomainI {
                         if(questAdded.getQuestType() == 1){
                             questAdded.setDescription("Collect "+questAdded.getRecycleAmount()+"/"+questAdded.getCollectAmount()+" pieces of clothing, and drop it in the park.");
                         }
+                        if(newQuest.getQuestType() == 2){
+                            questList.addQuest(newQuest);
+                        }
+                        System.out.println("I need you to do something for me.");
+                        System.out.println(questList.getCurrentQuests().get(questList.getCurrentQuests().size() - 1).getDescription());
                     }
                 }
             }
-        }else {
-            // If no NPC is in the room
+        } else {
             System.out.println("You are talking to yourself.");
         }
     }
@@ -591,15 +636,14 @@ public class Game implements DomainI {
                 } else if(questDone.getQuestType() == 1){ // for type 0 quests
                     questDone.setDescription("Clothes for the homeless - Completed at day "+Timer.getDay());
                 }
-                // Makes the quest giver active again so new quests can be acquired from the NPC
                 for(int j = 0 ; j < Room.getAllRoomList().size() - 1 ; j++){
                     if(questDone.getQuestGiver() != null){
                         if(Room.getAllRoomList().get(j).getNPC() == questDone.getQuestGiver()){
                             Room.getAllRoomList().get(j).getNPC().setQuestActive();
+                            System.out.println("Hej");
                         }
                     }
                 }
-                // Removes quest from questList and adds it to finishedQuestList for end screen
                 finishedQuestList.getCurrentQuests().add(questDone);
                 questList.getCurrentQuests().remove(i);
                 // Adds count point for achievement 3
@@ -674,7 +718,7 @@ public class Game implements DomainI {
                 thisAchievement.setComplete();
                 System.out.println("ACHIEVEMENT UNLOCKED - "+thisAchievement.getName());
                 System.out.println(thisAchievement.getDescription());
-            }
+                            }
         }
     }
 
@@ -702,16 +746,15 @@ public class Game implements DomainI {
     }
     // Type 0 quest. Collect and recycle
     private void createTypeZeroQuest(Quest newQuest){
-        //Create Quest and add it to questList
-        questList.addQuest(newQuest);
-        // Picks the latest added quest to questList
+
+        questList.addQuest(newQuest); //Create Quests - Will be added when talking to NPC
         Quest questSetting = questList.getCurrentQuests().get(questList.getCurrentQuests().size() - 1); // Gets the latest added quest and call it questSetting
         // Creates glass items
         for(int i = 0 ; i < questSetting.getGlassNeed() ; i++ ){
             Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
             if(room != currentRoom){
                 int itemNumber = rand.nextInt(Item.getGlassTypes().length);
-                room.setRoomItem(new Item(Item.getGlassTypes()[itemNumber], Item.getGlassTypesBtn()[itemNumber], "glass", 0));
+                room.setRoomItem(new Item(Item.getGlassTypes()[itemNumber], Item.getGlassTypesBtn()[itemNumber], Room.getContainerList().get(0)));
             } else {
                 i--;
             }
@@ -721,7 +764,7 @@ public class Game implements DomainI {
             Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
             if(room != currentRoom){
                 int itemNumber = rand.nextInt(Item.getMetalTypes().length);
-                room.setRoomItem(new Item(Item.getMetalTypes()[itemNumber], Item.getMetalTypesBtn()[itemNumber], "metal", 0));
+                room.setRoomItem(new Item(Item.getMetalTypes()[itemNumber], Item.getMetalTypesBtn()[itemNumber], Room.getContainerList().get(1)));
             } else {
                 i--;
             }
@@ -731,7 +774,7 @@ public class Game implements DomainI {
             Room room = Room.getRoomList().get(rand.nextInt(Room.getRoomList().size())); // Select a random room
             if(room != currentRoom){
                 int itemNumber = rand.nextInt(Item.getPlasticTypes().length);
-                room.setRoomItem(new Item(Item.getPlasticTypes()[itemNumber], Item.getPlasticTypesBtn()[itemNumber], "plastic", 0));
+                room.setRoomItem(new Item(Item.getPlasticTypes()[itemNumber], Item.getPlasticTypesBtn()[itemNumber], Room.getContainerList().get(2)));
             } else {
                 i--;
             }

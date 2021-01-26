@@ -7,37 +7,46 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import domain.*;
+import presentation.titleScreen.beachController;
+import presentation.titleScreen.cityController;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main extends Application {
-    private static Stage stage = new Stage();
-    private static DomainI game;
-    public ArrayList<Item> inventoryItems = new ArrayList<>();
-    public Inventory inventory = new Inventory(inventoryItems);
-    public TextField inventoryField = new TextField();
+    public static Stage stage = new Stage();
+    public static DomainI game;
 
     @FXML
-    public ImageView bottle, shoes, shoesInv;
+    public ImageView bottle, shoes, shoesInv, oldShoes, dirtyScarf;
+
+    @FXML
+    public ImageView[] images = {oldShoes, dirtyScarf};
+
+    public String[] itemNames = {"dirtyScarf", "oldShoes"};
+
+    @FXML
+    public String[] agd;
 
     @FXML
     public Button use, drop;
 
     @FXML
-    public Label label;
+    public Label points;
 
     @FXML
     public ScrollPane inventoryScroll;
+
+    @FXML
+    public TextArea gameText;
 
     @Override
     public void start(Stage primaryStage) throws IOException{
@@ -70,18 +79,50 @@ public class Main extends Application {
         bottle.setVisible(false);
         Item item = new Item("bottle");
         game.getInventory().addItem(item);
+        game.store();
     }
 
     public void collectShoes(){
         getGame().collectItem(new Command(CommandWord.COLLECT, "shoes"));
         shoes.setVisible(false);
         shoesInv.setVisible(true);
+    }
 
+    public void pointsText(){
+        points.setText("Score: " + Integer.toString(Point.getPoint()));
+    }
+
+    public void setGameText(){
+        gameText.setText(game.getCurrentRoom().getLongDescription());
     }
 
     //Use items
     public void useShoes() {
-        game.useItem(new Command(CommandWord.USE, "shoes"));
+        game.useItem(new Command(CommandWord.USE, "shoes"), game.getCurrentRoom());
+        shoesInv.setVisible(false);
+    }
+
+   public void getInventory(){
+        game.getInventory();
+   }
+
+    public void getCurrentRoom(){
+        game.getCurrentRoom();
+    }
+
+    public void itemShow(ImageView imageView, String itemName) {
+        for (int i = 0; i < game.getCurrentRoom().getRoomItems(); i++) {
+            if (game.getCurrentRoom().getRoomItem(i).getName().equals(itemName)) {
+                imageView.setVisible(true);
+            }
+        }
+/*        for (int i = 0; i < game.getCurrentRoom().getRoomItems(); i++) {
+            for (int j = 0; j < itemNames.length; j++) {
+                if (game.getCurrentRoom().getRoomItem(i).getName().equals(itemNames[j])) {
+                    images[j].setVisible(true);
+                }
+            }
+        }*/
     }
 
     //show use and drop button
@@ -90,9 +131,9 @@ public class Main extends Application {
         drop.setVisible(true);
     }
 
-
     public static void main(String[] args) {
         game = new Game();
+        game.load();
         launch(args);
     }
 }

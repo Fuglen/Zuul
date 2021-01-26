@@ -10,10 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import presentation.Main;
 
 import java.io.IOException;
 
-public class titleScreenController {
+public class titleScreenController extends Main {
     private static DomainI game;
 
     @FXML

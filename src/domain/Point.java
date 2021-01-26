@@ -5,7 +5,7 @@ public class Point {
     //Attributes
     private static int point = 0;
 
-    //Constructors
+    //Constructor
     public Point(){
     }
 

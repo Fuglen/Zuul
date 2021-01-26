@@ -8,8 +8,8 @@ public class Room {
     private String description;
     private HashMap<String, Room> exits;
     private NPC npc;
-    private ArrayList<Item> roomItems = new ArrayList<>();
-    private Inventory roomInventory = new Inventory(roomItems);
+    public static ArrayList<Item> roomItems = new ArrayList<>();
+    public static Inventory roomInventory = new Inventory(roomItems);
     private static ArrayList<Room> roomList = new ArrayList<Room>();
     private static ArrayList<Room> containerList = new ArrayList<Room>();
     private static ArrayList<Room> allRoomList = new ArrayList<Room>();
@@ -38,7 +38,7 @@ public class Room {
         for (String exit : keys) {
             returnString += " " + exit;
         }
-        returnString += "\nList of room items: " + printRoomItems() + "\nScore: " + Point.getPoint() + "\nDay: " + Timer.getDay()+"\nNPCS: ";
+        returnString += "\nList of room items: " + printRoomItems() + "\nScore: " + Point.getPoint() + "\nDay: " + Timer.getDay()+"\nPeople in the area: ";
         if(this.npc != null){
             returnString += getNPC().getName();
         } else {

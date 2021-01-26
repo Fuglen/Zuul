@@ -12,10 +12,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import presentation.Main;
 
 import java.io.IOException;
 
-public class nameSelectController {
+public class nameSelectController extends Main {
     @FXML
     private Label label, nameLabel;
     @FXML
@@ -27,6 +28,7 @@ public class nameSelectController {
                 label.setText("Please enter a name");
             } else {
                 label.setText("Hello " + textField.getText() + "\nWelcome to our game!");
+                game.setPlayerName(textField.getText());
                 nameLabel.setText(null);
                 stackPane.setVisible(true);
             }

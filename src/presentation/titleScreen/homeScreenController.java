@@ -1,73 +1,30 @@
 package presentation.titleScreen;
 
-import domain.Command;
-import domain.CommandWord;
-import domain.Item;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import presentation.Main;
-
 import java.io.IOException;
 
 public class homeScreenController extends Main {
     @FXML
-    public void goBack(MouseEvent event) throws IOException {
-        Parent startGameParent = FXMLLoader.load(getClass().getResource("titleScreen.fxml"));
-        Scene homeViewScene = new Scene(startGameParent);
-
-        //This line gets the stage information
-        Stage start = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        start.setScene(homeViewScene);
-        start.show();
-    }
-
+    private StackPane roadButton;
     @FXML
-    private ProgressBar progressBar;
-    @FXML
-    private CheckBox checkBox;
-
-    @FXML
-    public void toggleProgress() {
-        if (checkBox.isSelected()) {
-            progressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
-        } else {
-            progressBar.setProgress(0);
-        }
-    }
-
-    @FXML
-    private StackPane stackPane;
-
+    private Label roadLabel;
     @FXML
     public void hover() {
-        if (stackPane.getOpacity() == 1) {
-            stackPane.setOpacity(0.75);
+        if (roadButton.getOpacity() == 1) {
+            roadButton.setOpacity(0.75);
         } else {
-            stackPane.setOpacity(1);
+            roadButton.setOpacity(1);
         }
     }
-
     @FXML
-    public void goRoad(MouseEvent event) throws IOException {
-        Parent startGameParent = FXMLLoader.load(getClass().getResource("road.fxml"));
-        Scene homeViewScene = new Scene(startGameParent);
-
-        //This line gets the stage information
-        Stage start = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        start.setScene(homeViewScene);
-        start.show();
-    }
-
-    @FXML
-    public void goRoadv2() throws IOException {
-        changeRooms("road", "road.fxml");
+    public void goRoad() throws IOException {
+        if (!shoes.isVisible() && !shoesInv.isVisible()) {
+            changeRooms("road", "road.fxml");
+        } else {
+            roadLabel.setText("Put on your shoes");
+        }
     }
 }
